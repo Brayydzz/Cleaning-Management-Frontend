@@ -11,13 +11,19 @@ import { AuthFetchRequest, FetchRequest } from "./helperFunctions";
 
 function App() {
   // GLOBAL STATE
-  const token = localStorage.getItem("token") || null
+  const token = localStorage.getItem("token") || null;
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     bookings: [],
     token: token,
-    user: () => jwtDecode(token.split(' ')[1])
-  })
+    user: () => {
+      if (token){
+        jwtDecode(token.split(" ")[1]);
+      }else{
+        console.error("No user is currently signed in")
+      }
+    },
+  });
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
       dispatch({
