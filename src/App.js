@@ -14,6 +14,7 @@ function App() {
   // GLOBAL STATE
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
+    bookings: []
   })
 
   useEffect(() => {

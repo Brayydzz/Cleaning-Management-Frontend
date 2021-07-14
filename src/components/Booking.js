@@ -1,19 +1,26 @@
 import { Form } from "../Styled"
 import { useContext, useState, useEffect } from "react"
 import { stateContext } from "../stateReducer"
+import { FetchRequest } from "../helperFunctions"
+import { useHistory } from "react-router"
 
 
 const Booking = () => {
     const { services } = useContext(stateContext)
-    const [booking, setBooking] = useState({first_name: "", last_name: "", email: "", phone_number: "", service_type_id: ""})
+    const history = useHistory()
+    const [booking, setBooking] = useState({first_name: "", last_name: "", email: "", phone_number: "", service_type_id: "", body: ""})
 
 
     useEffect(() => {
-        services.length > 0 && setBooking({first_name: "", last_name: "", email: "", phone_number: "", service_type_id: services[0].id})
+        services.length > 0 && setBooking({first_name: "", last_name: "", email: "", phone_number: "", body: "", service_type_id: services[0].id})
     },[services])    
 
     const submit = async (event) => {
         event.preventDefault()
+        FetchRequest("/bookings", "POST", booking)
+
+        // Change this later to redirect to a Thank you page
+        history.push("/")
     }
 
     const handleChange = (e) => {
@@ -26,7 +33,7 @@ const Booking = () => {
         <>
             <h1>Booking Form</h1>
 
-            <Form>
+            <Form onSubmit={submit}>
                 <label htmlFor="first_name">First Name: </label>
                 <input id="first_name" type='text' onChange={handleChange} value={booking.first_name}></input>
 
@@ -36,11 +43,11 @@ const Booking = () => {
                 <label htmlFor="email">Email: </label>
                 <input id="email"type='text' onChange={handleChange} value={booking.email}></input>
 
-                <label>Phone Number: </label>
-                <input type='text' onChange={handleChange} value={booking.phone_number}></input>
+                <label htmlFor="phone_number">Phone Number: </label>
+                <input id="phone_number"type='text' onChange={handleChange} value={booking.phone_number}></input>
 
-                <label>Description: </label>
-                <textarea type='text'></textarea>
+                <label htmlFor="body">Description: </label>
+                <textarea id="body" type='text' onChange={handleChange} value={booking.body}></textarea>
 
                 <label>Service Type: </label>
                 <select onChange={(e) => setBooking({...booking, service_type_id: e.target.value})} value={booking.service_type_id}>
