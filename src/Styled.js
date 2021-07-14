@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Form component used on Booking.js,
 export const Form = styled.form `
     height: 100%;
     display: flex;
