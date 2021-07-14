@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './components/Nav';
+import IncomingBookings from './components/IncomingBookings'
 import Booking from './components/Booking';
 import Home from './components/Home';
 import { useReducer, useEffect } from 'react';
@@ -31,7 +32,8 @@ function App() {
       <stateContext.Provider value={{...store, dispatch}}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/bookings" component={Booking} />
+            <Route exact path="/bookings" component={Booking} />
+            <Route exact path="/admin" component={IncomingBookings} />
         </Switch>
       </stateContext.Provider>
     </Router>
