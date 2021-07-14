@@ -15,7 +15,6 @@ export async function AuthFetchRequest(uri, token = "", method = "GET", data) {
 }
 
 export async function FetchRequest(uri, method = "GET", data) {
-  console.log(JSON.stringify(data));
   let res = await fetch(url + uri, {
     method: method,
     headers: {
