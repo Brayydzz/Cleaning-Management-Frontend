@@ -4,7 +4,6 @@ import Login from './Login';
 
 const IncomingBookings = () =>
 {
-  // console.log(useContext(stateReducer));
   const { token } = useContext(stateContext);
   return (
     <div>

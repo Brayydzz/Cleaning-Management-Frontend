@@ -1,4 +1,5 @@
 import React from "react";
+import jwtDecode from "jwt-decode";
 import Nav from "./components/Nav";
 import IncomingBookings from "./components/IncomingBookings";
 import Booking from "./components/Booking";
@@ -10,19 +11,20 @@ import { AuthFetchRequest, FetchRequest } from "./helperFunctions";
 
 function App() {
   // GLOBAL STATE
+  const token = localStorage.getItem("token") || null
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     bookings: [],
-    token: localStorage.getItem("token"),
+    token: token,
+    user: token ? jwtDecode(token.split(' ')[1])[0] : null
   })
   useEffect(() => {
-    const services = FetchRequest("/service_types").then((data) =>
+    FetchRequest("/service_types").then((data) =>
       dispatch({
         type: "setServices",
         services: data,
       })
     );
-    // console.log(store.token, "********")
   }, []);
 
   return (

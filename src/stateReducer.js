@@ -8,13 +8,15 @@ export default function stateReducer ( state, action ) {
                 services: action.services
             }
         }
-        case "setToken": {
-            localStorage.setItem("token", action.data)
+        case "setTokenAndUser": {
+            localStorage.setItem("token", action.token)
             return {
                 ...state,
-                token: action.data
+                token: action.token,
+                user: action.user
             }
         }
+
 
         default: return state
     }
