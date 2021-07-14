@@ -8,6 +8,8 @@ export default function stateReducer ( state, action ) {
                 services: action.services
             }
         }
+
+        default: return state
     }
 }
 
