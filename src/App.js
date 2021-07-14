@@ -16,7 +16,7 @@ function App() {
     services: [],
     bookings: [],
     token: token,
-    user: token ? jwtDecode(token.split(' ')[1])[0] : null
+    user: () => jwtDecode(token.split(' ')[1])
   })
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>

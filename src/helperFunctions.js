@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+
 const url = process.env.REACT_APP_API_ENDPOINT;
 export async function AuthFetchRequest(uri, token = "", method = "GET", data) {
   let res = await fetch(url + uri, {
@@ -24,4 +25,7 @@ export async function FetchRequest(uri, method = "GET", data) {
   });
   let json = await res.json();
   return json;
+}
+export function getUser(token){
+  
 }

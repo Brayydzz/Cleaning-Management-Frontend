@@ -4,10 +4,10 @@ import Login from './Login';
 
 const IncomingBookings = () =>
 {
-  const { token } = useContext(stateContext);
+  const { token, user } = useContext(stateContext);
   return (
     <div>
-      {token ? <h1>Logged In</h1> : <Login />}
+      {token ? <h1>Hello {user().first_name + " " + user().last_name}</h1> : <Login />}
     </div>
   )
 }
