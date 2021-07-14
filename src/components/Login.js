@@ -7,6 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { dispatch } = useContext(stateContext);
+
   return (
     <div>
       <form
@@ -21,8 +22,7 @@ const Login = () => {
             console.log(jwtDecode(data.token), "**********")
             dispatch({
               type: "setTokenAndUser",
-              token: `Bearer ${data.token}`,
-              user: jwtDecode(data.token),
+              token: `Bearer ${data.token}`
             });
           });
         }}
