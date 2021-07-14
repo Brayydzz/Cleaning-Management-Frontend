@@ -1,6 +1,12 @@
 import { Form } from "../Styled"
+import { useContext } from "react"
+import { stateContext } from "../stateReducer"
+
 
 const Booking = () => {
+
+    const { services } = useContext(stateContext)
+
     return (
         <>
             <h1>Booking Form</h1>
@@ -23,9 +29,9 @@ const Booking = () => {
 
                 <label>Service Type: </label>
                 <select>
-                    <option>SERVICE 1</option>
-                    <option>SERVICE 2</option>
-                    <option>SERVICE 3</option>
+                    {services.map((service) => (
+                        <option key={service.id} value={service.id}>{service.name}</option>
+                    ))}
                 </select>
                 <button type="submit">Submit</button>
             </Form>   
