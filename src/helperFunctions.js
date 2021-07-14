@@ -1,5 +1,7 @@
+require('dotenv').config()
 
-const url = "http://localhost:3001/"
+
+const url = process.env.REACT_APP_API_ENDPOINT
 export async function AuthFetchRequest(uri, token = "", method = "GET", data){
     let res = await fetch(url + uri, {
         method: method,
