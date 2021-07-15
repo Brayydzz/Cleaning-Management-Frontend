@@ -19,6 +19,25 @@ export default function stateReducer ( state, action ) {
                 user: () => jwtDecode(action.token.split(' ')[1])
             }
         }
+        case "logout":{
+            localStorage.removeItem("token")
+            return {
+                ...state,
+                token: null
+            }
+        }
+        case "setError": {
+            return{
+                ...state,
+                error: action.error
+            }
+        }
+        case "setMessage": {
+            return{
+                ...state,
+                message: action.message
+            }
+        }
         default: return state
     }
 
