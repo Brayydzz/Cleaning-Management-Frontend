@@ -87,7 +87,7 @@ const Booking = () => {
         ></textarea>
 
         <label>Service Type: </label>
-        <select
+        <select id="service_select"
           onChange={(e) =>
             setBooking({ ...booking, service_type_id: e.target.value })
           }
