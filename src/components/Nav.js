@@ -10,7 +10,7 @@ const Nav = () => {
                 <li><Link to="/">Services</Link></li>
                 <li><Link to="/">About</Link></li>
                 {/* DELETE THIS BELOW */}
-                <li><Link to="/dashboard/admin">Dashboard</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link></li>
                 <Link to="/bookings"><button>Book Now!</button></Link>
             </NavUl>
         </nav>

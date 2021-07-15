@@ -18,7 +18,7 @@ const Login = () => {
           FetchRequest("/login", "POST", { email, password }).then((data) => {
             if (data.error) {
               // Add Alert
-              alert(data.error);
+              dispatch({type: "setError", error:data.error})
               return;
             }
             console.log(jwtDecode(data.token), "**********")
@@ -26,6 +26,7 @@ const Login = () => {
               type: "setTokenAndUser",
               token: `Bearer ${data.token}`
             });
+            dispatch({type: "setMessage", message: "You have logged in successfully!"})
           });
         }}
       >

@@ -7,15 +7,19 @@ import Home from "./components/Home";
 import { useReducer, useEffect } from "react";
 import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthFetchRequest, FetchRequest } from "./helperFunctions";
+import { FetchRequest } from "./helperFunctions";
 
 function App() {
   // GLOBAL STATE
-  const token = localStorage.getItem("token") || null;
+  const token = localStorage.getItem("token") 
+  console.log(token)
+  console.log(!!token)
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     token: token,
     user: () => token ? jwtDecode(token.split(' ')[1]) : null,
+    error: "",
+    message: ""
   });
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
@@ -34,7 +38,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/bookings" component={Booking} />
-            <Route exact path="/dashboard/admin" component={Dashboard} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </stateContext.Provider>
       </Router>
