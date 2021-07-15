@@ -1,34 +1,46 @@
-import { DashNavUl } from "../Styled"
-import { Link } from "react-router-dom"
-import { useState } from "react"
-import IncomingBookings from "./IncomingBookings"
+import { DashNavUl, DashLi } from "../Styled"
+import { stateContext } from "../stateReducer"
+import { useContext } from "react"
 
-const DashboardNav = () => {
-  
+const DashboardNav = ({setRoute}) => {
+    
+  const {user} = useContext(stateContext)
 
   const handleClick = (e) => {
-      console.log('yeet')
+      setRoute(e.target.id)
   }
-  
+
   return (
     <nav>
       <DashNavUl>
-        <li onClick={handleClick}>
-          All Jobs
-        </li>
-        <li>
-          Unassigned Jobs
-        </li>
-        <li>
-          Assigned Jobs
-        </li>
-        <br />
-        <li>
-          Employees
-        </li>
-        <li>
-          Clients
-        </li>
+        <DashLi onClick={handleClick} id="myJobs">
+          My Jobs
+        </DashLi>
+        <DashLi onClick={handleClick} id="completedJobs">
+          Completed Jobs
+        </DashLi>
+        {user().isAdmin && 
+          <>
+            <br />
+            <h4>Admin</h4>
+            <DashLi onClick={handleClick} id="allJobs">
+              All Jobs
+            </DashLi>
+            <DashLi onClick={handleClick} id="incomingBookings">
+              Incoming Bookings
+            </DashLi>
+            <DashLi onClick={handleClick} id="unassignedJobs">
+              Unassigned Jobs
+            </DashLi>
+            <br />
+            <DashLi onClick={handleClick} id="employees">
+              Employees
+            </DashLi>
+            <DashLi onClick={handleClick} id="clients">
+              Clients
+            </DashLi>
+          </>
+        }
       </DashNavUl>
     </nav>
   )

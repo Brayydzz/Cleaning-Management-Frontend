@@ -20,8 +20,6 @@ export default function stateReducer ( state, action ) {
                 user: () => jwtDecode(action.token.split(' ')[1])
             }
         }
-
-
         default: return state
     }
 
