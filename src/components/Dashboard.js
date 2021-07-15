@@ -4,6 +4,7 @@ import Login from "./Login"
 import DashboardNav from "./DashboardNav"
 import AllJobs from "./AllJobs"
 import IncomingBookings from "./IncomingBookings"
+import Employees from "./Employees"
 import { DashContain, DashCardContain } from "../Styled"
 
 const Dashboard = () => {
@@ -18,6 +19,9 @@ const Dashboard = () => {
       }
       case "incomingBookings": {
         return <IncomingBookings />
+      }
+      case "employees": {
+        return <Employees/>
       }
     }
   }
