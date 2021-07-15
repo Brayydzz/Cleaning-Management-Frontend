@@ -2,7 +2,6 @@ import jwtDecode from "jwt-decode";
 import { createContext } from "react";
 
 export default function stateReducer ( state, action ) {
-    console.log(state.user);
     switch (action.type) {
         case "setServices": {
             return {
