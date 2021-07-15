@@ -4,7 +4,6 @@ require("dotenv").config();
 const url = process.env.REACT_APP_API_ENDPOINT;
 export function AuthFetchRequest(uri, token = "", method = "GET", data) {
   return new Promise(async (resolve,reject) => {
-    console.log(method)
     let response = await fetch(url + uri, {
       method: method,
       headers: {
@@ -14,7 +13,6 @@ export function AuthFetchRequest(uri, token = "", method = "GET", data) {
       body: JSON.stringify(data),
     })
     if (method != "DELETE") {
-      console.log('bar')
       const json = await response.json()
       resolve(json)
     }

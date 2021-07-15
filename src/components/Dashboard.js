@@ -4,6 +4,7 @@ import Login from "./Login"
 import DashboardNav from "./DashboardNav"
 import AllJobs from "./AllJobs"
 import IncomingBookings from "./IncomingBookings"
+import { DashContain, DashCardContain } from "../Styled"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("allJobs")
@@ -25,11 +26,13 @@ const Dashboard = () => {
   return (
     <>
       {token ? (
-        <>
-          <h1>Hello {user().first_name + " " + user().last_name}</h1>
-          <DashboardNav setRoute={setRoute} />
-          {renderSwitch()}
-        </>
+          <>
+            <h1>Hello {user().first_name + " " + user().last_name}</h1>
+            <DashContain>
+              <DashboardNav setRoute={setRoute} />
+                {renderSwitch()}
+            </DashContain>
+          </>
       ) : (
         <Login />
       )}
