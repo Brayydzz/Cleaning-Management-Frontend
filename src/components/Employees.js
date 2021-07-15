@@ -19,9 +19,9 @@ const Employees = () => {
             <h1>Employees</h1>
             <DashCardContain>
                     {users.length > 0 && 
-                        users.map((user) => (
+                        users.map(({user}) => (
                             <DashCard>
-                                {/* <p>{user.contact_information.first_name}</p> */}
+                                <p>{user.contact_information.first_name}</p>
                             </DashCard>
                         ))}
             </DashCardContain>
