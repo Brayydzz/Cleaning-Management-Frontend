@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { FetchRequest } from "../helperFunctions";
+import React, { useEffect, useState, useContext } from "react"
+import { stateContext } from "../stateReducer"
+import { AuthFetchRequest } from "../helperFunctions";
 
 const IncomingBookings = () => {
+  const {services, token} = useContext(stateContext)
   const [bookings, setBookings] = useState([]);
+
+
+  const deletePost = (booking) => {
+
+    let conf = window.confirm("Are you sure you want to delete?")
+    
+    if (conf) {
+      setBookings(bookings.filter(b => b.id != booking.id))
+      AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE")
+    }
+  }
+
   useEffect(() => {
-    FetchRequest("/bookings").then((data) => setBookings(data));
+    AuthFetchRequest("/bookings", token).then((data) => setBookings(data));
   }, []);
   return (
     <div>
       <h1>Incoming booking</h1>
-      {bookings &&
+      {bookings.length > 0 &&
         bookings.map((booking) => (
           <div style={{backgroundColor:"grey", border:"solid black 2px"}}>
             <h2>Name</h2>
@@ -21,12 +35,12 @@ const IncomingBookings = () => {
             <h2>Description</h2>
             <p>{booking.body}</p>
             <h2>Service</h2>
-            <p>{booking.service_type_id}</p>
+            <p>{services.filter(service => service.id == booking.service_type_id)[0].name}</p>
+            <button onClick={() => deletePost(booking)}>Delete</button>
           </div>
         ))}
     </div>
   );
 };
-
 
 export default IncomingBookings;

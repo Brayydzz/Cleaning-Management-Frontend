@@ -14,9 +14,8 @@ function App() {
   const token = localStorage.getItem("token") || null;
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
-    bookings: [],
     token: token,
-    user: () => token ? jwtDecode(token.split(' ')[1]) : null
+    user: () => token ? jwtDecode(token.split(' ')[1]) : null,
   });
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>

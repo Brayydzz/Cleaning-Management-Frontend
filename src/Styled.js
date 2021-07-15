@@ -17,6 +17,10 @@ export const NavUl = styled.ul `
     margin: 0;
 `
 
+export const DashLi = styled.li `
+    cursor: pointer;
+`
+
 export const DashNavUl = styled.nav `
     display: flex;
     height: 300px;
