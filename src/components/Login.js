@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <div>
       
-      <Form
+      <Form id="login_form"
         onSubmit={(e) => {
           e.preventDefault();
           FetchRequest("/login", "POST", { email, password }).then((data) => {
@@ -21,7 +21,6 @@ const Login = () => {
               dispatch({type: "setError", error:data.error})
               return;
             }
-            console.log(jwtDecode(data.token), "**********")
             dispatch({
               type: "setTokenAndUser",
               token: `Bearer ${data.token}`
@@ -31,13 +30,13 @@ const Login = () => {
         }}
       >
         <h1>LOG IN</h1>
-        <input
+        <input id="login_email"
           type="text"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <input id="login_password"
           type="password"
           placeholder="Password"
           value={password}
