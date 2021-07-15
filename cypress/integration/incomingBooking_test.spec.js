@@ -11,7 +11,7 @@ describe("Test incoming bookings", () =>
     );
   }
   );
-  it('recieve flash message', () =>
+  it('receive flash message', () =>
   {
     cy.intercept({ url: "http://localhost:3001/login", method: 'POST' },
       { error: "username and password don't match" }),
