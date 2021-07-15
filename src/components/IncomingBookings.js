@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { AuthFetchRequest } from "../helperFunctions";
+import { DashCard, DashCardContain } from "../Styled"
 
 const IncomingBookings = () => {
   const {services, token} = useContext(stateContext)
@@ -25,25 +26,27 @@ const IncomingBookings = () => {
     AuthFetchRequest("/bookings", token).then((data) => setBookings(data));
   }, []);
   return (
-    <div>
-      <h1>Incoming booking</h1>
-      {bookings.length > 0 &&
-        bookings.map((booking) => (
-          <div key={booking.id}style={{backgroundColor:"grey", border:"solid black 2px"}}>
-            <h2>Name</h2>
-            <p>{`${booking.first_name} ${booking.last_name}`}</p>
-            <h2>Email</h2>
-            <p>{booking.email}</p>
-            <h2>Phone Number</h2>
-            <p>{booking.phone_number}</p>
-            <h2>Description</h2>
-            <p>{booking.body}</p>
-            <h2>Service</h2>
-            <p>{services.filter(service => service.id == booking.service_type_id)[0].name}</p>
-            <button onClick={() => deletePost(booking)}>Delete</button>
-          </div>
-        ))}
-    </div>
+      <div>
+        <h1>Incoming booking</h1>
+        <DashCardContain>
+        {bookings.length > 0 &&
+          bookings.map((booking) => (
+            <DashCard key={booking.id}style={{backgroundColor:"grey", border:"solid black 2px"}}>
+              <h2>Name</h2>
+              <p>{`${booking.first_name} ${booking.last_name}`}</p>
+              <h2>Email</h2>
+              <p>{booking.email}</p>
+              <h2>Phone Number</h2>
+              <p>{booking.phone_number}</p>
+              <h2>Description</h2>
+              <p>{booking.body}</p>
+              <h2>Service</h2>
+              <p>{services.filter(service => service.id == booking.service_type_id)[0].name}</p>
+              <button onClick={() => deletePost(booking)}>Delete</button>
+            </DashCard>
+          ))}
+        </DashCardContain>
+      </div>
   );
 };
 

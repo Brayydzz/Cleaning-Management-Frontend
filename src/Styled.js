@@ -9,6 +9,24 @@ export const Form = styled.form `
     align-items: center;
 `
 
+
+export const DashContain = styled.div `
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+`
+
+export const DashCard = styled.div `
+    padding: 10px;
+    height: 550px;
+    width: 400px;
+`
+
+export const DashCardContain = styled.div `
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+`
+
 export const NavUl = styled.ul `
     display: flex;
     justify-content: space-around;
