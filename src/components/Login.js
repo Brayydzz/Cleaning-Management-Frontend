@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { FetchRequest } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
 import jwtDecode from "jwt-decode";
+import { Form } from "../Styled"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,8 @@ const Login = () => {
 
   return (
     <div>
-      <form
+      
+      <Form
         onSubmit={(e) => {
           e.preventDefault();
           FetchRequest("/login", "POST", { email, password }).then((data) => {
@@ -27,6 +29,7 @@ const Login = () => {
           });
         }}
       >
+        <h1>LOG IN</h1>
         <input
           type="text"
           placeholder="Email"
@@ -40,7 +43,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button>Login</button>
-      </form>
+      </Form>
     </div>
   );
 };

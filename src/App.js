@@ -1,7 +1,7 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
 import Nav from "./components/Nav";
-import IncomingBookings from "./components/IncomingBookings";
+import Dashboard from "./components/Dashboard";
 import Booking from "./components/Booking";
 import Home from "./components/Home";
 import { useReducer, useEffect } from "react";
@@ -41,7 +41,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/bookings" component={Booking} />
-            <Route exact path="/dashboard/admin" component={IncomingBookings} />
+            <Route exact path="/dashboard/admin" component={Dashboard} />
           </Switch>
         </stateContext.Provider>
       </Router>

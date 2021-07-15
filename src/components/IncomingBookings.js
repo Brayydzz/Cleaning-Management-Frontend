@@ -28,4 +28,5 @@ const IncomingBookings = () => {
   );
 };
 
+
 export default IncomingBookings;
