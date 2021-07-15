@@ -22,7 +22,7 @@ const Dashboard = () => {
   return (
     <>
       {token ? (
-        <h1>Hello {console.log(user())}</h1>
+        <h1>Hello {user().first_name}</h1>
       ) : (
         <Login />
       )}
