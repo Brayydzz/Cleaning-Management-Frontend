@@ -1,64 +1,108 @@
-import { Form } from "../Styled"
-import { useContext, useState, useEffect } from "react"
-import { stateContext } from "../stateReducer"
-import { FetchRequest } from "../helperFunctions"
-import { useHistory } from "react-router"
-
+import { Form } from "../Styled";
+import { useContext, useState, useEffect } from "react";
+import { stateContext } from "../stateReducer";
+import { FetchRequest } from "../helperFunctions";
+import { useHistory } from "react-router";
 
 const Booking = () => {
-    const { services } = useContext(stateContext)
-    const history = useHistory()
-    const [booking, setBooking] = useState({first_name: "", last_name: "", email: "", phone_number: "", service_type_id: "", body: ""})
+  const { services } = useContext(stateContext);
+  const history = useHistory();
+  const [booking, setBooking] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    service_type_id: "",
+    body: "",
+  });
 
+  useEffect(() => {
+    services.length > 0 &&
+      setBooking({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        body: "",
+        service_type_id: services[0].id,
+      });
+  }, [services]);
 
-    useEffect(() => {
-        services.length > 0 && setBooking({first_name: "", last_name: "", email: "", phone_number: "", body: "", service_type_id: services[0].id})
-    },[services])    
+  const submit = async (event) => {
+    event.preventDefault();
+    FetchRequest("/bookings", "POST", booking);
 
-    const submit = async (event) => {
-        event.preventDefault()
-        FetchRequest("/bookings", "POST", booking)
+    // Change this later to redirect to a Thank you page
+    history.push("/");
+  };
 
-        // Change this later to redirect to a Thank you page
-        history.push("/")
-    }
+  const handleChange = (e) => {
+    // console.log([e.target.id])
+    setBooking({ ...booking, [e.target.id]: e.target.value });
+  };
 
-    const handleChange = (e) => {
-        // console.log([e.target.id])
-        setBooking({...booking, [e.target.id]: e.target.value })
-    }
+  return (
+    <>
+      <h1>Booking Form</h1>
 
+      <Form id="bookingSubmit" onSubmit={submit}>
+        <label htmlFor="first_name">First Name: </label>
+        <input
+          id="first_name"
+          type="text"
+          onChange={handleChange}
+          value={booking.first_name}
+        ></input>
 
-    return (
-        <>
-            <h1>Booking Form</h1>
+        <label htmlFor="last_name">Last Name: </label>
+        <input
+          id="last_name"
+          type="text"
+          onChange={handleChange}
+          value={booking.last_name}
+        ></input>
 
-            <Form onSubmit={submit}>
-                <label htmlFor="first_name">First Name: </label>
-                <input id="first_name" type='text' onChange={handleChange} value={booking.first_name}></input>
+        <label htmlFor="email">Email: </label>
+        <input
+          id="email"
+          type="text"
+          onChange={handleChange}
+          value={booking.email}
+        ></input>
 
-                <label htmlFor="last_name">Last Name: </label>
-                <input id="last_name" type='text' onChange={handleChange} value={booking.last_name}></input>
+        <label htmlFor="phone_number">Phone Number: </label>
+        <input
+          id="phone_number"
+          type="text"
+          onChange={handleChange}
+          value={booking.phone_number}
+        ></input>
 
-                <label htmlFor="email">Email: </label>
-                <input id="email"type='text' onChange={handleChange} value={booking.email}></input>
+        <label htmlFor="body">Description: </label>
+        <textarea
+          id="body"
+          type="text"
+          onChange={handleChange}
+          value={booking.body}
+        ></textarea>
 
-                <label htmlFor="phone_number">Phone Number: </label>
-                <input id="phone_number"type='text' onChange={handleChange} value={booking.phone_number}></input>
+        <label>Service Type: </label>
+        <select
+          onChange={(e) =>
+            setBooking({ ...booking, service_type_id: e.target.value })
+          }
+          value={booking.service_type_id}
+        >
+          {services.map((service) => (
+            <option key={service.id} value={service.id}>
+              {service.name}
+            </option>
+          ))}
+        </select>
+        <button type="submit">Submit</button>
+      </Form>
+    </>
+  );
+};
 
-                <label htmlFor="body">Description: </label>
-                <textarea id="body" type='text' onChange={handleChange} value={booking.body}></textarea>
-
-                <label>Service Type: </label>
-                <select onChange={(e) => setBooking({...booking, service_type_id: e.target.value})} value={booking.service_type_id}>
-                    {services.map((service) => (
-                        <option key={service.id} value={service.id}>{service.name}</option>
-                    ))}
-                </select>
-                <button type="submit">Submit</button>
-            </Form>   
-        </>
-    )
-}
-
-export default Booking
+export default Booking;
