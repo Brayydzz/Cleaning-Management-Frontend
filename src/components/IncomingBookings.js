@@ -12,8 +12,12 @@ const IncomingBookings = () => {
     let conf = window.confirm("Are you sure you want to delete?")
     
     if (conf) {
-      setBookings(bookings.filter(b => b.id != booking.id))
       AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE")
+      .then(method => {
+        if (method) {
+          setBookings(bookings.filter(b => b.id != booking.id))
+        }
+      })
     }
   }
 
@@ -25,7 +29,7 @@ const IncomingBookings = () => {
       <h1>Incoming booking</h1>
       {bookings.length > 0 &&
         bookings.map((booking) => (
-          <div style={{backgroundColor:"grey", border:"solid black 2px"}}>
+          <div key={booking.id}style={{backgroundColor:"grey", border:"solid black 2px"}}>
             <h2>Name</h2>
             <p>{`${booking.first_name} ${booking.last_name}`}</p>
             <h2>Email</h2>
