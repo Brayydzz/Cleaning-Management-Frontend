@@ -8,18 +8,19 @@ import { useReducer, useEffect } from "react";
 import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FetchRequest } from "./helperFunctions";
+import FlashMessage from "./components/FlashMessage";
 
 function App() {
   // GLOBAL STATE
-  const token = localStorage.getItem("token") 
-  console.log(token)
-  console.log(!!token)
+  const token = localStorage.getItem("token");
+  console.log(token);
+  console.log(!!token);
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     token: token,
-    user: () => token ? jwtDecode(token.split(' ')[1]) : null,
+    user: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
-    message: ""
+    message: "",
   });
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
@@ -34,7 +35,9 @@ function App() {
     <>
       <Router>
         <Nav />
+
         <stateContext.Provider value={{ ...store, dispatch }}>
+        <FlashMessage />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/bookings" component={Booking} />

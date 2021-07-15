@@ -5,8 +5,7 @@ import DashboardNav from "./DashboardNav";
 import AllJobs from "./AllJobs";
 import IncomingBookings from "./IncomingBookings";
 import Employees from "./Employees";
-import { DashContain, DashCardContain } from "../Styled";
-import FlashMessage from "./FlashMessage";
+import { DashContain } from "../Styled";
 import MyJobs from "./MyJobs";
 
 const Dashboard = () => {
@@ -36,7 +35,6 @@ const Dashboard = () => {
   const { token, user } = useContext(stateContext);
   return (
     <>
-      <FlashMessage />
       {token ? (
         <>
           <h1>Hello {user().first_name + " " + user().last_name}</h1>
