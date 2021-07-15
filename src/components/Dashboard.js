@@ -9,7 +9,7 @@ import { DashContain, DashCardContain } from "../Styled"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("allJobs")
-
+  const {dispatch} = useContext(stateContext)
 
   //Switch statement allows us to render a component when a li is clicked in DashboardNav.
   const renderSwitch = () => {
@@ -23,8 +23,10 @@ const Dashboard = () => {
       case "employees": {
         return <Employees/>
       }
+      default: return null
     }
   }
+
 
   const { token, user } = useContext(stateContext)
   return (
@@ -32,6 +34,7 @@ const Dashboard = () => {
       {token ? (
           <>
             <h1>Hello {user().first_name + " " + user().last_name}</h1>
+            <button onClick={() => dispatch({type: "setTokenAndUser", token: null})}>Log Out</button>
             <DashContain>
               <DashboardNav setRoute={setRoute} />
                 {renderSwitch()}
