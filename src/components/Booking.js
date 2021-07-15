@@ -3,9 +3,10 @@ import { useContext, useState, useEffect } from "react";
 import { stateContext } from "../stateReducer";
 import { FetchRequest } from "../helperFunctions";
 import { useHistory } from "react-router";
+import validator from "validator";
 
 const Booking = () => {
-  const { services } = useContext(stateContext);
+  const { services, dispatch } = useContext(stateContext);
   const history = useHistory();
   const [booking, setBooking] = useState({
     first_name: "",
@@ -16,6 +17,25 @@ const Booking = () => {
     body: "",
   });
 
+  const setErrorMessage = (message) => {
+    dispatch({ type: "setError", error: message });
+  };
+
+  const validateInputs = () => {
+    if (validator.isEmpty(booking.first_name)) {
+      setErrorMessage("First name can't be empty");
+      return false;
+    }
+    if (!validator.isEmail(booking.email)) {
+      setErrorMessage("Invalid Email");
+      return false;
+    }
+    if (validator.isEmpty(booking.body)) {
+      setErrorMessage("Body can't be empty");
+      return false;
+    }
+    return true;
+  };
   useEffect(() => {
     services.length > 0 &&
       setBooking({
@@ -30,10 +50,14 @@ const Booking = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    FetchRequest("/bookings", "POST", booking);
+    if (validateInputs()) {
+      FetchRequest("/bookings", "POST", booking);
+      setErrorMessage("")
+      dispatch({type: "setMessage", message: "Form submitted, thanks!"})
+      history.push("/");
+    }
 
     // Change this later to redirect to a Thank you page
-    history.push("/");
   };
 
   const handleChange = (e) => {
@@ -87,7 +111,8 @@ const Booking = () => {
         ></textarea>
 
         <label>Service Type: </label>
-        <select id="service_select"
+        <select
+          id="service_select"
           onChange={(e) =>
             setBooking({ ...booking, service_type_id: e.target.value })
           }
