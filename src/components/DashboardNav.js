@@ -2,13 +2,9 @@ import { DashNavUl, DashLi } from "../Styled"
 import { stateContext } from "../stateReducer"
 import { useContext } from "react"
 
-const DashboardNav = ({setRoute}) => {
+const DashboardNav = ({handleClick}) => {
     
-  const {user} = useContext(stateContext)
-
-  const handleClick = (e) => {
-      setRoute(e.target.id)
-  }
+  const {currentUser} = useContext(stateContext)
 
   return (
     <nav>
@@ -19,7 +15,7 @@ const DashboardNav = ({setRoute}) => {
         <DashLi onClick={handleClick} id="completedJobs">
           Completed Jobs
         </DashLi>
-        {user().isAdmin && 
+        {currentUser().isAdmin && 
           <>
             <br />
             <h4>Admin</h4>

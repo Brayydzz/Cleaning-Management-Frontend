@@ -19,6 +19,8 @@ export const DashCard = styled.div `
     padding: 10px;
     height: 550px;
     width: 400px;
+    background-color: grey; 
+    border:solid black 2px;
 `
 
 export const DashCardContain = styled.div `

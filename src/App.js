@@ -13,12 +13,11 @@ import FlashMessage from "./components/FlashMessage";
 function App() {
   // GLOBAL STATE
   const token = localStorage.getItem("token");
-  console.log(token);
-  console.log(!!token);
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
+    employees: [],
     token: token,
-    user: () => (token ? jwtDecode(token.split(" ")[1]) : null),
+    currentUser: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
     message: "",
   });
