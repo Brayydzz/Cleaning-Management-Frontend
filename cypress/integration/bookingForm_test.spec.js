@@ -32,60 +32,34 @@ describe("Booking Form", () => {
       cy.get("#service_select").select("Half Clean").should("have.value", "12");
     });
   });
-  context("defines routes", () => {
-    // beforeEach(() =>
-    //   cy.intercept("http://localhost:3000/bookings", {
-    //     body: [
-    //       { value: "Service1" },
-    //       { value: "Service2" },
-    //       { value: "Service3" },
-    //     ],
-    //   })
-    // );
-    // beforeEach(() =>  cy.intercept(
-    //   {
-    //     url: "http://localhost:3001/bookings",
-    //     method: "GET",
-    //   },
-    //   { statusCode: 400 }
-    // ))
-    it("input values for Booking Form", () => {
-      cy.intercept("http://localhost:3001/service_types", {
-        body: [
-          {
-            id: 10,
-            name: "Hour Clean",
-            created_at: "2021-07-14T06:32:39.682Z",
-            updated_at: "2021-07-14T06:32:39.682Z",
-            hours_needed: 1.0,
-          },
-          {
-            id: 11,
-            name: "Full Clean",
-            created_at: "2021-07-14T06:32:39.688Z",
-            updated_at: "2021-07-14T06:32:39.688Z",
-            hours_needed: 8.0,
-          },
-          {
-            id: 12,
-            name: "Half Clean",
-            created_at: "2021-07-14T06:32:39.693Z",
-            updated_at: "2021-07-14T06:32:39.693Z",
-            hours_needed: 4.0,
-          },
-        ],
-      });
-
-      cy.visit("http://localhost:3000/bookings");
-
-      cy.get("Form").within(() => {
-        cy.get("#first_name").type("firstName");
-        cy.get("#last_name").type("lastName");
-        cy.get("#email").type("email@test.com");
-        cy.get("#phone_number").type("0435647876");
-        // cy.get("#phone_number").type("Phone Number *** make FAIL");
-        cy.get("#body").type("Test text in the description");
-      });
+  it("should return a failed status code on GET request", () => {
+    cy.intercept(
+      {
+        url: "http://localhost:3001/bookings",
+        method: "GET",
+      },
+      { statusCode: 400 }
+    );
+  });
+  it("should accept input values for Booking Form", () => {
+    cy.visit("http://localhost:3000/bookings");
+    cy.get("Form").within(() => {
+      cy.get("#first_name").type("firstName");
+      cy.get("#last_name").type("lastName");
+      cy.get("#email").type("email@test.com");
+      cy.get("#phone_number").type("0435647876");
+      // cy.get("#phone_number").type("Phone Number *** make FAIL");
+      cy.get("#body").type("Test text in the description");
     });
   });
+  it("should Post form data to server", () =>
+  {
+    // cy.intercept(
+    //   {
+    //     url: "http://localhost:3001/bookings",
+    //     method: "POST",
+    //   }
+    // );
+    cy.get("#bookingSubmit").submit()
+  })
 });

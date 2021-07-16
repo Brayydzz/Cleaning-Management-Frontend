@@ -1,9 +1,20 @@
-import cypress = require("cypress");
-
 describe("Test incoming bookings", () =>
 {
-  context('retrieve bookings', () =>
+  it('retrieve bookings', () =>
   {
-    beforeEach(() => cypress.visit("") )
+    cy.visit("http://localhost:3000/dashboard");
+    cy.get("#login_form").within(() =>
+    {
+      cy.get("#login_email").type("a@b.com"),
+        cy.get("#login_password").type("password");
+    }
+    );
+  }
+  );
+  it('receive flash message', () =>
+  {
+    cy.intercept({ url: "http://localhost:3001/login", method: 'POST' },
+      { error: "username and password don't match" }),
+      cy.get('#login_form').submit()
   })
 })
