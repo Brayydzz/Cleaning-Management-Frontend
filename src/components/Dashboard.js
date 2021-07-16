@@ -3,16 +3,17 @@ import { stateContext } from "../stateReducer";
 import Login from "./Login";
 import DashboardNav from "./DashboardNav";
 import AllJobs from "./AllJobs";
-import NewEmployee from "./NewEmployee";
 import IncomingBookings from "./IncomingBookings";
 import Employees from "./Employees";
 import { DashContain } from "../Styled";
 import MyJobs from "./MyJobs";
 import AllClients from "./AllClients";
 import NewClient from "./NewClient";
+import NewEmployee from "./NewEmployee"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs");
+
   const { dispatch, token, currentUser } = useContext(stateContext);
   const [reloadClients, setReloadClients] = useState(true)
 
@@ -31,13 +32,14 @@ const Dashboard = () => {
         return <IncomingBookings />;
       }
       case "employees": {
+
         return <Employees handleClick={handleClick}/>;
       }
       case "myJobs":{
         return <MyJobs />
       }
       case "newEmployee": {
-        return <NewEmployee />
+        return <NewEmployee setRoute={setRoute}/>
       }
       case "clients":{
         return <AllClients {...{handleClick, reloadClients}}/>
@@ -50,10 +52,12 @@ const Dashboard = () => {
         return null;
     }
   };
+
   return (
     <>
       {token ? (
         <>
+
           <h1>Hello {currentUser().first_name + " " + currentUser().last_name}</h1>
           <button onClick={() => dispatch({ type: "logout" })}>Log Out</button>
           <DashContain>

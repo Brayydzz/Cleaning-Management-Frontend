@@ -1,6 +1,5 @@
 import { Form } from "../Styled"
 
-
 const ContactForm = ({handleChange, submit}) => {
     return (
         <Form onSubmit={submit}>

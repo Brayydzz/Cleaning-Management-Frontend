@@ -50,6 +50,8 @@ export default function stateReducer ( state, action ) {
                 clients: action.clients
             }
         }
+
+
         default: return state
     }
 

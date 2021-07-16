@@ -15,7 +15,6 @@ const Employees = ({handleClick}) => {
     }, [])
 
     const deleteUser = (user) => {
-
         let conf = window.confirm("Are you sure you want to delete?")
         
         if (conf) {
@@ -23,12 +22,11 @@ const Employees = ({handleClick}) => {
             .then(method => {
             if (method) {
                 // eslint-disable-next-line
-                setUsers(users.filter(obj => obj.user.user.id != user.id))
+                setUsers(users.filter(obj => obj.user_data.user.id != user.id))
             }
             })
         }
     }
-
 
     return (
         <div>
@@ -45,7 +43,7 @@ const Employees = ({handleClick}) => {
                                 <p>{`Is an Admin? ${user_data.user.is_admin}`}</p>
 
                                 { currentUser().user_id != user_data.user.id &&
-                                    <button onClick={() => deleteUser(user_data.user)}>Delete User! (IT NOT WORK YET)</button>
+                                    <button onClick={() => deleteUser(user_data.user)}>Delete User!</button>
                                 }
                             </DashCard>
                         ))}
