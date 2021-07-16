@@ -1,11 +1,16 @@
-import { useState, useContext } from "react"
-import { AuthFetchRequest } from "../helperFunctions"
-import { stateContext } from "../stateReducer"
-import ContactForm from "./ContactForm"
+import { useState, useContext } from "react";
+import { AuthFetchRequest } from "../helperFunctions";
+import { stateContext } from "../stateReducer";
+import ContactForm from "./ContactForm";
 
+<<<<<<< HEAD
+const NewEmployee = () => {
+  const { token } = useContext(stateContext);
+=======
 const NewEmployee = ({setRoute}) => {
 
     const {token} = useContext(stateContext)
+>>>>>>> 57cd92b8a4bfd4c9cf86bfabb1c252422b0cc941
   const [employee, setEmployee] = useState({
     first_name: "",
     last_name: "",
@@ -15,15 +20,25 @@ const NewEmployee = ({setRoute}) => {
     street_number: "",
     unit_number: "",
     suburb: "",
-    state: "", 
+    state: "",
     postcode: "",
-  })
+  });
 
   const handleChange = (e) => {
-    setEmployee({ ...employee, [e.target.id]: e.target.value })
-  }
+    setEmployee({ ...employee, [e.target.id]: e.target.value });
+  };
 
   const submit = (e) => {
+<<<<<<< HEAD
+    e.preventDefault();
+    AuthFetchRequest("/signup", token, "POST", employee);
+  };
+
+  return (
+    <>
+      <h1>New Employee</h1>
+      <ContactForm props={(handleChange, submit)} />
+=======
     e.preventDefault()
     AuthFetchRequest("/signup", token, "POST", employee)
     setRoute("employees")
@@ -34,10 +49,11 @@ const NewEmployee = ({setRoute}) => {
     <>
         <h1>New Employee</h1>
       <ContactForm {...{handleChange, submit}}/>
+>>>>>>> 57cd92b8a4bfd4c9cf86bfabb1c252422b0cc941
     </>
-  )
-}
+  );
+};
 
-export default NewEmployee
+export default NewEmployee;
 
 // email, street_address, street_number, unit_number ,suburb, state, postcode, first_name, last_name, phone_number

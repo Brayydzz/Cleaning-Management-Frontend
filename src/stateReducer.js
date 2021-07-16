@@ -44,25 +44,14 @@ export default function stateReducer ( state, action ) {
                 message: action.message
             }
         }
-        case "logout":{
-            localStorage.removeItem("token")
-            return {
-                ...state,
-                token: null
-            }
-        }
-        case "setError": {
+        case "setClients": {
             return{
                 ...state,
-                error: action.error
+                clients: action.clients
             }
         }
-        case "setMessage": {
-            return{
-                ...state,
-                message: action.message
-            }
-        }
+
+
         default: return state
     }
 
