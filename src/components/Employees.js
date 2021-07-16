@@ -51,7 +51,6 @@ const Employees = ({handleClick}) => {
                                 { currentUser().user_id != user_data.user.id &&
                                     <button onClick={() => deleteUser(user_data.user)}>Delete User!</button>
                                 }
-                                
                             </DashCard>
                         ))}
             </DashCardContain>
