@@ -22,6 +22,7 @@ function App() {
     currentUser: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
     message: "",
+    clients: []
   });
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
