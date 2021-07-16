@@ -8,7 +8,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { dispatch } = useContext(stateContext);
-
   return (
     <div>
       
