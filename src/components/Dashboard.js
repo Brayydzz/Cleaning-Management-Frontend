@@ -33,7 +33,7 @@ const Dashboard = () => {
         return <MyJobs />
       }
       case "newEmployee": {
-        return <NewEmployee />
+        return <NewEmployee setRoute={setRoute}/>
       }
       default:
         return null;

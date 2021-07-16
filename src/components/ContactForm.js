@@ -1,10 +1,8 @@
 import { Form } from "../Styled"
 
-
 const ContactForm = ({handleChange, submit}) => {
     return (
         <Form onSubmit={submit}>
-            <h1>New Employee</h1>
             <label htmlFor="first_name">First Name:</label>
             <input id="first_name" type="text" onChange={handleChange}></input>
 
