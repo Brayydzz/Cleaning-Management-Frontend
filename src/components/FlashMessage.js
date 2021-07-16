@@ -8,12 +8,12 @@ const FlashMessage = () => {
         {error && 
             <div id="errorFlashMessage" style={{backgroundColor:"red"}}>
             <h3>{error}</h3>
-            <button onClick={() => dispatch({type: "setError", error: ""})}>close</button>
+            <button id="closeErrorFlash"onClick={() => dispatch({type: "setError", error: ""})}>close</button>
         </div>}
         {message && 
             <div id="successFlashMessage" style={{backgroundColor:"green"}}>
             <h3>{message}</h3>
-            <button onClick={() => dispatch({type: "setMessage", message: ""})}>close</button>
+            <button id="closeSuccessFlash" onClick={() => dispatch({type: "setMessage", message: ""})}>close</button>
         </div>}
         </>
     )

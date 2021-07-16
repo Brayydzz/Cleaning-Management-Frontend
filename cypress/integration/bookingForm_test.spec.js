@@ -226,8 +226,41 @@ describe("Booking Form", () => {
       { statusCode: 201 }
     );
   });
-  // it("should close the flash message", () =>
-  // {
-    
-  // })
+  it.only("should close the flash message", () => {
+    cy.intercept("http://localhost:3001/service_types", {
+      body: [
+        {
+          id: 10,
+          name: "Hour Clean",
+          created_at: "2021-07-14T06:32:39.682Z",
+          updated_at: "2021-07-14T06:32:39.682Z",
+          hours_needed: 1.0,
+        },
+        {
+          id: 11,
+          name: "Full Clean",
+          created_at: "2021-07-14T06:32:39.688Z",
+          updated_at: "2021-07-14T06:32:39.688Z",
+          hours_needed: 8.0,
+        },
+        {
+          id: 12,
+          name: "Half Clean",
+          created_at: "2021-07-14T06:32:39.693Z",
+          updated_at: "2021-07-14T06:32:39.693Z",
+          hours_needed: 4.0,
+        },
+      ],
+    });
+    cy.visit("http://localhost:3000/bookings");
+    cy.get("Form").within(() => {
+      cy.get("#last_name").type("lastName");
+      cy.get("#email").type("email@test.com");
+      cy.get("#phone_number").type("0412345678");
+      cy.get("#body").type("Test text in the description");
+      cy.get("button").click();
+    });
+    cy.get("#errorFlashMessage").should("contain", "First name can't be empty");
+    cy.get("#closeErrorFlash").click();
+  });
 });
