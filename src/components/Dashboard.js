@@ -8,10 +8,14 @@ import IncomingBookings from "./IncomingBookings";
 import Employees from "./Employees";
 import { DashContain } from "../Styled";
 import MyJobs from "./MyJobs";
+import AllClients from "./AllClients";
+import NewClient from "./NewClient";
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs");
   const { dispatch, token, currentUser } = useContext(stateContext);
+  const [reloadClients, setReloadClients] = useState(true)
+
 
   const handleClick = (e) => {
     setRoute(e.target.id)
@@ -35,6 +39,13 @@ const Dashboard = () => {
       case "newEmployee": {
         return <NewEmployee />
       }
+      case "clients":{
+        return <AllClients {...{handleClick, reloadClients}}/>
+      }
+      case "newClient":{
+        return <NewClient {...{setRoute, setReloadClients}}/>
+      }
+
       default:
         return null;
     }

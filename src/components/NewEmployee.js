@@ -1,11 +1,10 @@
-import { useState, useContext } from "react"
-import { AuthFetchRequest } from "../helperFunctions"
-import { stateContext } from "../stateReducer"
-import ContactForm from "./ContactForm"
+import { useState, useContext } from "react";
+import { AuthFetchRequest } from "../helperFunctions";
+import { stateContext } from "../stateReducer";
+import ContactForm from "./ContactForm";
 
 const NewEmployee = () => {
-
-    const {token} = useContext(stateContext)
+  const { token } = useContext(stateContext);
   const [employee, setEmployee] = useState({
     first_name: "",
     last_name: "",
@@ -15,26 +14,27 @@ const NewEmployee = () => {
     street_number: "",
     unit_number: "",
     suburb: "",
-    state: "", 
+    state: "",
     postcode: "",
-  })
+  });
 
   const handleChange = (e) => {
-    setEmployee({ ...employee, [e.target.id]: e.target.value })
-  }
+    setEmployee({ ...employee, [e.target.id]: e.target.value });
+  };
 
   const submit = (e) => {
-    e.preventDefault()
-    AuthFetchRequest("/signup", token, "POST", employee)
-  }
+    e.preventDefault();
+    AuthFetchRequest("/signup", token, "POST", employee);
+  };
 
   return (
     <>
-      <ContactForm props={handleChange, submit}/>
+      <h1>New Employee</h1>
+      <ContactForm props={(handleChange, submit)} />
     </>
-  )
-}
+  );
+};
 
-export default NewEmployee
+export default NewEmployee;
 
 // email, street_address, street_number, unit_number ,suburb, state, postcode, first_name, last_name, phone_number
