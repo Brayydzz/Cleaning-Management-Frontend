@@ -7,7 +7,7 @@ import IncomingBookings from "./IncomingBookings";
 import Employees from "./Employees";
 import { DashContain } from "../Styled";
 import MyJobs from "./MyJobs";
-import EditAccount from "./EditAccount";
+import AccountDetails from "./AccountDetails";
 import AllClients from "./AllClients";
 import NewClient from "./NewClient";
 import NewEmployee from "./NewEmployee";
@@ -48,8 +48,8 @@ const Dashboard = () => {
       case "allJobs": {
         return <AllJobs />;
       }
-      case "editAccount": {
-        return <EditAccount />;
+      case "accountDetails": {
+        return <AccountDetails />;
       }
       case "incomingBookings": {
         return <IncomingBookings />;
