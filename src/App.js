@@ -13,17 +13,16 @@ import FlashMessage from "./components/FlashMessage";
 function App() {
   // GLOBAL STATE
   const token = localStorage.getItem("token");
-
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     employees: [],
     token: token,
-
     currentUser: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
     message: "",
     clients: []
   });
+  
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
       dispatch({

@@ -56,11 +56,10 @@ export default function stateReducer ( state, action ) {
                 clients: action.clients
             }
         }
-
-
-        default: return state
+        default:
+          return state;
     }
 
-}
+  }
 
-export const stateContext = createContext() 
+export const stateContext = createContext();

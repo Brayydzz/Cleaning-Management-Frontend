@@ -1,12 +1,12 @@
-import { useState, useContext, useEffect } from "react"
-import { AuthFetchRequest } from "../helperFunctions"
-import { stateContext } from "../stateReducer"
-import { DashCard, DashCardContain } from "../Styled"
+import { useState, useContext, useEffect } from "react";
+import { AuthFetchRequest } from "../helperFunctions";
+import { stateContext } from "../stateReducer";
+import { DashCard, DashCardContain } from "../Styled";
 
-const Employees = ({handleClick}) => {
+const Employees = ({ handleClick }) => {
+  const [users, setUsers] = useState([]);
 
     const {token, currentUser, dispatch, employees} = useContext(stateContext)
-    const [users, setUsers] = useState([])
 
     useEffect(() => {
         AuthFetchRequest("/users", token).then(data => {
@@ -33,7 +33,7 @@ const Employees = ({handleClick}) => {
             }
             })
         }
-    }
+      }
 
     return (
         <div>
@@ -58,4 +58,4 @@ const Employees = ({handleClick}) => {
     )
 }
 
-export default Employees
+export default Employees;
