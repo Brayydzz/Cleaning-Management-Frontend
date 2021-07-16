@@ -1,13 +1,13 @@
-import { Form } from "../Styled";
-import { useContext, useState, useEffect } from "react";
-import { stateContext } from "../stateReducer";
-import { FetchRequest } from "../helperFunctions";
-import { useHistory } from "react-router";
-import validator from "validator";
+import { Form } from "../Styled"
+import { useContext, useState, useEffect } from "react"
+import { stateContext } from "../stateReducer"
+import { FetchRequest } from "../helperFunctions"
+import { useHistory } from "react-router"
+import validator from "validator"
 
 const Booking = () => {
-  const { services, dispatch } = useContext(stateContext);
-  const history = useHistory();
+  const { services, dispatch } = useContext(stateContext)
+  const history = useHistory()
   const [booking, setBooking] = useState({
     first_name: "",
     last_name: "",
@@ -15,27 +15,28 @@ const Booking = () => {
     phone_number: "",
     service_type_id: "",
     body: "",
-  });
+  })
 
   const setErrorMessage = (message) => {
-    dispatch({ type: "setError", error: message });
-  };
+
+    dispatch({ type: "setError", error: message })
+  }
 
   const validateInputs = () => {
     if (validator.isEmpty(booking.first_name)) {
-      setErrorMessage("First name can't be empty");
-      return false;
+      setErrorMessage("First name can't be empty")
+      return false
     }
     if (!validator.isEmail(booking.email)) {
-      setErrorMessage("Invalid Email");
-      return false;
+      setErrorMessage("Invalid Email")
+      return false
     }
     if (validator.isEmpty(booking.body)) {
-      setErrorMessage("Body can't be empty");
-      return false;
+      setErrorMessage("Body can't be empty")
+      return false
     }
-    return true;
-  };
+    return true
+  }
   useEffect(() => {
     services.length > 0 &&
       setBooking({
@@ -45,25 +46,27 @@ const Booking = () => {
         phone_number: "",
         body: "",
         service_type_id: services[0].id,
-      });
-  }, [services]);
+      })
+  }, [services])
 
   const submit = async (event) => {
-    event.preventDefault();
-    if (validateInputs()) {
-      FetchRequest("/bookings", "POST", booking);
-      setErrorMessage("")
-      dispatch({type: "setMessage", message: "Form submitted, thanks!"})
-      history.push("/");
-    }
 
-    // Change this later to redirect to a Thank you page
-  };
+    event.preventDefault()
+    if (validateInputs()) {
+      FetchRequest("/bookings", "POST", booking)
+      setErrorMessage("")
+      dispatch({ type: "setMessage", message: "Form submitted, thanks!" })
+
+      // Change this later to redirect to a Thank you page
+      history.push("/")
+    }
+  }
+
 
   const handleChange = (e) => {
     // console.log([e.target.id])
-    setBooking({ ...booking, [e.target.id]: e.target.value });
-  };
+    setBooking({ ...booking, [e.target.id]: e.target.value })
+  }
 
   return (
     <>
@@ -127,7 +130,7 @@ const Booking = () => {
         <button type="submit">Submit</button>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default Booking;
+export default Booking

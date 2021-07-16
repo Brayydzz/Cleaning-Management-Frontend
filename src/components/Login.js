@@ -26,6 +26,7 @@ const Login = () => {
               token: `Bearer ${data.token}`
             });
             dispatch({type: "setMessage", message: "You have logged in successfully!"})
+
           });
         }}
       >

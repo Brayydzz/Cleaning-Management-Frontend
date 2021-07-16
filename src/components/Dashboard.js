@@ -10,7 +10,12 @@ import MyJobs from "./MyJobs";
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs");
-  const { dispatch } = useContext(stateContext);
+
+  const { dispatch, token, currentUser } = useContext(stateContext);
+
+  const handleClick = (e) => {
+    setRoute(e.target.id)
+}
 
   //Switch statement allows us to render a component when a li is clicked in DashboardNav.
   const renderSwitch = () => {
@@ -22,25 +27,30 @@ const Dashboard = () => {
         return <IncomingBookings />;
       }
       case "employees": {
-        return <Employees />;
+
+        return <Employees handleClick={handleClick}/>;
       }
       case "myJobs":{
         return <MyJobs />
+      }
+      case "newEmployee": {
+        return <NewEmployee />
+
       }
       default:
         return null;
     }
   };
 
-  const { token, user } = useContext(stateContext);
   return (
     <>
       {token ? (
         <>
-          <h1>Hello {user().first_name + " " + user().last_name}</h1>
+
+          <h1>Hello {currentUser().first_name + " " + currentUser().last_name}</h1>
           <button onClick={() => dispatch({ type: "logout" })}>Log Out</button>
           <DashContain>
-            <DashboardNav setRoute={setRoute} />
+            <DashboardNav handleClick={handleClick} />
             {renderSwitch()}
           </DashContain>
         </>

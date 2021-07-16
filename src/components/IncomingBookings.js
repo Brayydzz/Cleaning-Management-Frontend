@@ -31,7 +31,7 @@ const IncomingBookings = () => {
         <DashCardContain>
         {bookings.length > 0 &&
           bookings.map((booking) => (
-            <DashCard key={booking.id}style={{backgroundColor:"grey", border:"solid black 2px"}}>
+            <DashCard key={booking.id}>
               <h2>Name</h2>
               <p>{`${booking.first_name} ${booking.last_name}`}</p>
               <h2>Email</h2>
