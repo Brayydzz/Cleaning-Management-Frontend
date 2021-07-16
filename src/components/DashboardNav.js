@@ -15,6 +15,9 @@ const DashboardNav = ({handleClick}) => {
         <DashLi onClick={handleClick} id="completedJobs">
           Completed Jobs
         </DashLi>
+        <DashLi onClick={handleClick} id="editAccount">
+          Edit Account Details
+        </DashLi>
         {currentUser().isAdmin && 
           <>
             <br />

@@ -7,6 +7,7 @@ import IncomingBookings from "./IncomingBookings";
 import Employees from "./Employees";
 import { DashContain } from "../Styled";
 import MyJobs from "./MyJobs";
+import EditAccount from "./EditAccount";
 import AllClients from "./AllClients";
 import NewClient from "./NewClient";
 import NewEmployee from "./NewEmployee"
@@ -28,11 +29,13 @@ const Dashboard = () => {
       case "allJobs": {
         return <AllJobs />;
       }
+      case "editAccount": {
+        return <EditAccount />;
+      }
       case "incomingBookings": {
         return <IncomingBookings />;
       }
       case "employees": {
-
         return <Employees handleClick={handleClick}/>;
       }
       case "myJobs":{

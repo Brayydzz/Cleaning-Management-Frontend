@@ -3,9 +3,8 @@ import { AuthFetchRequest } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
 import ContactForm from "./ContactForm";
 
-const NewEmployee = ({setRoute}) => {
-
-    const {token} = useContext(stateContext)
+const NewEmployee = ({ setRoute }) => {
+  const { token, dispatch } = useContext(stateContext)
   const [employee, setEmployee] = useState({
     first_name: "",
     last_name: "",
@@ -25,15 +24,34 @@ const NewEmployee = ({setRoute}) => {
 
   const submit = (e) => {
     e.preventDefault()
-    AuthFetchRequest("/signup", token, "POST", employee)
-    setRoute("employees")
-    console.log("Post")
+    AuthFetchRequest("/signup", token, "POST", employee).then((data) => {
+        if (data.error) {   
+            dispatch({
+                type: "setError",
+                error: "Email already exists"
+            })
+        } else {
+            dispatch({
+              type: "addEmployee",
+              employee: data,
+            })
+            dispatch({
+                type: "setMessage",
+                message: "Employee Added"
+            })
+            setRoute("employees")
+        }
+    })
+    .catch(err => dispatch({
+        type: "setError",
+        error: err
+    }))
   }
 
   return (
     <>
-        <h1>New Employee</h1>
-      <ContactForm {...{handleChange, submit}}/>
+      <h1>New Employee</h1>
+      <ContactForm {...{ handleChange, submit }} />
     </>
   );
 };
