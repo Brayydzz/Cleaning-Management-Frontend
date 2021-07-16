@@ -3,7 +3,7 @@ import { AuthFetchRequest } from "../helperFunctions"
 import { stateContext } from "../stateReducer"
 import ContactForm from "./ContactForm"
 
-const NewEmployee = () => {
+const NewEmployee = ({setRoute}) => {
 
     const {token} = useContext(stateContext)
   const [employee, setEmployee] = useState({
@@ -26,11 +26,14 @@ const NewEmployee = () => {
   const submit = (e) => {
     e.preventDefault()
     AuthFetchRequest("/signup", token, "POST", employee)
+    setRoute("employees")
+    console.log("Post")
   }
 
   return (
     <>
-      <ContactForm props={handleChange, submit}/>
+        <h1>New Employee</h1>
+      <ContactForm {...{handleChange, submit}}/>
     </>
   )
 }
