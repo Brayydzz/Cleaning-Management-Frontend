@@ -18,6 +18,7 @@ const Booking = () => {
   })
 
   const setErrorMessage = (message) => {
+
     dispatch({ type: "setError", error: message })
   }
 
@@ -49,6 +50,7 @@ const Booking = () => {
   }, [services])
 
   const submit = async (event) => {
+
     event.preventDefault()
     if (validateInputs()) {
       FetchRequest("/bookings", "POST", booking)
@@ -59,6 +61,7 @@ const Booking = () => {
       history.push("/")
     }
   }
+
 
   const handleChange = (e) => {
     // console.log([e.target.id])
