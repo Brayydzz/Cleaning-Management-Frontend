@@ -21,12 +21,12 @@ const Login = () => {
               dispatch({type: "setError", error:data.error})
               return;
             }
-            console.log(jwtDecode(data.token), "**********")
             dispatch({
               type: "setTokenAndUser",
               token: `Bearer ${data.token}`
             });
             dispatch({type: "setMessage", message: "You have logged in successfully!"})
+            dispatch({type: "setError", error: ""})
           });
         }}
       >
