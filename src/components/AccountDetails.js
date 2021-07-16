@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from "react"
 import { stateContext } from "../stateReducer"
 import { AuthFetchRequest } from "../helperFunctions"
 
-const AccountDetails = () => {
+const AccountDetails = ({setRoute, setContactInfo}) => {
   const { currentUser, token } = useContext(stateContext)
   const [user, setUser] = useState(null)
 
@@ -14,7 +14,7 @@ const AccountDetails = () => {
   return (
     <div>
       <h1>Account Details</h1>
-      <button>Edit Details</button>
+      <button onClick={() => {setContactInfo(user.user_data); setRoute("editAccount")}}>Edit Details</button>
       { user &&
       <>
         <h3>First Name: {user.user_data.contact_information.first_name}</h3>
