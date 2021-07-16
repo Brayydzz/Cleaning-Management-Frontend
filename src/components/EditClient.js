@@ -4,7 +4,7 @@ import { stateContext } from "../stateReducer";
 import EditForm from "./EditForm";
 
 const EditClient = ({ formData, setRoute, setFormData, contactInfo }) => {
-  const { token, clients, dispatch } = useContext(stateContext);
+  const { token } = useContext(stateContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
