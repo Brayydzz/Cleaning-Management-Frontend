@@ -51,7 +51,7 @@ const NewEmployee = ({ setRoute }) => {
   return (
     <>
       <h1>New Employee</h1>
-      <ContactForm {...{ handleChange, submit }} />
+      <ContactForm {...{ handleChange, submit, employee }} />
     </>
   );
 };

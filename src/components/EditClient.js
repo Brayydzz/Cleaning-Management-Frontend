@@ -13,7 +13,6 @@ const EditClient = ({ formData, setRoute, setFormData, contactInfo }) => {
   const submit = (e) => {
     e.preventDefault();
     AuthFetchRequest(`/clients/${contactInfo.client.id}`, token, "PATCH", formData).then((data) => {
-      console.log(data);
       setRoute("clients");
     });
   };
