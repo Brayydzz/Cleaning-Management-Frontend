@@ -6,12 +6,12 @@ const FlashMessage = () => {
     return (
         <>
         {error && 
-            <div style={{backgroundColor:"red"}}>
+            <div id="errorFlashMessage" style={{backgroundColor:"red"}}>
             <h3>{error}</h3>
             <button onClick={() => dispatch({type: "setError", error: ""})}>close</button>
         </div>}
         {message && 
-            <div style={{backgroundColor:"green"}}>
+            <div id="successFlashMessage" style={{backgroundColor:"green"}}>
             <h3>{message}</h3>
             <button onClick={() => dispatch({type: "setMessage", message: ""})}>close</button>
         </div>}

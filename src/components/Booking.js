@@ -31,6 +31,11 @@ const Booking = () => {
       setErrorMessage("Invalid Email")
       return false
     }
+    if (validator.isAlpha(booking.phone_number))
+    {
+      setErrorMessage("Phone Number must not contain characters")
+      return false
+    }
     if (validator.isEmpty(booking.body)) {
       setErrorMessage("Body can't be empty")
       return false
