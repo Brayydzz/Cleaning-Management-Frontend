@@ -47,6 +47,7 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
               <p>{`Address: ${client_data.address}`}</p>
               <button onClick={() => deleteClient(client_data.client)}>DELETE CLIENT</button>
               <button onClick={() => {setContactInfo(client_data); setRoute("editClient")}}>EDIT CLIENT</button>
+              {console.log(client_data)}
             </DashCard>
           ))}
       </DashCardContain>
