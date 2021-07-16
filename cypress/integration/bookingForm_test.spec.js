@@ -226,4 +226,8 @@ describe("Booking Form", () => {
       { statusCode: 201 }
     );
   });
+  // it("should close the flash message", () =>
+  // {
+    
+  // })
 });
