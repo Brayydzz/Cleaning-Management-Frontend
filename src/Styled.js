@@ -16,9 +16,10 @@ export const DashContain = styled.div `
 `
 
 export const DashCard = styled.div `
+    text-align: center;
     padding: 10px;
-    height: 550px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     background-color: grey; 
     border:solid black 2px;
 `
