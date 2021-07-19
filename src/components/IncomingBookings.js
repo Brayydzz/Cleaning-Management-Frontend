@@ -1,34 +1,37 @@
 import React, { useEffect, useState, useContext } from "react"
 import { stateContext } from "../stateReducer"
-import { AuthFetchRequest } from "../helperFunctions";
+import { AuthFetchRequest } from "../helperFunctions"
 import { DashCard, DashCardContain } from "../Styled"
+import BookingModal from "./BookingModal"
 
 const IncomingBookings = () => {
-  const {services, token} = useContext(stateContext)
-  const [bookings, setBookings] = useState([]);
+  const { services, token } = useContext(stateContext)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [cardData, setCardData] = useState({})
+  const [bookings, setBookings] = useState([])
 
 
   const deletePost = (booking) => {
-
     let conf = window.confirm("Are you sure you want to delete?")
-    
+
     if (conf) {
-      AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE")
-      .then(method => {
-        if (method) {
-          setBookings(bookings.filter(b => b.id != booking.id))
+      AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE").then(
+        (method) => {
+          if (method) {
+            setBookings(bookings.filter((b) => b.id != booking.id))
+          }
         }
-      })
+      )
     }
   }
 
   useEffect(() => {
-    AuthFetchRequest("/bookings", token).then((data) => setBookings(data));
-  }, []);
+    AuthFetchRequest("/bookings", token).then((data) => setBookings(data)) 
+  }, [])
   return (
-      <div>
-        <h1>Incoming booking</h1>
-        <DashCardContain>
+    <div>
+      <h1>Incoming booking</h1>
+      <DashCardContain>
         {bookings.length > 0 &&
           bookings.map((booking) => (
             <DashCard key={booking.id}>
@@ -36,18 +39,22 @@ const IncomingBookings = () => {
               <p>{`${booking.first_name} ${booking.last_name}`}</p>
               <h2>Email</h2>
               <p>{booking.email}</p>
-              <h2>Phone Number</h2>
-              <p>{booking.phone_number}</p>
-              <h2>Description</h2>
-              <p>{booking.body}</p>
               <h2>Service</h2>
-              <p>{services.filter(service => service.id == booking.service_type_id)[0].name}</p>
+              <p>
+                {
+                  services.filter(
+                    (service) => service.id == booking.service_type_id
+                  )[0].name
+                }
+              </p>
               <button onClick={() => deletePost(booking)}>Delete</button>
+              <button onClick={() => {setCardData(booking); setModalIsOpen(true)}}>View Booking</button>
             </DashCard>
           ))}
-        </DashCardContain>
-      </div>
-  );
-};
+        <BookingModal {...{ modalIsOpen, setModalIsOpen, cardData, services }} />
+      </DashCardContain>
+    </div>
+  )
+}
 
-export default IncomingBookings;
+export default IncomingBookings
