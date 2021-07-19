@@ -9,6 +9,7 @@ import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FetchRequest } from "./helperFunctions";
 import FlashMessage from "./components/FlashMessage";
+import GlobalModal from "./components/GlobalModal";
 
 function App() {
   // GLOBAL STATE
@@ -20,7 +21,10 @@ function App() {
     currentUser: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
     message: "",
-    clients: []
+    clients: [],
+    modalOpen: false,
+    modalType: "",
+    modalData: {}
   });
   
   useEffect(() => {
@@ -38,6 +42,7 @@ function App() {
         <Nav />
 
         <stateContext.Provider value={{ ...store, dispatch }}>
+        <GlobalModal />
         <FlashMessage />
           <Switch>
             <Route exact path="/" component={Home} />
