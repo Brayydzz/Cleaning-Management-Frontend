@@ -57,7 +57,6 @@ export default function stateReducer(state, action) {
       };
     }
     case "setModalOpen": {
-      console.log("foo")
       return {
         ...state,
         modalOpen: action.modalOpen,

@@ -9,7 +9,7 @@ import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FetchRequest } from "./helperFunctions";
 import FlashMessage from "./components/FlashMessage";
-import GlobalModal from "./components/GlobalModal";
+import GlobalModal from "./components/Modals/GlobalModal";
 
 function App() {
   // GLOBAL STATE
