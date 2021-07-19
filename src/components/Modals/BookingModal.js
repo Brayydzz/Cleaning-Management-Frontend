@@ -1,11 +1,9 @@
 import { useContext } from "react"
-import { stateContext } from "../stateReducer"
+import { stateContext } from "../../stateReducer"
 
 const BookingModal = () => {
 
-    const {dispatch, modalData} = useContext(stateContext)
-    console.log(modalData)
-    console.log("asdasd")
+    const {dispatch, modalData, services} = useContext(stateContext)
     return (
         <>
             <h2>Name</h2>
@@ -17,14 +15,13 @@ const BookingModal = () => {
             <h2>Description</h2>
             <p>{modalData.body}</p>
             <h2>Services: </h2>
-            {/* <p>
-                {console.log(modalData)}
+            <p>
             {
                 Object.keys(modalData).length > 0 && services.filter(
                 (service) => service.id == modalData.service_type_id
                 )[0].name
             }
-            </p> */}
+            </p>
             <button onClick={() => dispatch({
                 type: "setModalOpen",
                 modalOpen: false

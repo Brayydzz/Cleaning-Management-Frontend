@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { AuthFetchRequest } from "../helperFunctions"
 import { DashCard, DashCardContain } from "../Styled"
-import BookingModal from "./BookingModal"
+import BookingModal from "./Modals/BookingModal"
 
 const IncomingBookings = () => {
   const { services, token } = useContext(stateContext)
@@ -10,7 +10,6 @@ const IncomingBookings = () => {
   const { dispatch } = useContext(stateContext)
 
   const setModal = (data) => {
-
     dispatch({
       type: "setModalOpen",
       modalOpen: true,
@@ -60,7 +59,6 @@ const IncomingBookings = () => {
               <button onClick={() => setModal(booking)}>View Booking</button>
             </DashCard>
           ))}
-        {/* <BookingModal {...{ modalIsOpen, setModalIsOpen, cardData, services }} /> */}
       </DashCardContain>
     </div>
   )

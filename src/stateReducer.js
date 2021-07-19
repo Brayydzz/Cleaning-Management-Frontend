@@ -9,6 +9,12 @@ export default function stateReducer(state, action) {
         services: action.services,
       };
     }
+    case "setJobs": {
+      return {
+        ...state,
+        jobs: action.jobs
+      }
+    }
     case "setEmployees": {
       return {
         ...state,
@@ -57,7 +63,6 @@ export default function stateReducer(state, action) {
       };
     }
     case "setModalOpen": {
-      console.log("foo")
       return {
         ...state,
         modalOpen: action.modalOpen,
