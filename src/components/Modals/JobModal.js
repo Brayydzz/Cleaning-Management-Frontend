@@ -1,12 +1,37 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
+import { AuthFetchRequest } from "../../helperFunctions"
 import { stateContext } from "../../stateReducer"
 
 
 const JobModal = () => {
 
-    const {dispatch, modalData, services} = useContext(stateContext)
+    const {dispatch, modalData, services, token} = useContext(stateContext)
     const {address, address_object, client, job, service_type, user} = modalData
     const date = new Date(parseFloat(job.due_data)).toString()
+    const [checkIn, setCheckIn] = useState("")
+    const [checkOut, setCheckOut] = useState("")
+
+    const handleCheckIn = () => {
+        let currentdate = new Date(); 
+        let datetime = 
+                + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes()
+        setCheckIn(datetime)
+    }
+
+    const handleCheckOut = () => {
+        let currentdate = new Date(); 
+        let datetime = 
+                + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes()
+        setCheckOut(datetime)
+    }
 
     return (
         <>
@@ -24,6 +49,12 @@ const JobModal = () => {
                 type: "setModalOpen",
                 modalOpen: false
             })}>Close</button>
+            <br/>
+            <button onClick={handleCheckIn}>Check In</button>
+            <span>: {checkIn}</span>
+            <br/>
+            <button onClick={handleCheckOut}>Check Out</button>
+            <span>: {checkOut}</span>
         </>
     )
 }
