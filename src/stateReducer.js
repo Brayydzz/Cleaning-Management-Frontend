@@ -9,6 +9,12 @@ export default function stateReducer(state, action) {
         services: action.services,
       };
     }
+    case "setJobs": {
+      return {
+        ...state,
+        jobs: action.jobs
+      }
+    }
     case "setEmployees": {
       return {
         ...state,

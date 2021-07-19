@@ -4,7 +4,7 @@ import { stateContext } from "../../stateReducer"
 import BookingModal from "./BookingModal"
 import EmployeeModal from "./EmployeeModal"
 import ClientModal from "./ClientModal"
-import { Client } from "fb-watchman"
+import JobModal from "./JobModal"
 
 const GlobalModal = () => {
   const { dispatch, modalOpen, modalType } = useContext(stateContext)
@@ -20,6 +20,9 @@ const GlobalModal = () => {
         case "clients": {
           return <ClientModal />
         }
+        case "jobs": {
+          return <JobModal />
+        }
     }
   }
 
@@ -30,6 +33,7 @@ const GlobalModal = () => {
         type: "setModalOpen",
         modalOpen: false,
       })}
+      ariaHideApp={false}
     >
         {renderModal()}
     </Modal>

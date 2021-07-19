@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import { useReducer, useEffect } from "react";
 import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { FetchRequest } from "./helperFunctions";
+import { FetchRequest, AuthFetchRequest } from "./helperFunctions";
 import FlashMessage from "./components/FlashMessage";
 import GlobalModal from "./components/Modals/GlobalModal";
 
@@ -17,6 +17,7 @@ function App() {
   const [store, dispatch] = useReducer(stateReducer, {
     services: [],
     employees: [],
+    jobs: [],
     token: token,
     currentUser: () => (token ? jwtDecode(token.split(" ")[1]) : null),
     error: "",
@@ -27,6 +28,18 @@ function App() {
     modalData: {}
   });
   
+
+  useEffect(() => {
+    AuthFetchRequest("/jobs", token).then(data => {
+      dispatch({
+        type: "setJobs",
+        jobs: data,
+      })
+    })
+  }, [])
+
+
+  // Get request for services
   useEffect(() => {
     FetchRequest("/service_types").then((data) =>
       dispatch({
