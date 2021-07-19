@@ -1,28 +1,35 @@
-import Modal from "react-modal"
+import { useContext } from "react"
+import { stateContext } from "../stateReducer"
 
+const BookingModal = () => {
 
-const BookingModal = ({modalIsOpen, setModalIsOpen, cardData, services}) => {
-
+    const {dispatch, modalData} = useContext(stateContext)
+    console.log(modalData)
+    console.log("asdasd")
     return (
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+        <>
             <h2>Name</h2>
-              <p>{`${cardData.first_name} ${cardData.last_name}`}</p>
-              <h2>Email</h2>
-              <p>{cardData.email}</p>
-              <h2>Phone Number</h2>
-              <p>{cardData.phone_number}</p>
-              <h2>Description</h2>
-              <p>{cardData.body}</p>
-              <h2>Services: </h2>
-              <p>
-                {
-                  services.filter(
-                    (service) => service.id == cardData.service_type_id
-                  )[0].name
-                }
-              </p>
-            <button onClick={() => setModalIsOpen(false)}>Close</button>
-        </Modal>
+            <p>{`${modalData.first_name} ${modalData.last_name}`}</p>
+            <h2>Email</h2>
+            <p>{modalData.email}</p>
+            <h2>Phone Number</h2>
+            <p>{modalData.phone_number}</p>
+            <h2>Description</h2>
+            <p>{modalData.body}</p>
+            <h2>Services: </h2>
+            {/* <p>
+                {console.log(modalData)}
+            {
+                Object.keys(modalData).length > 0 && services.filter(
+                (service) => service.id == modalData.service_type_id
+                )[0].name
+            }
+            </p> */}
+            <button onClick={() => dispatch({
+                type: "setModalOpen",
+                modalOpen: false
+            })}>Close</button>
+        </>
     )
 }
 

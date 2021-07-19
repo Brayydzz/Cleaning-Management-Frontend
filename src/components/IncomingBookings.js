@@ -6,9 +6,18 @@ import BookingModal from "./BookingModal"
 
 const IncomingBookings = () => {
   const { services, token } = useContext(stateContext)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [cardData, setCardData] = useState({})
   const [bookings, setBookings] = useState([])
+  const { dispatch } = useContext(stateContext)
+
+  const setModal = (data) => {
+
+    dispatch({
+      type: "setModalOpen",
+      modalOpen: true,
+      modalData: data,
+      modalType: "bookings"
+    })
+  }
 
 
   const deletePost = (booking) => {
@@ -48,10 +57,10 @@ const IncomingBookings = () => {
                 }
               </p>
               <button onClick={() => deletePost(booking)}>Delete</button>
-              <button onClick={() => {setCardData(booking); setModalIsOpen(true)}}>View Booking</button>
+              <button onClick={() => setModal(booking)}>View Booking</button>
             </DashCard>
           ))}
-        <BookingModal {...{ modalIsOpen, setModalIsOpen, cardData, services }} />
+        {/* <BookingModal {...{ modalIsOpen, setModalIsOpen, cardData, services }} /> */}
       </DashCardContain>
     </div>
   )
