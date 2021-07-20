@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
 
-const AllJobs = () => {
+const AllJobs = ({handleClick}) => {
 
   const {jobs, dispatch, token} = useContext(stateContext)
 
@@ -18,6 +18,7 @@ const AllJobs = () => {
   return (
     <div>
       <h1>All Jobs</h1>
+      <button onClick={handleClick} id="newJob">Create Job</button>
       <DashCardContain>
         {jobs.length > 0 &&
           jobs.map(({job_data}) => (
