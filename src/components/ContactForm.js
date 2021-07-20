@@ -59,10 +59,6 @@ const ContactForm = ({handleChange, submit, employee}) => {
             setErrorMessage("Street name must not be blank")
             return false
         }
-        if (!validator.isAlpha(employee.street_address)){
-            setErrorMessage("Street name must only contain alpha characters")
-            return false
-        }
         // Suburb
         if (validator.isEmpty(employee.suburb)){
             setErrorMessage("Suburb name must not be blank")

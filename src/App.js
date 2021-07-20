@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FetchRequest, AuthFetchRequest } from "./helperFunctions";
 import FlashMessage from "./components/FlashMessage";
 import GlobalModal from "./components/Modals/GlobalModal";
+import About from "./components/About";
+import Services from "./components/Services";
 
 function App() {
   // GLOBAL STATE
@@ -73,10 +75,12 @@ function App() {
         <Nav />
 
         <stateContext.Provider value={{ ...store, dispatch }}>
-        <GlobalModal />
-        <FlashMessage />
+          <GlobalModal />
+          <FlashMessage />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/services" component={Services} />
             <Route exact path="/bookings" component={Booking} />
             <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
