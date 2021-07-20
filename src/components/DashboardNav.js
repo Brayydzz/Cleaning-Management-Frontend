@@ -28,9 +28,6 @@ const DashboardNav = ({handleClick}) => {
             <DashLi onClick={handleClick} id="incomingBookings">
               Incoming Bookings
             </DashLi>
-            <DashLi onClick={handleClick} id="unassignedJobs">
-              Unassigned Jobs
-            </DashLi>
             <br />
             <DashLi onClick={handleClick} id="employees">
               Employees

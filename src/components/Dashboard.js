@@ -13,6 +13,7 @@ import NewClient from "./NewClient"
 import NewEmployee from "./NewEmployee"
 import EditClient from "./EditClient"
 import EditAccount from "./EditAccount"
+import NewJob from "./NewJob"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs")
@@ -46,7 +47,10 @@ const Dashboard = () => {
   const renderSwitch = () => {
     switch (route) {
       case "allJobs": {
-        return <AllJobs />
+        return <AllJobs handleClick={handleClick}/>
+      }
+      case "newJob": {
+        return <NewJob />
       }
       case "accountDetails": {
         return <AccountDetails {...{ setRoute, handleClick, setContactInfo  }} />

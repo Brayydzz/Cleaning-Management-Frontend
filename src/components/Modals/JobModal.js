@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { AuthFetchRequest } from "../../helperFunctions"
 import { stateContext } from "../../stateReducer"
 
@@ -12,26 +12,28 @@ const JobModal = () => {
     const [checkOut, setCheckOut] = useState("")
 
     const handleCheckIn = () => {
-        let currentdate = new Date(); 
-        let datetime = 
-                + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes()
-        setCheckIn(datetime)
+        let currentDate = new Date(); 
+        AuthFetchRequest(`/jobs/${job.id}/checkin`, token, "POST", {time_in: currentDate}).then(data => {
+            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
+            setCheckIn(currentDate)
+        })
     }
 
     const handleCheckOut = () => {
-        let currentdate = new Date(); 
-        let datetime = 
-                + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes()
-        setCheckOut(datetime)
+        let currentDate = new Date();
+        AuthFetchRequest(`/jobs/${job.id}/checkout`, token, "POST", {time_out: currentDate}).then(data => {
+            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
+            setCheckOut(currentDate)
+        })
     }
+
+    useEffect(() => {
+        setCheckOut(job.time_out)
+    }, [job])
+
+    useEffect(() => {
+        setCheckIn(job.time_in)
+    }, [job])
 
     return (
         <>
@@ -51,10 +53,10 @@ const JobModal = () => {
             })}>Close</button>
             <br/>
             <button onClick={handleCheckIn}>Check In</button>
-            <span>: {checkIn}</span>
+            {checkIn && <span>: {checkIn.toString()}</span>}
             <br/>
             <button onClick={handleCheckOut}>Check Out</button>
-            <span>: {checkOut}</span>
+            {checkOut && <span>: {checkOut.toString()}</span>}
         </>
     )
 }

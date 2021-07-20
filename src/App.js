@@ -30,12 +30,30 @@ function App() {
     modalData: {}
   });
   
-
+  // Get request for Jobs
   useEffect(() => {
     AuthFetchRequest("/jobs", token).then(data => {
       dispatch({
         type: "setJobs",
         jobs: data,
+      })
+    })
+  }, [])
+
+  // Get request for Clients
+  useEffect(() => {
+    AuthFetchRequest("/clients", token).then((data) => {
+      dispatch({ type: "setClients", clients: data })
+    })
+  }, [])
+
+  // Get request for Employees
+  useEffect(() => {
+    AuthFetchRequest("/users", token).then((data) => {
+      // setUsers(data)
+      dispatch({
+        type: "setEmployees",
+        employees: data,
       })
     })
   }, [])

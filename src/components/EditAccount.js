@@ -2,6 +2,7 @@ import EditForm from "./EditForm";
 import { useContext } from "react";
 import { stateContext } from "../stateReducer";
 import { AuthFetchRequest } from "../helperFunctions";
+import { DashCardContain } from "../Styled";
 
 const EditAccount = ({ formData, setRoute, setFormData, contactInfo }) => {
   const { token } = useContext(stateContext);
@@ -24,11 +25,12 @@ const EditAccount = ({ formData, setRoute, setFormData, contactInfo }) => {
     });
   };
   return (
-    <>
+    <div>
       <h1>EDIT ACCOUNT</h1>
-      {console.log()}
-      <EditForm {...{ submit, formData, handleChange }} />
-    </>
+      <DashCardContain>
+        <EditForm {...{ submit, formData, handleChange }} />
+      </DashCardContain>
+    </div>
   );
 };
 

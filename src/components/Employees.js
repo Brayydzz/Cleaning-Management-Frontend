@@ -17,15 +17,7 @@ const Employees = ({ handleClick }) => {
     })
   }
 
-  useEffect(() => {
-    AuthFetchRequest("/users", token).then((data) => {
-      // setUsers(data)
-      dispatch({
-        type: "setEmployees",
-        employees: data,
-      })
-    })
-  }, [])
+  
 
   const deleteUser = (user) => {
     let conf = window.confirm("Are you sure you want to delete?")

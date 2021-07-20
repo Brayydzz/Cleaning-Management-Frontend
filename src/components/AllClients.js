@@ -15,11 +15,6 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
     })
   }
 
-  useEffect(() => {
-    AuthFetchRequest("/clients", token).then((data) => {
-      dispatch({ type: "setClients", clients: data })
-    })
-  }, [])
 
   const deleteClient = (client) => {
     let conf = window.confirm("Are you sure you want to delete?")
