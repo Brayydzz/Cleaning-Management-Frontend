@@ -13,7 +13,7 @@ const Home = () => {
       <body>
         <article>
           <div class="homeSection" id="homeAbout">
-            <h2>About Clean Team</h2>
+            <h2>About The Clean Team</h2>
             <p>
               We are a Brisbane based family owned business established in 1998.
               With over a decade worth of experience in the cleaning industry,
@@ -111,7 +111,7 @@ const Home = () => {
             <li>Services</li>
           </Link>
           <Link to="/bookings">
-            <button>Contact Us</button>
+            <li>Contact Us</li>
           </Link>
         </ul>
         <p>{"\u00a9"}, Copyright The Clean Team 2021</p>
