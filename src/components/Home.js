@@ -103,9 +103,13 @@ const Home = () => {
       </body>
       <footer>
         Sitemap
-        <ul>
-          <li>About</li>
-          <li>Services</li>
+        <ul style={{ listStyleType: "none" }}>
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+          <Link to="/services">
+            <li>Services</li>
+          </Link>
           <Link to="/bookings">
             <button>Contact Us</button>
           </Link>
