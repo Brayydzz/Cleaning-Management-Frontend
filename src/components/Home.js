@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <>
       <header>
         <h1>The Clean Team</h1>
         <blockquote>We'll sweep you off your feet!</blockquote>
-        <button>Get a Quote</button>
+        <Link to="/bookings">
+          <button>Get a Quote!</button>
+        </Link>
       </header>
       <body>
         <article>
@@ -27,7 +31,9 @@ const Home = () => {
                 re-occurring service so that you can have a ongoing regular
                 clean anywhere from every couple of days to once a month.
               </p>
-              <button>Book Now!</button>
+              <Link to="/bookings">
+                <button>Book Now!</button>
+              </Link>
             </span>
             <br />
             <span>
@@ -40,7 +46,9 @@ const Home = () => {
                 we will utilize ours years of experience to convert any
                 residence to a show home.
               </p>
-              <button>Book Now!</button>
+              <Link to="/bookings">
+                <button>Book Now!</button>
+              </Link>
             </span>
             <br />
             <span>
@@ -54,7 +62,9 @@ const Home = () => {
                 bring them back to new? The half clean is just the solution for
                 you!
               </p>
-              <button>Book Now!</button>
+              <Link to="/bookings">
+                <button>Book Now!</button>
+              </Link>
             </span>
             <br />
           </div>
@@ -96,7 +106,9 @@ const Home = () => {
         <ul>
           <li>About</li>
           <li>Services</li>
-          <li>Contact Us</li>
+          <Link to="/bookings">
+            <button>Contact Us</button>
+          </Link>
         </ul>
         <p>{"\u00a9"}, Copyright The Clean Team 2021</p>
       </footer>
