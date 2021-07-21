@@ -1,0 +1,14 @@
+[
+  {
+    "first_name": "firstName",
+    "last_name": "lastNames",
+    "email": "random@email.com",
+    "phone_number": "0412345678",
+    "street_address": "fake street",
+    "street_number": "99",
+    "unit_number": "1",
+    "suburb": "Brisbane",
+    "state": "Qld",
+    "postcode": "4000"
+  }
+]
