@@ -1,31 +1,27 @@
 import { useContext, useState, useEffect } from "react"
-import { AuthFetchRequest, setModal } from "../../helperFunctions"
+
+import { AuthFetchRequest, AuthFetchRequestImages, setModal } from "../../helperFunctions"
+
 import { stateContext } from "../../stateReducer"
 import { NewNote, NoteCard } from "../../Styled"
 
 const JobModal = () => {
   const { dispatch, modalData, services, token } = useContext(stateContext)
-  const { address, address_object, client, job, service_type, user, notes } =
-    modalData
+  const {address, address_object, client, job, service_type, user, photos, notes} = modalData
   const date = new Date(parseFloat(job.due_data)).toString()
   const [checkIn, setCheckIn] = useState("")
   const [checkOut, setCheckOut] = useState("")
   const [addNote, setAddNote] = useState(false)
   const [jobNote, setJobNote] = useState("")
 
-  const handleCheckIn = () => {
-    let currentDate = new Date()
-    AuthFetchRequest(`/jobs/${job.id}/checkin`, token, "POST", {
-      time_in: currentDate,
-    }).then((data) => {
-      dispatch({
-        type: "update job",
-        id: data.job_data.job.id,
-        job_data: data.job_data,
-      })
-      setCheckIn(currentDate)
-    })
-  }
+
+    const handleCheckIn = () => {
+        let currentDate = new Date(); 
+        AuthFetchRequest(`/jobs/${job.id}/checkin`, token, "POST", {time_in: currentDate}).then(data => {
+            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
+            setCheckIn(currentDate)
+        })
+    }
 
   const handleCheckOut = () => {
     let currentDate = new Date()
@@ -41,9 +37,19 @@ const JobModal = () => {
     })
   }
 
-  const handleNewNote = () => {
-    setAddNote(true)
-  }
+    const handleUpload = (e) => {
+        e.preventDefault()
+
+        const form = new FormData()
+        for(let i = 0; i < images.length; i++){
+            form.append(`pictures[${i}]`, images[i])
+        }
+        AuthFetchRequestImages(`/jobs/${job.id}/images`, token, form).then(data => console.log(data))
+    }
+
+    const handleNewNote = () => {
+        setAddNote(true)
+    }
 
   const handleAddNote = () => {
     AuthFetchRequest(`/jobs/${job.id}/notes`, token, "POST", {
@@ -88,6 +94,11 @@ const JobModal = () => {
       </p>
       <h2>Time of Job</h2>
       <p>{date}</p>
+      <form onSubmit={handleUpload}>
+                <label>Upload Photos</label>
+                <input type="file" multiple onChange={(e) => setImages(e.target.files)} />
+                <button>Upload Photos</button>
+        </form>
       <h2>Notes: </h2>
       {notes.map((note) => (
         <NoteCard key={note.id}>
