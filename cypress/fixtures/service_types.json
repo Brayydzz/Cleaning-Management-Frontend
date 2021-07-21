@@ -1,0 +1,23 @@
+[
+  {
+    "id": 10,
+    "name": "Hour Clean",
+    "created_at": "2021-07-14T06:32:39.682Z",
+    "updated_at": "2021-07-14T06:32:39.682Z",
+    "hours_needed": 1.0
+  },
+  {
+    "id": 11,
+    "name": "Full Clean",
+    "created_at": "2021-07-14T06:32:39.688Z",
+    "updated_at": "2021-07-14T06:32:39.688Z",
+    "hours_needed": 8.0
+  },
+  {
+    "id": 12,
+    "name": "Half Clean",
+    "created_at": "2021-07-14T06:32:39.693Z",
+    "updated_at": "2021-07-14T06:32:39.693Z",
+    "hours_needed": 4.0
+  }
+]
