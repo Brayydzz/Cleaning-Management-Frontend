@@ -1,18 +1,18 @@
 import { useContext, useState, useEffect } from "react"
-import { AuthFetchRequest } from "../../helperFunctions"
+import { AuthFetchRequest, setModal } from "../../helperFunctions"
 import { stateContext } from "../../stateReducer"
-import { NewNote } from "../../Styled"
+import { NewNote, NoteCard } from "../../Styled"
 
 
 const JobModal = () => {
 
     const {dispatch, modalData, services, token} = useContext(stateContext)
-    const {address, address_object, client, job, service_type, user} = modalData
+    const {address, address_object, client, job, service_type, user, notes} = modalData
     const date = new Date(parseFloat(job.due_data)).toString()
     const [checkIn, setCheckIn] = useState("")
     const [checkOut, setCheckOut] = useState("")
     const [addNote, setAddNote] = useState(false)
-    const [note, setNote] = useState("")
+    const [jobNote, setJobNote] = useState("")
 
     const handleCheckIn = () => {
         let currentDate = new Date(); 
@@ -35,6 +35,10 @@ const JobModal = () => {
     }
 
     const handleAddNote = () => {
+        AuthFetchRequest(`/jobs/${job.id}/notes`, token, "POST", {note: jobNote}).then(data => {
+            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
+            setModal(data.job_data, "jobs", dispatch)
+        })
         setAddNote(false)
     }
 
@@ -59,6 +63,14 @@ const JobModal = () => {
             <p>{user.user_data ? user.user_data.contact_information.first_name : user}</p>
             <h2>Time of Job</h2>
             <p>{date}</p>
+            <h2>Notes: </h2>
+            {
+                notes.map(note => (
+                    <NoteCard key={note.id}>
+                        <p>{note.note}</p>
+                    </NoteCard>
+                ))
+            }
             <button onClick={() => dispatch({
                 type: "setModalOpen",
                 modalOpen: false
@@ -74,8 +86,8 @@ const JobModal = () => {
             {
                 addNote && 
                 <NewNote>
-                    <label>New Note: </label>
-                    <textarea />
+                    <label htmlFor="note">New Note: </label>
+                    <textarea id="note" onChange={(e) => setJobNote(e.target.value)}/>
                     <br />
                     <button onClick={handleAddNote}>Submit Note</button>
                 </NewNote>
