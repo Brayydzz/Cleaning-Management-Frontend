@@ -11,11 +11,9 @@ export function AuthFetchRequest(uri, token = "", method = "GET", data) {
       },
       body: JSON.stringify(data),
     });
-    if (method != "DELETE") {
       const json = await response.json();
       resolve(json);
-    }
-    resolve(method);
+    
   });
 }
 
@@ -70,8 +68,8 @@ export function setModal(modalData, modalType, cb) {
     type: "setModalOpen",
     modalOpen: true,
     modalData,
-    modalType,
-  });
+    modalType
+  })
 }
 
 export function setTimeAvailable(availableString, date, hoursRequired) {

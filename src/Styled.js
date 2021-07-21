@@ -18,6 +18,13 @@ export const NewNote = styled.div `
     align-items: center;
 `
 
+export const NoteCard = styled.div `
+    border: solid black 2px;
+    height: 200px;
+    width: 100%;
+    background-color: grey;
+`
+
 
 export const DashContain = styled.div `
     display: grid;
