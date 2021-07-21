@@ -56,6 +56,7 @@ export function setModal(modalData, modalType, cb) {
     modalData,
     modalType
   })
+}
 export function setTimeAvailable(availableString, date, hoursRequired) {
   let availableArray = availableString.split("")
   let defaultString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
