@@ -8,23 +8,7 @@ const Employees = ({ handleClick }) => {
 
   const { token, currentUser, dispatch, employees } = useContext(stateContext)
 
-  const deleteUser = (user) => {
-    let conf = window.confirm("Are you sure you want to delete?")
 
-    if (conf) {
-      AuthFetchRequest(`/users/${user.id}`, token, "DELETE").then((method) => {
-        if (method) {
-          dispatch({
-            type: "setEmployees",
-            // eslint-disable-next-line
-            employees: employees.filter(
-              (obj) => obj.user_data.user.id != user.id
-            ),
-          })
-        }
-      })
-    }
-  }
 
   return (
     <div>
@@ -42,11 +26,6 @@ const Employees = ({ handleClick }) => {
               <p>{user_data.contact_information.email}</p>
               <h2>Phone: </h2>
               <p>{user_data.contact_information.phone_number}</p>
-              {currentUser().user_id != user_data.user.id && (
-                <button onClick={() => deleteUser(user_data.user)}>
-                  Delete User!
-                </button>
-              )}
               <button onClick={() => setModal(user_data, "employees", dispatch)}>View Employee</button>
             </DashCard>
           ))}

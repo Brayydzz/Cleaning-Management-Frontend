@@ -11,11 +11,9 @@ export function AuthFetchRequest(uri, token = "", method = "GET", data) {
       },
       body: JSON.stringify(data),
     });
-    if (method != "DELETE") {
       const json = await response.json();
       resolve(json);
-    }
-    resolve(method);
+    
   });
 }
 
