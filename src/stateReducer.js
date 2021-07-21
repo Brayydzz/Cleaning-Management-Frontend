@@ -70,6 +70,7 @@ export default function stateReducer(state, action) {
         modalData: action.modalData
       }
     }
+    
     case "update job": {
       const newJobs = state.jobs.slice()
       let index = state.jobs.findIndex(job => job.job_data.job.id == action.id)

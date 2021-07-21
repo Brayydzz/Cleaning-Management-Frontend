@@ -9,6 +9,15 @@ export const Form = styled.form `
     align-items: center;
 `
 
+export const NewNote = styled.div `
+    border:solid black 2px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
 
 export const DashContain = styled.div `
     display: grid;

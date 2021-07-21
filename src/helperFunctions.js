@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 
@@ -48,6 +49,13 @@ export function checkAvailable(availableString, date, hoursRequired) {
   return true;
 }
 
+export function setModal(modalData, modalType, cb) {
+  cb({
+    type: "setModalOpen",
+    modalOpen: true,
+    modalData,
+    modalType
+  })
 export function setTimeAvailable(availableString, date, hoursRequired) {
   let availableArray = availableString.split("")
   let defaultString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"

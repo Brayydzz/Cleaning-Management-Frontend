@@ -3,16 +3,16 @@ import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
 import {setModal} from "../helperFunctions"
 
-const MyJobs = () => {
+const CompletedJobs = () => {
 
     const { jobs, dispatch, token, currentUser, employees } = useContext(stateContext)
-    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id == currentUser().user_id)
+    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id == currentUser().user_id && job.job_data.job.time_out !== null)
 
     return (
         <div>
-            <h1>My Jobs!</h1>
+            <h1>Completed Jobs</h1>
             <DashCardContain>
-                {jobs.length > 0 &&
+            {jobs.length > 0 &&
                     myJobs.map(({job_data}) => (
                         <DashCard key={job_data.job.id}>
                             <h2>Client: </h2>
@@ -25,10 +25,9 @@ const MyJobs = () => {
                         </DashCard>
                     ))        
                 }
-
             </DashCardContain>
         </div>
     )
 }
 
-export default MyJobs
+export default CompletedJobs
