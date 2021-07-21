@@ -1,10 +1,8 @@
-
 require("dotenv").config();
-
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 export function AuthFetchRequest(uri, token = "", method = "GET", data) {
-  return new Promise(async (resolve,reject) => {
+  return new Promise(async (resolve, reject) => {
     let response = await fetch(url + uri, {
       method: method,
       headers: {
@@ -12,13 +10,28 @@ export function AuthFetchRequest(uri, token = "", method = "GET", data) {
         Authorization: token,
       },
       body: JSON.stringify(data),
-    })
+    });
     if (method != "DELETE") {
-      const json = await response.json()
-      resolve(json)
+      const json = await response.json();
+      resolve(json);
     }
-    resolve(method)
-  })
+    resolve(method);
+  });
+}
+
+export function AuthFetchRequestImages(uri, token = "", data, method = "POST") {
+  return new Promise(async (resolve, reject) => {
+    let response = await fetch(url + uri, {
+      method: method,
+      headers: {
+        Authorization: token,
+      },
+      body: data,
+    });
+
+    const json = await response.json();
+    resolve(json);
+  });
 }
 
 export async function FetchRequest(uri, method = "GET", data) {
@@ -33,16 +46,19 @@ export async function FetchRequest(uri, method = "GET", data) {
   return json;
 }
 
-
 export function checkAvailable(availableString, date, hoursRequired) {
   // Check if hour matches beginning of time (returns false if it is)
   // If it's doesn't match, check the next X amount of hours are available
-  let availableArray = availableString.split("")
+  let availableArray = availableString.split("");
 
-  for (let i = 1; i < hoursRequired * 4 ; i++) {
-    if (availableArray[date.getHours() * 4 + Math.round(date.getMinutes() / 60 * 4) + i] != "0") {
-        console.log(date.getHours() * 4 + date.getMinutes() / 60 * 4 + i)
-        console.log("Bad Time");
+  for (let i = 1; i < hoursRequired * 4; i++) {
+    if (
+      availableArray[
+        date.getHours() * 4 + Math.round((date.getMinutes() / 60) * 4) + i
+      ] != "0"
+    ) {
+      console.log(date.getHours() * 4 + (date.getMinutes() / 60) * 4 + i);
+      console.log("Bad Time");
       return false;
     }
   }
@@ -54,21 +70,24 @@ export function setModal(modalData, modalType, cb) {
     type: "setModalOpen",
     modalOpen: true,
     modalData,
-    modalType
-  })
+    modalType,
+  });
+}
+
 export function setTimeAvailable(availableString, date, hoursRequired) {
-  let availableArray = availableString.split("")
-  let defaultString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-  if (!availableString){
-    availableArray = defaultString.split("")
+  let availableArray = availableString.split("");
+  let defaultString =
+    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+  if (!availableString) {
+    availableArray = defaultString.split("");
   }
   // Run over all the array items from the Date Hours + hours required and set it to one
   for (
-    let i = date.getHours() * 4 + date.getMinutes() / 60 * 4;
+    let i = date.getHours() * 4 + (date.getMinutes() / 60) * 4;
     i < date.getHours() * 4 + hoursRequired * 4;
     i++
   ) {
     availableArray[i] = "1";
   }
-  return availableArray.join("")
+  return availableArray.join("");
 }

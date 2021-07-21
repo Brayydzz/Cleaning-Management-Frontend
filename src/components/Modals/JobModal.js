@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react"
-import { AuthFetchRequest } from "../../helperFunctions"
+import { AuthFetchRequest, AuthFetchRequestImages } from "../../helperFunctions"
 import { stateContext } from "../../stateReducer"
 import { NewNote } from "../../Styled"
 
@@ -7,12 +7,13 @@ import { NewNote } from "../../Styled"
 const JobModal = () => {
 
     const {dispatch, modalData, services, token} = useContext(stateContext)
-    const {address, address_object, client, job, service_type, user} = modalData
+    const {address, address_object, client, job, service_type, user, photos} = modalData
     const date = new Date(parseFloat(job.due_data)).toString()
     const [checkIn, setCheckIn] = useState("")
     const [checkOut, setCheckOut] = useState("")
     const [addNote, setAddNote] = useState(false)
     const [note, setNote] = useState("")
+    const [images, setImages] = useState(null)
 
     const handleCheckIn = () => {
         let currentDate = new Date(); 
@@ -28,6 +29,16 @@ const JobModal = () => {
             dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
             setCheckOut(currentDate)
         })
+    }
+
+    const handleUpload = (e) => {
+        e.preventDefault()
+
+        const form = new FormData()
+        for(let i = 0; i < images.length; i++){
+            form.append(`pictures[${i}]`, images[i])
+        }
+        AuthFetchRequestImages(`/jobs/${job.id}/images`, token, form).then(data => console.log(data))
     }
 
     const handleNewNote = () => {
@@ -70,6 +81,12 @@ const JobModal = () => {
             <button onClick={handleCheckOut}>Check Out</button>
             {checkOut && <span>: {checkOut.toString()}</span>}
             <br/>
+            <form onSubmit={handleUpload}>
+                <label>Upload Photos</label>
+                <input type="file" multiple onChange={(e) => setImages(e.target.files)} />
+                <button>Upload Photos</button>
+            </form>
+
             <button onClick={handleNewNote}>Add Note</button>
             {
                 addNote && 
