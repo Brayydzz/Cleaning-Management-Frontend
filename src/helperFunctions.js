@@ -70,8 +70,8 @@ export function setModal(modalData, modalType, cb) {
     type: "setModalOpen",
     modalOpen: true,
     modalData,
-    modalType,
-  });
+    modalType
+  })
 }
 
 export function setTimeAvailable(availableString, date, hoursRequired) {
