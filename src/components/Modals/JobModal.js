@@ -5,20 +5,14 @@ import { AuthFetchRequest, AuthFetchRequestImages, setModal } from "../../helper
 import { stateContext } from "../../stateReducer"
 import { NewNote, NoteCard } from "../../Styled"
 
-
 const JobModal = () => {
-
-    const {dispatch, modalData, services, token} = useContext(stateContext)
-
-    const {address, address_object, client, job, service_type, user, photos, notes} = modalData
-
-    const date = new Date(parseFloat(job.due_data)).toString()
-    const [checkIn, setCheckIn] = useState("")
-    const [checkOut, setCheckOut] = useState("")
-    const [addNote, setAddNote] = useState(false)
-    const [note, setNote] = useState("")
-    const [images, setImages] = useState(null)
-    const [jobNote, setJobNote] = useState("")
+  const { dispatch, modalData, services, token } = useContext(stateContext)
+  const {address, address_object, client, job, service_type, user, photos, notes} = modalData
+  const date = new Date(parseFloat(job.due_data)).toString()
+  const [checkIn, setCheckIn] = useState("")
+  const [checkOut, setCheckOut] = useState("")
+  const [addNote, setAddNote] = useState(false)
+  const [jobNote, setJobNote] = useState("")
 
 
     const handleCheckIn = () => {
@@ -29,13 +23,19 @@ const JobModal = () => {
         })
     }
 
-    const handleCheckOut = () => {
-        let currentDate = new Date();
-        AuthFetchRequest(`/jobs/${job.id}/checkout`, token, "POST", {time_out: currentDate}).then(data => {
-            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
-            setCheckOut(currentDate)
-        })
-    }
+  const handleCheckOut = () => {
+    let currentDate = new Date()
+    AuthFetchRequest(`/jobs/${job.id}/checkout`, token, "POST", {
+      time_out: currentDate,
+    }).then((data) => {
+      dispatch({
+        type: "update job",
+        id: data.job_data.job.id,
+        job_data: data.job_data,
+      })
+      setCheckOut(currentDate)
+    })
+  }
 
     const handleUpload = (e) => {
         e.preventDefault()
@@ -51,72 +51,89 @@ const JobModal = () => {
         setAddNote(true)
     }
 
-    const handleAddNote = () => {
-        AuthFetchRequest(`/jobs/${job.id}/notes`, token, "POST", {note: jobNote}).then(data => {
-            dispatch({type: "update job", id: data.job_data.job.id, job_data: data.job_data})
-            setModal(data.job_data, "jobs", dispatch)
-        })
-        setAddNote(false)
-    }
+  const handleAddNote = () => {
+    AuthFetchRequest(`/jobs/${job.id}/notes`, token, "POST", {
+      note: jobNote,
+    }).then((data) => {
+      dispatch({
+        type: "update job",
+        id: data.job_data.job.id,
+        job_data: data.job_data,
+      })
+      setModal(data.job_data, "jobs", dispatch)
+    })
+    setAddNote(false)
+  }
 
-    useEffect(() => {
-        setCheckOut(job.time_out)
-    }, [job])
+  const handleDeleteNote = (note) => {
+    AuthFetchRequest(`/notes/${note}/`, token, "DELETE").then(data => console.log(data))
+  }
 
-    useEffect(() => {
-        setCheckIn(job.time_in)
-    }, [job])
+  useEffect(() => {
+    setCheckOut(job.time_out)
+  }, [job])
 
+  useEffect(() => {
+    setCheckIn(job.time_in)
+  }, [job])
 
-    return (
-        <>
-            <h2>Client Name:</h2>
-            <p>{`${client.client_data.contact_information.first_name}`} {`${client.client_data.contact_information.last_name}`}</p>
-            <h2>Address:</h2>
-            <p>{address}</p>
-            <h2>Service Type:</h2>
-            <p>{service_type.name}</p>
-            <h2>Employee</h2>
-            <p>{user.user_data ? user.user_data.contact_information.first_name : user}</p>
-            <h2>Time of Job</h2>
-            <p>{date}</p>
-            <h2>Notes: </h2>
-            {
-                notes.map(note => (
-                    <NoteCard key={note.id}>
-                        <p>{note.note}</p>
-                    </NoteCard>
-                ))
-            }
-            <button onClick={() => dispatch({
-                type: "setModalOpen",
-                modalOpen: false
-            })}>Close</button>
-            <br/>
-            <button onClick={handleCheckIn}>Check In</button>
-            {checkIn && <span>: {checkIn.toString()}</span>}
-            <br/>
-            <button onClick={handleCheckOut}>Check Out</button>
-            {checkOut && <span>: {checkOut.toString()}</span>}
-            <br/>
-            <form onSubmit={handleUpload}>
+  return (
+    <>
+      <h2>Client Name:</h2>
+      <p>
+        {`${client.client_data.contact_information.first_name}`}{" "}
+        {`${client.client_data.contact_information.last_name}`}
+      </p>
+      <h2>Address:</h2>
+      <p>{address}</p>
+      <h2>Service Type:</h2>
+      <p>{service_type.name}</p>
+      <h2>Employee</h2>
+      <p>
+        {user.user_data ? user.user_data.contact_information.first_name : user}
+      </p>
+      <h2>Time of Job</h2>
+      <p>{date}</p>
+      <form onSubmit={handleUpload}>
                 <label>Upload Photos</label>
                 <input type="file" multiple onChange={(e) => setImages(e.target.files)} />
                 <button>Upload Photos</button>
-            </form>
-
-            <button onClick={handleNewNote}>Add Note</button>
-            {
-                addNote && 
-                <NewNote>
-                    <label htmlFor="note">New Note: </label>
-                    <textarea id="note" onChange={(e) => setJobNote(e.target.value)}/>
-                    <br />
-                    <button onClick={handleAddNote}>Submit Note</button>
-                </NewNote>
-            }
-        </>
-    )
+        </form>
+      <h2>Notes: </h2>
+      {notes.map((note) => (
+        <NoteCard key={note.id}>
+          <p>{note.note}</p>
+          <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
+        </NoteCard>
+      ))}
+      <button
+        onClick={() =>
+          dispatch({
+            type: "setModalOpen",
+            modalOpen: false,
+          })
+        }
+      >
+        Close
+      </button>
+      <br />
+      <button onClick={handleCheckIn}>Check In</button>
+      {checkIn && <span>: {checkIn.toString()}</span>}
+      <br />
+      <button onClick={handleCheckOut}>Check Out</button>
+      {checkOut && <span>: {checkOut.toString()}</span>}
+      <br />
+      <button onClick={handleNewNote}>Add Note</button>
+      {addNote && (
+        <NewNote>
+          <label htmlFor="note">New Note: </label>
+          <textarea id="note" onChange={(e) => setJobNote(e.target.value)} />
+          <br />
+          <button onClick={handleAddNote}>Submit Note</button>
+        </NewNote>
+      )}
+    </>
+  )
 }
 
 export default JobModal
