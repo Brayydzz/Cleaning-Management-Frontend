@@ -34,15 +34,7 @@ const NewJob = () => {
     //Get client to grab address
     const address_id = clients.find(cli => cli.client_data.client.id).client_data.address_object.id
 
-    const jobData = {
-      service_type_id: serviceOption,
-      due_date: dateTime,
-      client_id: clientOption,
-      reoccuring: recurring,
-      reoccuring_length: recurringType,
-      user_id: employeeOption,
-      address_id: address_id
-    }
+ 
 
     const currentEmployee = employees.find(emp => emp.user_data.user.id)
     let currAvailable = null
@@ -69,6 +61,15 @@ const NewJob = () => {
       AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => console.log(data))
     }
 
+    const jobData = {
+      service_type_id: serviceOption,
+      due_date: dateTime,
+      client_id: clientOption,
+      reoccuring: recurring,
+      reoccuring_length: recurringType,
+      user_id: employeeOption,
+      address_id: address_id
+    }
 
 
     // let getFreedomString = setTimeAvailable()
@@ -214,7 +215,8 @@ const NewJob = () => {
             />
           </fieldset>
         )}
-        <button type="submit" >Submit</button>
+
+        <button type="submit">Submit</button>
       </Form>
     </div>
   );
