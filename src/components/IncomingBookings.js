@@ -56,7 +56,7 @@ const IncomingBookings = () => {
                 }
               </p>
               <button onClick={() => deletePost(booking)}>Delete</button>
-              <button onClick={() => setModal(booking)}>View Booking</button>
+              <button onClick={() => setModal(booking, "bookings", dispatch)}>View Booking</button>
             </DashCard>
           ))}
       </DashCardContain>

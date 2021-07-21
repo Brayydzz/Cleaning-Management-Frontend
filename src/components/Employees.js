@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react"
-import { AuthFetchRequest } from "../helperFunctions"
+import { AuthFetchRequest, setModal } from "../helperFunctions"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
 
@@ -7,17 +7,6 @@ const Employees = ({ handleClick }) => {
   const [users, setUsers] = useState([])
 
   const { token, currentUser, dispatch, employees } = useContext(stateContext)
-
-  const setModal = (data) => {
-    dispatch({
-      type: "setModalOpen",
-      modalOpen: true,
-      modalData: data,
-      modalType: "employees",
-    })
-  }
-
-  
 
   const deleteUser = (user) => {
     let conf = window.confirm("Are you sure you want to delete?")
@@ -58,7 +47,7 @@ const Employees = ({ handleClick }) => {
                   Delete User!
                 </button>
               )}
-              <button onClick={() => setModal(user_data)}>View Employee</button>
+              <button onClick={() => setModal(user_data, "employees", dispatch)}>View Employee</button>
             </DashCard>
           ))}
       </DashCardContain>

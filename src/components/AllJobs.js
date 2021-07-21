@@ -1,19 +1,13 @@
 import { useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
+import {setModal} from "../helperFunctions"
 
 const AllJobs = ({handleClick}) => {
 
   const {jobs, dispatch, token} = useContext(stateContext)
 
-  const setModal = (data) => {
-    dispatch({
-      type: "setModalOpen",
-      modalOpen: true,
-      modalData: data,
-      modalType: "jobs"
-    })
-  }
+  
 
   return (
     <div>
@@ -30,7 +24,7 @@ const AllJobs = ({handleClick}) => {
               <p>{job_data.address}</p>
               <h2>Service Type:</h2>
               <p>{job_data.service_type.name}</p>
-              <button onClick={() => setModal(job_data)}>View Job</button>
+              <button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</button>
             </DashCard>
           ))}
       </DashCardContain>

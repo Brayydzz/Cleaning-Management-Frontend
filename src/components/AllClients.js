@@ -63,7 +63,7 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
               >
                 EDIT CLIENT
               </button>
-              <button onClick={() => setModal(client_data)}>View Client</button>
+              <button onClick={() => setModal(client_data, "clients", dispatch)}>View Client</button>
             </DashCard>
           ))}
       </DashCardContain>

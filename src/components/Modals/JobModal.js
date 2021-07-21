@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react"
 import { AuthFetchRequest } from "../../helperFunctions"
 import { stateContext } from "../../stateReducer"
+import { NewNote } from "../../Styled"
 
 
 const JobModal = () => {
@@ -10,6 +11,8 @@ const JobModal = () => {
     const date = new Date(parseFloat(job.due_data)).toString()
     const [checkIn, setCheckIn] = useState("")
     const [checkOut, setCheckOut] = useState("")
+    const [addNote, setAddNote] = useState(false)
+    const [note, setNote] = useState("")
 
     const handleCheckIn = () => {
         let currentDate = new Date(); 
@@ -27,6 +30,14 @@ const JobModal = () => {
         })
     }
 
+    const handleNewNote = () => {
+        setAddNote(true)
+    }
+
+    const handleAddNote = () => {
+        setAddNote(false)
+    }
+
     useEffect(() => {
         setCheckOut(job.time_out)
     }, [job])
@@ -34,6 +45,7 @@ const JobModal = () => {
     useEffect(() => {
         setCheckIn(job.time_in)
     }, [job])
+
 
     return (
         <>
@@ -57,6 +69,17 @@ const JobModal = () => {
             <br/>
             <button onClick={handleCheckOut}>Check Out</button>
             {checkOut && <span>: {checkOut.toString()}</span>}
+            <br/>
+            <button onClick={handleNewNote}>Add Note</button>
+            {
+                addNote && 
+                <NewNote>
+                    <label>New Note: </label>
+                    <textarea />
+                    <br />
+                    <button onClick={handleAddNote}>Submit Note</button>
+                </NewNote>
+            }
         </>
     )
 }

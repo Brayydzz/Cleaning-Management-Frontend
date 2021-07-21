@@ -14,6 +14,7 @@ import NewEmployee from "./NewEmployee"
 import EditClient from "./EditClient"
 import EditAccount from "./EditAccount"
 import NewJob from "./NewJob"
+import CompletedJobs from "./CompletedJobs"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs")
@@ -79,6 +80,11 @@ const Dashboard = () => {
       case "editClient": {
         return (
           <EditClient {...{ setRoute, contactInfo, formData, setFormData }} />
+        )
+      }
+      case "completedJobs": {
+        return (
+          <CompletedJobs />
         )
       }
 

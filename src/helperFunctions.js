@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 
@@ -33,4 +34,13 @@ export async function FetchRequest(uri, method = "GET", data) {
 }
 export function getUser(token){
   
+}
+
+export function setModal(modalData, modalType, cb) {
+  cb({
+    type: "setModalOpen",
+    modalOpen: true,
+    modalData,
+    modalType
+  })
 }
