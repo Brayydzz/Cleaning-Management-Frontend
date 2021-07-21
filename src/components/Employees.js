@@ -1,12 +1,12 @@
-import { useState, useContext, useEffect } from "react"
-import { AuthFetchRequest, setModal } from "../helperFunctions"
-import { stateContext } from "../stateReducer"
-import { DashCard, DashCardContain } from "../Styled"
+import { useState, useContext, useEffect } from "react";
+import { AuthFetchRequest, setModal } from "../helperFunctions";
+import { stateContext } from "../stateReducer";
+import { DashCard, DashCardContain } from "../Styled";
 
 const Employees = ({ handleClick }) => {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
-  const { token, currentUser, dispatch, employees } = useContext(stateContext)
+  const { token, currentUser, dispatch, employees } = useContext(stateContext);
 
 
 
@@ -17,6 +17,7 @@ const Employees = ({ handleClick }) => {
         New Employee
       </button>
       <DashCardContain>
+        {console.log(employees)}
         {employees.length > 0 &&
           employees.map(({ user_data }) => (
             <DashCard key={user_data.user.id}>
@@ -26,12 +27,12 @@ const Employees = ({ handleClick }) => {
               <p>{user_data.contact_information.email}</p>
               <h2>Phone: </h2>
               <p>{user_data.contact_information.phone_number}</p>
-              <button onClick={() => setModal(user_data, "employees", dispatch)}>View Employee</button>
+
             </DashCard>
           ))}
       </DashCardContain>
     </div>
-  )
-}
+  );
+};
 
-export default Employees
+export default Employees;
