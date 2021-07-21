@@ -19,8 +19,9 @@ describe("test employee form", () => {
       cy.intercept("http://localhost:3001/bookings", {
         fixture: "bookings.json",
       });
+      // Response from signup
       cy.intercept("http://localhost:3001/signup", {
-        fixture: "sign_up.json",
+        fixture: "newEmployee.json",
       });
       // cy.intercept("http://localhost:3001/signup", {
       //   fixture: "failed_email_signup.json",
@@ -39,7 +40,7 @@ describe("test employee form", () => {
       cy.get("Form").within(() => {
         cy.get("#first_name").type("firstName");
         cy.get("#last_name").type("lastName");
-        cy.get("#email").type("random@email.com");
+        cy.get("#email").type("foo@bar.com");
         cy.get("#phone_number").type("0412345678");
         cy.get("#street_address").type("fake street");
         cy.get("#street_number").type("99");
