@@ -63,7 +63,7 @@ const NewJob = () => {
 
     const jobData = {
       service_type_id: serviceOption,
-      due_date: dateTime,
+      due_date: Date.parse(dateTime),
       client_id: clientOption,
       reoccuring: recurring,
       reoccuring_length: recurringType,
@@ -83,15 +83,14 @@ const NewJob = () => {
   }, [clients]);
 
   useEffect(() => {
-    setEmployeeOption(`${employees[0].user_data.user.id}`);
-  }, [employees]);
+    availableEmployees.length > 0 ? setEmployeeOption(`${availableEmployees[0].user_data.user.id}`) : setEmployeeOption(null);
+  }, [availableEmployees]);
 
   useEffect(() => {
     setServiceOption(`${services[0].id}`);
   }, [services]);
 
   useEffect(() => {
-    setAvailableEmployees([]);
     let tmpEmployees = [];
 
     if (dateTime) {
