@@ -33,7 +33,7 @@ describe("test employee form", () => {
         cy.get("button").click();
       });
     });
-    it("should return a error message for first name", () => {
+    it("should return a success flash message for adding employee", () => {
       cy.get("#closeSuccessFlash").click();
       cy.get("#employees").click();
       cy.get("#newEmployee").click();
@@ -51,6 +51,56 @@ describe("test employee form", () => {
         cy.get("button").click();
       });
       cy.get("#successFlashMessage").should("contain", "Employee Added");
+    });
+    it("should return a error flash message", () => {
+      cy.get("#closeSuccessFlash").click();
+      cy.get("#employees").click();
+      cy.get("#newEmployee").click();
+      // comment in input appropriate for test
+      cy.get("Form").within(() => {
+        cy.get("#first_name").type("1234");
+        // cy.get("#last_name").type("1234");
+        // cy.get("#email").type("email");
+        // cy.get("#phone_number").type("ijijij");
+        // cy.get("#street_address").type("1223");
+        // cy.get("#street_number").type("aa");
+        // cy.get("#unit_number").type("aa");
+        // cy.get("#suburb").type("1111");
+        // cy.get("#state").type("111");
+        // cy.get("#postcode").type("postcode");
+
+        cy.get("button").click();
+      });
+      // comment in error message appropriate for test
+      cy.get("#errorFlashMessage").should(
+        "contain",
+        "First name must only contain alpha characters"
+      );
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Last name must only contain alpha characters"
+      // );
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Email must be a valid Email"
+      // );
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Phone number must only contain numbers"
+      // );
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Street Number must be a number"
+      // );
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Suburb must only contain alpha characters"
+      // );
+      // cy.get("#errorFlashMessage").should("contain", "State must not be blank");
+      // cy.get("#errorFlashMessage").should(
+      //   "contain",
+      //   "Postcode must be a number"
+      // );
     });
   });
 });
