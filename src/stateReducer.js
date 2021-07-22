@@ -27,6 +27,12 @@ export default function stateReducer(state, action) {
         employees: [...state.employees, action.employee],
       };
     }
+    case "addJob": {
+      return {
+        ...state,
+        jobs: [...state.jobs, action.job],
+      };
+    }
     case "setTokenAndUser": {
       localStorage.setItem("token", action.token);
       return {

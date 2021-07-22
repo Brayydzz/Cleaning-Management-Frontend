@@ -49,7 +49,7 @@ export function checkAvailable(availableString, date, hoursRequired) {
   // If it's doesn't match, check the next X amount of hours are available
   let availableArray = availableString.split("");
 
-  for (let i = 1; i < hoursRequired * 4; i++) {
+  for (let i = 0; i < hoursRequired * 4; i++) {
     if (
       availableArray[
         date.getHours() * 4 + Math.round((date.getMinutes() / 60) * 4) + i
@@ -81,11 +81,8 @@ export function setTimeAvailable(availableString, date, hoursRequired) {
   }
   // Run over all the array items from the Date Hours + hours required and set it to one
   for (
-    let i = date.getHours() * 4 + (date.getMinutes() / 60) * 4;
-    i < date.getHours() * 4 + hoursRequired * 4;
-    i++
-  ) {
-    availableArray[i] = "1";
+    let i = 0; i < hoursRequired * 4; i++) {
+    availableArray[date.getHours() * 4 + Math.round((date.getMinutes() / 60) * 4) + i] = "1";
   }
   return availableArray.join("");
 }

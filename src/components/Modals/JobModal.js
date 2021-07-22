@@ -114,8 +114,10 @@ const JobModal = () => {
       <button onClick={handleCheckIn}>Check In</button>
       {checkIn && <span>: {checkIn.toString()}</span>}
       <br />
+      {checkIn && <> 
       <button onClick={handleCheckOut}>Check Out</button>
       {checkOut && <span>: {checkOut.toString()}</span>}
+      </>}
       <br />
       <form onSubmit={handleUpload}>
         <label>Upload Photos</label>

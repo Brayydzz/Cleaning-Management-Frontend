@@ -3,8 +3,8 @@ import { AuthFetchRequest, checkAvailable, setTimeAvailable } from "../helperFun
 import { stateContext } from "../stateReducer";
 import { Form } from "../Styled";
 
-const NewJob = () => {
-  const { services, clients, employees, token } = useContext(stateContext);
+const NewJob = ({setRoute}) => {
+  const { services, clients, employees, token, dispatch } = useContext(stateContext);
   const [clientOption, setClientOption] = useState(null);
   const [employeeOption, setEmployeeOption] = useState(null);
   const [serviceOption, setServiceOption] = useState(null);
@@ -50,13 +50,14 @@ const NewJob = () => {
     const availableData = {
       day: new Date(dateTime).toDateString()
     }
+    const service = services.find(service => service.id == serviceOption)
 
     if (currAvailable){
-      availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), 3)
+      availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), service.hours_needed)
       console.log("UPDATING AVAILABLE")
       AuthFetchRequest(`/availables/${currAvailable.id}`, token, "PATCH", availableData).then(data => console.log(data))
     }else{
-      availableData.freedom = setTimeAvailable("", new Date(dateTime), 3)
+      availableData.freedom = setTimeAvailable("", new Date(dateTime), service.hours_needed)
       console.log("CREATING NEW AVAILABLE")
       AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => console.log(data))
     }
@@ -75,7 +76,7 @@ const NewJob = () => {
     // let getFreedomString = setTimeAvailable()
 
     // console.log(dataToSend)
-    AuthFetchRequest("/jobs", token, "POST", jobData).then(data => console.log(data))
+    AuthFetchRequest("/jobs", token, "POST", jobData).then(data =>{ dispatch({type: "addJob", job: data}); setRoute("allJobs"); dispatch({type: "setMessage", message: "Successfully created job!"})})
   }
 
   useEffect(() => {
@@ -93,6 +94,8 @@ const NewJob = () => {
   useEffect(() => {
     let tmpEmployees = [];
 
+    const service = services.find(service => service.id == serviceOption)
+
     if (dateTime) {
       employees.forEach((employee) => {
         let dateCompare = new Date(dateTime).toDateString();
@@ -102,7 +105,7 @@ const NewJob = () => {
           let employeeDate = new Date(available.day).toDateString();
 
           if (dateCompare === employeeDate) {
-            if (!checkAvailable(available.freedom, new Date(dateTime), 3)) {
+            if (!checkAvailable(available.freedom, new Date(dateTime), service.hours_needed)) {
               canWork = false;
             }
           }
