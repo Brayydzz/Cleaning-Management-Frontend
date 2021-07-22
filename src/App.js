@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import jwtDecode from "jwt-decode";
-import Nav from "./components/Nav";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./components/Dashboard";
 import Booking from "./components/Booking";
 import Home from "./components/Home";
@@ -69,11 +70,18 @@ function App() {
     );
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleNav = () => {
+    setIsOpen(!isOpen)
+    console.log('yeet')
+  }
+
   return (
     <>
       <Router>
-        <Nav />
-
+        <Navbar toggleNav={toggleNav}/>
+        <Sidebar isOpen={isOpen} toggleNav={toggleNav}/>
         <stateContext.Provider value={{ ...store, dispatch }}>
           <GlobalModal />
           <FlashMessage />
