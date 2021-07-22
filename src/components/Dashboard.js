@@ -44,6 +44,11 @@ const Dashboard = () => {
     setRoute(e.target.id)
   }
 
+  useEffect(() => {
+   dispatch({type: "setError", error: ""})
+   dispatch({type: "setMessage", message: ""})
+  }, [route])
+
   //Switch statement allows us to render a component when a li is clicked in DashboardNav.
   const renderSwitch = () => {
     switch (route) {
@@ -51,7 +56,7 @@ const Dashboard = () => {
         return <AllJobs handleClick={handleClick}/>
       }
       case "newJob": {
-        return <NewJob />
+        return <NewJob {...{setRoute}}/>
       }
       case "accountDetails": {
         return <AccountDetails {...{ setRoute, handleClick, setContactInfo  }} />
