@@ -6,7 +6,7 @@ import {setModal} from "../helperFunctions"
 const MyJobs = () => {
 
     const { jobs, dispatch, currentUser } = useContext(stateContext)
-    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id === currentUser().user_id.toString())
+    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id.toString() === currentUser().user_id.toString() && job.job_data.job.time_out === null)
 
     return (
         <div>

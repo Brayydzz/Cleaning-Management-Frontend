@@ -25,7 +25,7 @@ const GlobalModal = () => {
           return <JobModal />
         }
         default: 
-        console.log("Not a valid modal type", modalType)
+          <> </>
     }
   }
 
