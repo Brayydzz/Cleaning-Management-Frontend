@@ -27,6 +27,7 @@ const JobModal = () => {
   const [addNote, setAddNote] = useState(false)
   const [jobNote, setJobNote] = useState("")
   const [images, setImages] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const handleCheckIn = () => {
     let currentDate = new Date()
@@ -58,13 +59,22 @@ const JobModal = () => {
 
   const handleUpload = (e) => {
     e.preventDefault()
-
+    setLoading(true)
     const form = new FormData()
     for (let i = 0; i < images.length; i++) {
       form.append(`pictures[${i}]`, images[i])
     }
-    AuthFetchRequestImages(`/jobs/${job.id}/images`, token, form).then((data) =>
-      console.log(data)
+    AuthFetchRequestImages(`/jobs/${job.id}/images`, token, form).then(
+      (data) => {
+        dispatch({
+          type: "update job",
+          id: data.job_data.job.id,
+          job_data: data.job_data,
+        })
+        setModal(data.job_data, "jobs", dispatch)
+        e.target.children[1].value = ""
+        setLoading(false)
+      }
     )
   }
 
@@ -124,15 +134,31 @@ const JobModal = () => {
       </p>
       <h2>Time of Job</h2>
       <p>{date}</p>
-      <form onSubmit={handleUpload}>
-        <label>Upload Photos</label>
-        <input
-          type="file"
-          multiple
-          onChange={(e) => setImages(e.target.files)}
-        />
-        <button>Upload Photos</button>
-      </form>
+      {loading ? (
+        <p>Uploading Images......</p>
+      ) : (
+        <form onSubmit={handleUpload}>
+          <label>Upload Photos</label>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => {
+              if (e.target.files.length + photos.length > 10) {
+                dispatch({
+                  type: "setError",
+                  error: "There is a maximum of 10 images allowed for upload",
+                })
+                e.target.value = ""
+              } else {
+                setImages(e.target.files)
+              }
+            }}
+          />
+          <button type="submit">Upload Photos</button>
+        </form>
+      )}
+
+      {/* Close button */}
       <button
         onClick={() =>
           dispatch({

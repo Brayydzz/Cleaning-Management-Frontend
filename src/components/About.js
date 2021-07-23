@@ -11,7 +11,7 @@ const About = () => {
           <button>Get a Quote!</button>
         </Link>
       </header>
-      <body>
+      <div>
         <div>
           <h1>History Of The Clean Team</h1>
           <p>
@@ -28,7 +28,7 @@ const About = () => {
             <h2>Our Values</h2>
             <span>
               <img src="https://placeimg.com/200/200/people" alt="" />
-              <p>
+              <div>
                 <ul style={{ listStyleType: "none" }}>
                   <li>
                     Respect: The Clean Team is an inclusive organization where
@@ -66,7 +66,7 @@ const About = () => {
                 electronic audit form which is automatically uploaded into our
                 online system which are then accessible by client appointed
                 representatives as required.
-              </p>
+              </div>
             </span>
             <br />
             <span>
@@ -91,7 +91,7 @@ const About = () => {
             </span>
           </div>
         </article>
-      </body>
+      </div>
       <footer>
         Sitemap
         <ul style={{ listStyleType: "none" }}>

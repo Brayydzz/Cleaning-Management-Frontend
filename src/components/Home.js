@@ -10,7 +10,7 @@ const Home = () => {
           <button>Get a Quote!</button>
         </Link>
       </header>
-      <body>
+      <div>
         <article>
           <div class="homeSection" id="homeAbout">
             <h2>About The Clean Team</h2>
@@ -100,7 +100,7 @@ const Home = () => {
             </p>
           </div>
         </article>
-      </body>
+      </div>
       <footer>
         Sitemap
         <ul style={{ listStyleType: "none" }}>
