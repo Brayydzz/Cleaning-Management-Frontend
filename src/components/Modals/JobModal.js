@@ -6,8 +6,9 @@ import {
   setModal,
 } from "../../helperFunctions"
 
+import { JobCheck, JobTop, JobBottom, JobPhoto, JobNotes } from "./ModalStyle"
 import { stateContext } from "../../stateReducer"
-import { NewNote, NoteCard } from "../../Styled"
+import { NewNote, NoteCard, Button } from "../../Styled"
 import PhotoCarousel from "../PhotoCarousel"
 
 const JobModal = () => {
@@ -120,83 +121,90 @@ const JobModal = () => {
 
   return (
     <>
-      <h2>Client Name:</h2>
-      <p>
-        {`${client.client_data.contact_information.first_name}`}{" "}
-        {`${client.client_data.contact_information.last_name}`}
-      </p>
-      <h2>Address:</h2>
-      <p>{address}</p>
-      <h2>Service Type:</h2>
-      <p>{service_type.name}</p>
-      <h2>Employee</h2>
-      <p>
-        {user.user_data ? user.user_data.contact_information.first_name : user}
-      </p>
-      <h2>Time of Job</h2>
-      <p>{date}</p>
-      {loading ? (
-        <p>Uploading Images......</p>
-      ) : (
-        <form onSubmit={handleUpload}>
-          <label>Upload Photos</label>
-          <input
-            type="file"
-            multiple
-            onChange={(e) => {
-              if (e.target.files.length + photos.length > 10) {
-                dispatch({
-                  type: "setError",
-                  error: "There is a maximum of 10 images allowed for upload",
-                })
-                e.target.value = ""
-              } else {
-                setImages(e.target.files)
-              }
-            }}
-          />
-          <button type="submit">Upload Photos</button>
-        </form>
-      )}
-      {/* Close button */}
-      <button
-        onClick={() =>
-          dispatch({
-            type: "setModalOpen",
-            modalOpen: false,
-          })
-        }
-      >
-        Close
-      </button>
-      <br />
-      <button onClick={handleCheckIn}>Check In</button>
-      {checkIn && <span>: {new Date(Date.parse(checkIn)).toString()}</span>}
-      <br />
-      {checkIn && <> 
-        <button onClick={handleCheckOut}>Check Out</button>
-        {checkOut && <span>: {new Date(Date.parse(checkOut)).toString()}</span>}
-      </>}
-      <br />
-      <button onClick={handleNewNote}>Add Note</button>
-      {addNote && (
-        <NewNote>
-          <label htmlFor="note">New Note: </label>
-          <textarea id="note" onChange={(e) => setJobNote(e.target.value)} />
+      <JobTop>
+        <div>
+          <h2>Client Name:</h2>
+          <p>
+            {`${client.client_data.contact_information.first_name}`}{" "}
+            {`${client.client_data.contact_information.last_name}`}
+          </p>
+          <h2>Address:</h2>
+          <p>{address}</p>
+          <h2>Service Type:</h2>
+          <p>{service_type.name}</p>
+          <h2>Employee</h2>
+          <p>
+            {user.user_data ? user.user_data.contact_information.first_name : user}
+          </p>
+          <h2>Time of Job</h2>
+          <p>{date}</p>
+        </div>
+        <JobCheck>
+        <Button
+          onClick={() =>
+            dispatch({
+              type: "setModalOpen",
+              modalOpen: false,
+            })
+          }
+        >
+          Close
+        </Button>
+          <Button onClick={handleCheckIn}>Check In</Button>
+          {checkIn && <span>: {new Date(Date.parse(checkIn)).toString()}</span>}
           <br />
-          <button onClick={handleAddNote}>Submit Note</button>
-        </NewNote>
-      )}
-      <h2>Notes: </h2>
-      {notes.map((note) => (
-        <NoteCard key={note.id}>
-          <p>{note.note}</p>
-          <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
-        </NoteCard>
-      ))}
-      <br />
-      <PhotoCarousel />
-
+          {checkIn && <> 
+            <Button onClick={handleCheckOut}>Check Out</Button>
+            {checkOut && <span>: {new Date(Date.parse(checkOut)).toString()}</span>}
+          </>}      
+        </JobCheck>
+      </JobTop>
+      <JobBottom>
+        <JobNotes>
+          <Button onClick={handleNewNote}>Add Note</Button>
+          {addNote && (
+            <NewNote>
+              <label htmlFor="note">New Note: </label>
+              <textarea id="note" onChange={(e) => setJobNote(e.target.value)} />
+              <br />
+              <Button onClick={handleAddNote}>Submit Note</Button>
+            </NewNote>
+          )}
+          <h2>Notes: </h2>
+          {notes.map((note) => (
+            <NoteCard key={note.id}>
+              <p>{note.note}</p>
+              <Button onClick={() => handleDeleteNote(note.id)}>Delete</Button>
+            </NoteCard>
+          ))}
+        </JobNotes>
+        <JobPhoto>
+          {loading ? (
+            <p>Uploading Images......</p>
+          ) : (
+            <form onSubmit={handleUpload}>
+              <label>Upload Photos</label>
+              <input
+                type="file"
+                multiple
+                onChange={(e) => {
+                  if (e.target.files.length + photos.length > 10) {
+                    dispatch({
+                      type: "setError",
+                      error: "There is a maximum of 10 images allowed for upload",
+                    })
+                    e.target.value = ""
+                  } else {
+                    setImages(e.target.files)
+                  }
+                }}
+              />
+              <Button type="submit">Upload Photos</Button>
+            </form>
+          )}
+          <PhotoCarousel />
+        </JobPhoto>
+      </JobBottom>
     </>
   )
 }
