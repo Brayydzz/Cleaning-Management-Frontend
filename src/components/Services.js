@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Services = () => {
   return (
     <>
-      <body>
+      <div>
         <h1>Services</h1>
         <article>
           <div>
@@ -57,7 +57,7 @@ const Services = () => {
             </Link>
           </div>
         </article>
-      </body>
+      </div>
       <footer>
         Sitemap
         <ul style={{ listStyleType: "none" }}>
