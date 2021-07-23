@@ -13,12 +13,12 @@ export const Form = styled.form `
 export const CarouselDiv = styled.div `
     height: 200px;
     width: 200px;
-    
+
 `
 
 export const NewNote = styled.div `
     border:solid black 2px;
-    height: 200px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,8 +27,8 @@ export const NewNote = styled.div `
 
 export const NoteCard = styled.div `
     border: solid black 2px;
-    height: 200px;
-    width: 100%;
+    height: 100%;
+    width: 200px;
     background-color: grey;
 `
 
