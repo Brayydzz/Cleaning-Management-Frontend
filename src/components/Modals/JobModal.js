@@ -8,7 +8,7 @@ import {
 
 import { JobCheck, JobTop, JobBottom, JobPhoto, JobNotes } from "./ModalStyle"
 import { stateContext } from "../../stateReducer"
-import { NewNote, NoteCard } from "../../Styled"
+import { NewNote, NoteCard, Button } from "../../Styled"
 import PhotoCarousel from "../PhotoCarousel"
 
 const JobModal = () => {
@@ -140,43 +140,41 @@ const JobModal = () => {
           <p>{date}</p>
         </div>
         <JobCheck>
-          {/* Close button */}
-          <button
-            onClick={() =>
-              dispatch({
-                type: "setModalOpen",
-                modalOpen: false,
-              })
-            }
-          >
-            Close
-          </button>
+        <Button
+          onClick={() =>
+            dispatch({
+              type: "setModalOpen",
+              modalOpen: false,
+            })
+          }
+        >
+          Close
+        </Button>
+          <Button onClick={handleCheckIn}>Check In</Button>
+          {checkIn && <span>: {new Date(Date.parse(checkIn)).toString()}</span>}
           <br />
-          <button onClick={handleCheckIn}>Check In</button>
-          {checkIn && <span>: {checkIn.toString()}</span>}
-          <br />
-          {checkIn && <>
-            <button onClick={handleCheckOut}>Check Out</button>
-            {checkOut && <span>: {checkOut.toString()}</span>}
-          </>}
+          {checkIn && <> 
+            <Button onClick={handleCheckOut}>Check Out</Button>
+            {checkOut && <span>: {new Date(Date.parse(checkOut)).toString()}</span>}
+          </>}      
         </JobCheck>
       </JobTop>
       <JobBottom>
         <JobNotes>
-          <button onClick={handleNewNote}>Add Note</button>
+          <Button onClick={handleNewNote}>Add Note</Button>
           {addNote && (
             <NewNote>
               <label htmlFor="note">New Note: </label>
               <textarea id="note" onChange={(e) => setJobNote(e.target.value)} />
               <br />
-              <button onClick={handleAddNote}>Submit Note</button>
+              <Button onClick={handleAddNote}>Submit Note</Button>
             </NewNote>
           )}
           <h2>Notes: </h2>
           {notes.map((note) => (
             <NoteCard key={note.id}>
               <p>{note.note}</p>
-              <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
+              <Button onClick={() => handleDeleteNote(note.id)}>Delete</Button>
             </NoteCard>
           ))}
         </JobNotes>
@@ -201,7 +199,7 @@ const JobModal = () => {
                   }
                 }}
               />
-              <button type="submit">Upload Photos</button>
+              <Button type="submit">Upload Photos</Button>
             </form>
           )}
           <PhotoCarousel />

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
+const primaryColor = "red"
+const primaryText = "black"
+const secondaryText = "white" 
+const cardColor = "grey"
+
 // Form component used on Booking.js,
 export const Form = styled.form `
     height: 100%;
@@ -19,6 +25,7 @@ export const CarouselDiv = styled.div `
 export const NewNote = styled.div `
     border:solid black 2px;
     height: 100%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,8 +35,28 @@ export const NewNote = styled.div `
 export const NoteCard = styled.div `
     border: solid black 2px;
     height: 100%;
-    width: 200px;
-    background-color: grey;
+    min-height: 100px;
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px;
+    margin-bottom: 10px;
+    background-color: ${cardColor};
+`
+
+export const Button = styled.button `
+    background: ${primaryColor};
+    color: ${primaryText};
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid palevioletred;
+    border-radius: 3px;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: ${secondaryText};
+        color: #010606;
+    }
 `
 
 
@@ -40,10 +67,11 @@ export const DashContain = styled.div `
 
 export const DashCard = styled.div `
     text-align: center;
-    padding: 10px;
+    margin: 10px;
+
     height: 300px;
     width: 300px;
-    background-color: grey; 
+    background-color: ${cardColor}; 
     border:solid black 2px;
 `
 
@@ -119,8 +147,8 @@ export const NavLinks = styled(Link)`
     height: 100%;
     cursor: pointer;
 
-    &.active {
-        border-bottom: 3px solid #01bf71;
+    &:hover {
+        border-bottom: 3px solid ${primaryColor};
     }
 `
 
@@ -166,16 +194,17 @@ export const NavBtnLink = styled(Link)`
 
 export const DashLi = styled.li `
     cursor: pointer;
+    border: black solid 1px;
 `
 
 export const DashNavUl = styled.nav `
     display: flex;
     height: 300px;
     width: 200px;
-    background-color: grey;
+    background-color: ${cardColor};
     flex-direction: column;
     justify-content: space-around;
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 10px;
 `
