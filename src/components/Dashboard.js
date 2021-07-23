@@ -47,7 +47,7 @@ const Dashboard = () => {
   useEffect(() => {
    dispatch({type: "setError", error: ""})
    dispatch({type: "setMessage", message: ""})
-  }, [route])
+  }, [route, dispatch])
 
   //Switch statement allows us to render a component when a li is clicked in DashboardNav.
   const renderSwitch = () => {

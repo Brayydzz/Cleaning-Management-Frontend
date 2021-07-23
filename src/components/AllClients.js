@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { AuthFetchRequest } from "../helperFunctions"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
@@ -27,7 +27,7 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
             dispatch({
               type: "setClients",
               clients: clients.filter(
-                (obj) => obj.client_data.client.id != client.id
+                (obj) => obj.client_data.client.id !== client.id
               ),
             })
           }

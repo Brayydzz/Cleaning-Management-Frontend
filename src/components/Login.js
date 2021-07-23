@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { FetchRequest } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
-import jwtDecode from "jwt-decode";
 import { Form } from "../Styled"
 
 const Login = () => {

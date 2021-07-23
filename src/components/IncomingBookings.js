@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { AuthFetchRequest } from "../helperFunctions"
 import { DashCard, DashCardContain } from "../Styled"
-import BookingModal from "./Modals/BookingModal"
 
 const IncomingBookings = () => {
   const { services, token } = useContext(stateContext)
@@ -26,7 +25,7 @@ const IncomingBookings = () => {
       AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE").then(
         (method) => {
           if (method) {
-            setBookings(bookings.filter((b) => b.id != booking.id))
+            setBookings(bookings.filter((b) => b.id !== booking.id))
           }
         }
       )
@@ -35,7 +34,7 @@ const IncomingBookings = () => {
 
   useEffect(() => {
     AuthFetchRequest("/bookings", token).then((data) => setBookings(data)) 
-  }, [])
+  }, [token])
   return (
     <div>
       <h1>Incoming booking</h1>
@@ -51,7 +50,7 @@ const IncomingBookings = () => {
               <p>
                 {
                   services.filter(
-                    (service) => service.id == booking.service_type_id
+                    (service) => service.id === booking.service_type_id
                   )[0].name
                 }
               </p>
