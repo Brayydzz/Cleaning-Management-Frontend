@@ -5,6 +5,7 @@ import BookingModal from "./BookingModal"
 import EmployeeModal from "./EmployeeModal"
 import ClientModal from "./ClientModal"
 import JobModal from "./JobModal"
+import FlashMessage from "../FlashMessage";
 
 const GlobalModal = () => {
   const { dispatch, modalOpen, modalType } = useContext(stateContext)
@@ -35,6 +36,9 @@ const GlobalModal = () => {
       })}
       ariaHideApp={false}
     >
+        {
+          <FlashMessage />  
+        }
         {renderModal()}
     </Modal>
   )

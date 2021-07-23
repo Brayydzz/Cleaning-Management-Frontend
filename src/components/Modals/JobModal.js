@@ -8,9 +8,10 @@ import {
 
 import { stateContext } from "../../stateReducer"
 import { NewNote, NoteCard } from "../../Styled"
+import PhotoCarousel from "../PhotoCarousel"
 
 const JobModal = () => {
-  const { dispatch, modalData, services, token } = useContext(stateContext)
+  const { dispatch, modalData, token } = useContext(stateContext)
   const {
     address,
     address_object,
@@ -28,6 +29,7 @@ const JobModal = () => {
   const [jobNote, setJobNote] = useState("")
   const [images, setImages] = useState(null)
   const [loading, setLoading] = useState(false)
+
 
   const handleCheckIn = () => {
     let currentDate = new Date()
@@ -157,7 +159,6 @@ const JobModal = () => {
           <button type="submit">Upload Photos</button>
         </form>
       )}
-
       {/* Close button */}
       <button
         onClick={() =>
@@ -173,8 +174,10 @@ const JobModal = () => {
       <button onClick={handleCheckIn}>Check In</button>
       {checkIn && <span>: {checkIn.toString()}</span>}
       <br />
-      <button onClick={handleCheckOut}>Check Out</button>
-      {checkOut && <span>: {checkOut.toString()}</span>}
+      {checkIn && <> 
+        <button onClick={handleCheckOut}>Check Out</button>
+        {checkOut && <span>: {checkOut.toString()}</span>}
+      </>}
       <br />
       <button onClick={handleNewNote}>Add Note</button>
       {addNote && (
@@ -192,6 +195,9 @@ const JobModal = () => {
           <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
         </NoteCard>
       ))}
+      <br />
+      <PhotoCarousel />
+
     </>
   )
 }

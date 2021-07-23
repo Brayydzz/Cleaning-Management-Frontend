@@ -10,6 +10,12 @@ export const Form = styled.form `
     align-items: center;
 `
 
+export const CarouselDiv = styled.div `
+    height: 200px;
+    width: 200px;
+    
+`
+
 export const NewNote = styled.div `
     border:solid black 2px;
     height: 200px;
