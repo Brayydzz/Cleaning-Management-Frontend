@@ -31,6 +31,8 @@ function App() {
     modalData: {}
   });
   
+
+
   // Get request for Jobs
   useEffect(() => {
     AuthFetchRequest("/jobs", token).then(data => {
@@ -74,17 +76,21 @@ function App() {
 
   const toggleNav = () => {
     setIsOpen(!isOpen)
-    console.log('yeet')
   }
 
   return (
     <>
       <Router>
-        <Navbar toggleNav={toggleNav}/>
-        <Sidebar isOpen={isOpen} toggleNav={toggleNav}/>
         <stateContext.Provider value={{ ...store, dispatch }}>
           <GlobalModal />
-          <FlashMessage />
+          {
+            !store.modalOpen &&
+              <>
+                <Navbar toggleNav={toggleNav}/>
+                <Sidebar isOpen={isOpen} toggleNav={toggleNav}/>
+                <FlashMessage />
+              </>
+          }
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
