@@ -24,9 +24,9 @@ const IncomingBookings = () => {
     if (conf) {
       AuthFetchRequest(`/bookings/${booking.id}`, token, "DELETE").then(
         (method) => {
-          if (method) {
+          
             setBookings(bookings.filter((b) => b.id !== booking.id))
-          }
+          
         }
       )
     }

@@ -10,10 +10,9 @@ import { stateContext } from "../../stateReducer"
 import { NewNote, NoteCard } from "../../Styled"
 
 const JobModal = () => {
-  const { dispatch, modalData, services, token } = useContext(stateContext)
+  const { dispatch, modalData, token } = useContext(stateContext)
   const {
     address,
-    address_object,
     client,
     job,
     service_type,
