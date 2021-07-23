@@ -5,8 +5,8 @@ import {setModal} from "../helperFunctions"
 
 const CompletedJobs = () => {
 
-    const { jobs, dispatch, token, currentUser, employees } = useContext(stateContext)
-    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id == currentUser().user_id && job.job_data.job.time_out !== null)
+    const { jobs, dispatch, currentUser } = useContext(stateContext)
+    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id === currentUser().user_id.toString() && job.job_data.job.time_out !== null)
 
     return (
         <div>

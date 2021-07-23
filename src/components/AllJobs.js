@@ -5,7 +5,7 @@ import {setModal} from "../helperFunctions"
 
 const AllJobs = ({handleClick}) => {
 
-  const {jobs, dispatch, token} = useContext(stateContext)
+  const {jobs, dispatch} = useContext(stateContext)
 
   
 

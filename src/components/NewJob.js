@@ -14,30 +14,14 @@ const NewJob = ({setRoute}) => {
 
   const [availableEmployees, setAvailableEmployees] = useState([]);
 
-//   const clientOptions = clients.map((client) => ({
-//     value: client.client_data.client.id,
-//     label: `${client.client_data.contact_information.first_name} ${client.client_data.contact_information.last_name}`,
-//   }));
-
-//   const employeeOptions = employees.map((employee) => ({
-//     value: employee.user_data.user.id,
-//     label: `${employee.user_data.contact_information.first_name} ${employee.user_data.contact_information.last_name}`,
-//   }));
-
-//   const handleClientChange = (e) => {
-//     setClientOption("e.target.value");
-//   };
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
     //Get client to grab address
-    const address_id = clients.find(cli => cli.client_data.client.id).client_data.address_object.id
-
- 
-
+    const address_id = clients.find(cli => cli.client_data.client.id === clientOption).client_data.address_object.id
     const currentEmployee = employees.find(emp => emp.user_data.user.id)
     let currAvailable = null
+
     // Set available
     currentEmployee.user_data.availables.forEach((available) => {
       let employeeDate = new Date(available.day).toDateString();
@@ -47,10 +31,11 @@ const NewJob = ({setRoute}) => {
         currAvailable = available
       }
     });
+
     const availableData = {
       day: new Date(dateTime).toDateString()
     }
-    const service = services.find(service => service.id == serviceOption)
+    const service = services.find(service => service.id === serviceOption)
 
     if (currAvailable){
       availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), service.hours_needed)
@@ -72,10 +57,6 @@ const NewJob = ({setRoute}) => {
       address_id: address_id
     }
 
-
-    // let getFreedomString = setTimeAvailable()
-
-    // console.log(dataToSend)
     AuthFetchRequest("/jobs", token, "POST", jobData).then(data =>{ dispatch({type: "addJob", job: data}); setRoute("allJobs"); dispatch({type: "setMessage", message: "Successfully created job!"})})
   }
 
@@ -94,7 +75,7 @@ const NewJob = ({setRoute}) => {
   useEffect(() => {
     let tmpEmployees = [];
 
-    const service = services.find(service => service.id == serviceOption)
+    const service = services.find(service => service.id === serviceOption)
 
     if (dateTime) {
       employees.forEach((employee) => {
@@ -119,7 +100,7 @@ const NewJob = ({setRoute}) => {
     }
 
     setAvailableEmployees(tmpEmployees);
-  }, [dateTime]);
+  }, [dateTime, employees, serviceOption, services]);
 
   return (
     <div>

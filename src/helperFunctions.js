@@ -53,7 +53,7 @@ export function checkAvailable(availableString, date, hoursRequired) {
     if (
       availableArray[
         date.getHours() * 4 + Math.round((date.getMinutes() / 60) * 4) + i
-      ] != "0"
+      ] !== "0"
     ) {
       console.log(date.getHours() * 4 + (date.getMinutes() / 60) * 4 + i);
       console.log("Bad Time");
