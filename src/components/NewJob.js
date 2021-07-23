@@ -18,7 +18,7 @@ const NewJob = ({setRoute}) => {
     e.preventDefault()
 
     //Get client to grab address
-    const address_id = clients.find(cli => cli.client_data.client.id === clientOption).client_data.address_object.id
+    const address_id = clients.find(cli => cli.client_data.client.id.toString() === clientOption).client_data.address_object.id
     const currentEmployee = employees.find(emp => emp.user_data.user.id)
     let currAvailable = null
 
@@ -35,7 +35,7 @@ const NewJob = ({setRoute}) => {
     const availableData = {
       day: new Date(dateTime).toDateString()
     }
-    const service = services.find(service => service.id === serviceOption)
+    const service = services.find(service => service.id.toString() === serviceOption)
 
     if (currAvailable){
       availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), service.hours_needed)
@@ -75,7 +75,7 @@ const NewJob = ({setRoute}) => {
   useEffect(() => {
     let tmpEmployees = [];
 
-    const service = services.find(service => service.id === serviceOption)
+    const service = services.find(service => service.id.toString() === serviceOption)
 
     if (dateTime) {
       employees.forEach((employee) => {

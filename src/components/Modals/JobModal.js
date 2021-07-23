@@ -171,11 +171,11 @@ const JobModal = () => {
       </button>
       <br />
       <button onClick={handleCheckIn}>Check In</button>
-      {checkIn && <span>: {checkIn.toString()}</span>}
+      {checkIn && <span>: {new Date(Date.parse(checkIn)).toString()}</span>}
       <br />
       {checkIn && <> 
         <button onClick={handleCheckOut}>Check Out</button>
-        {checkOut && <span>: {checkOut.toString()}</span>}
+        {checkOut && <span>: {new Date(Date.parse(checkOut)).toString()}</span>}
       </>}
       <br />
       <button onClick={handleNewNote}>Add Note</button>

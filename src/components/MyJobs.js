@@ -21,6 +21,9 @@ const MyJobs = () => {
                             <p>{job_data.address}</p>
                             <h2>Service Type:</h2>
                             <p>{job_data.service_type.name}</p>
+                            <h2>Time Due</h2>
+                            <p>{new Date(parseFloat(job_data.job.due_data)).toString()}</p>
+              
                             <button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</button>
                         </DashCard>
                     ))        
