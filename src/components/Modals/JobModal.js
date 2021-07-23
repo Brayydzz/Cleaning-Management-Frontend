@@ -14,7 +14,6 @@ const JobModal = () => {
   const { dispatch, modalData, token } = useContext(stateContext)
   const {
     address,
-    address_object,
     client,
     job,
     service_type,

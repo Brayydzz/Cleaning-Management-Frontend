@@ -41,14 +41,14 @@ function App() {
         jobs: data,
       })
     })
-  }, [])
+  }, [token])
 
   // Get request for Clients
   useEffect(() => {
     AuthFetchRequest("/clients", token).then((data) => {
       dispatch({ type: "setClients", clients: data })
     })
-  }, [])
+  }, [token])
 
   // Get request for Employees
   useEffect(() => {
@@ -59,7 +59,7 @@ function App() {
         employees: data,
       })
     })
-  }, [])
+  }, [token])
 
 
   // Get request for services

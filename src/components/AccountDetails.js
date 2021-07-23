@@ -8,7 +8,7 @@ const AccountDetails = ({setRoute, setContactInfo}) => {
 
   useEffect(() => {
     AuthFetchRequest(`/users/${currentUser().id}`, token).then(data => setUser(data))
-  }, [])
+  }, [currentUser, token])
 
 
   return (

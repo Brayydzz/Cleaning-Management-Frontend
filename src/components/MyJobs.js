@@ -5,8 +5,8 @@ import {setModal} from "../helperFunctions"
 
 const MyJobs = () => {
 
-    const { jobs, dispatch, token, currentUser, employees } = useContext(stateContext)
-    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id == currentUser().user_id)
+    const { jobs, dispatch, currentUser } = useContext(stateContext)
+    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id === currentUser().user_id.toString())
 
     return (
         <div>

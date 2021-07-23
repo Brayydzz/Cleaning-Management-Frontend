@@ -18,7 +18,7 @@ const BookingModal = () => {
             <p>
             {
                 Object.keys(modalData).length > 0 && services.filter(
-                (service) => service.id == modalData.service_type_id
+                (service) => service.id === modalData.service_type_id
                 )[0].name
             }
             </p>

@@ -1,12 +1,10 @@
-import { useState, useContext, useEffect } from "react";
-import { AuthFetchRequest, setModal } from "../helperFunctions";
+import { useContext } from "react";
 import { stateContext } from "../stateReducer";
 import { DashCard, DashCardContain } from "../Styled";
 
 const Employees = ({ handleClick }) => {
-  const [users, setUsers] = useState([]);
 
-  const { token, currentUser, dispatch, employees } = useContext(stateContext);
+  const { employees } = useContext(stateContext);
 
 
 

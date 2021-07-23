@@ -24,6 +24,8 @@ const GlobalModal = () => {
         case "jobs": {
           return <JobModal />
         }
+        default: 
+        console.log("Not a valid modal type", modalType)
     }
   }
 
