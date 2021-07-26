@@ -4,13 +4,15 @@ import { stateContext } from "../stateReducer";
 import { Form } from "../Styled";
 
 const NewJob = ({setRoute}) => {
+  const today = new Date()
+
   const { services, clients, employees, token, dispatch } = useContext(stateContext);
   const [clientOption, setClientOption] = useState(null);
   const [employeeOption, setEmployeeOption] = useState(null);
   const [serviceOption, setServiceOption] = useState(null);
   const [recurring, setRecurring] = useState(false);
   const [recurringType, setRecurringType] = useState("0");
-  const [dateTime, setDateTime] = useState("");
+  const [dateTime, setDateTime] = useState(today.toISOString());
 
   const [availableEmployees, setAvailableEmployees] = useState([]);
 
@@ -122,7 +124,9 @@ const NewJob = ({setRoute}) => {
           ))}
         </select>
 
-        <label></label>
+            {navigator.userAgent.includes("Firefox") ?
+        <label>Due Date (Please use chrome)</label> : <label>Due Date</label>
+            }
         <input
           onChange={(e) => setDateTime(e.target.value)}
           type="datetime-local"

@@ -29,6 +29,7 @@ const JobModal = () => {
   const [jobNote, setJobNote] = useState("")
   const [images, setImages] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [enableUploadBtn, setEnableUploadBtn] = useState(false)
 
 
   const handleCheckIn = () => {
@@ -76,6 +77,8 @@ const JobModal = () => {
         setModal(data.job_data, "jobs", dispatch)
         e.target.children[1].value = ""
         setLoading(false)
+        setEnableUploadBtn(false)
+
       }
     )
   }
@@ -196,10 +199,11 @@ const JobModal = () => {
                     e.target.value = ""
                   } else {
                     setImages(e.target.files)
+                    setEnableUploadBtn(true)
                   }
                 }}
               />
-              <Button type="submit">Upload Photos</Button>
+              {enableUploadBtn && <Button type="submit">Upload Photos</Button>}
             </form>
           )}
           <PhotoCarousel />
