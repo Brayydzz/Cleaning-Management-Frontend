@@ -15,7 +15,6 @@ const Employees = ({ handleClick }) => {
         New Employee
       </button>
       <DashCardContain>
-        {console.log(employees)}
         {employees.length > 0 &&
           employees.map(({ user_data }) => (
             <DashCard key={user_data.user.id}>
