@@ -27,6 +27,12 @@ export default function stateReducer(state, action) {
         employees: [...state.employees, action.employee],
       };
     }
+    case "addClient": {
+      return {
+        ...state,
+        clients: [...state.clients, action.client],
+      };
+    }
     case "addJob": {
       return {
         ...state,
