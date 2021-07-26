@@ -13,14 +13,12 @@ const EditAccount = ({ formData, setRoute, setFormData, contactInfo }) => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(contactInfo);
     AuthFetchRequest(
       `/users/${contactInfo.user.id}`,
       token,
       "PATCH",
       formData
     ).then((data) => {
-      console.log(data);
       setRoute("accountDetails");
     });
   };
