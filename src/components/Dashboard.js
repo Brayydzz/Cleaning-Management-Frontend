@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { stateContext } from "../stateReducer"
 import Login from "./Login"
-import DashboardNav from "./DashboardNav"
 import AllJobs from "./AllJobs"
 import IncomingBookings from "./IncomingBookings"
 import Employees from "./Employees"
@@ -15,11 +14,13 @@ import EditClient from "./EditClient"
 import EditAccount from "./EditAccount"
 import NewJob from "./NewJob"
 import CompletedJobs from "./CompletedJobs"
+import DashNav from "./SideDash/DashNav"
 
 const Dashboard = () => {
   const [route, setRoute] = useState("myJobs")
   const [contactInfo, setContactInfo] = useState(null) // This is so that we can edit a client / users
   const [formData, setFormData] = useState({})
+  
 
   useEffect(() => {
     if (contactInfo) {
@@ -107,7 +108,7 @@ const Dashboard = () => {
           </h1>
           <button onClick={() => dispatch({ type: "logout" })}>Log Out</button>
           <DashContain>
-            <DashboardNav handleClick={handleClick} />
+            <DashNav handleClick={handleClick}/>
             {renderSwitch()}
           </DashContain>
         </>
