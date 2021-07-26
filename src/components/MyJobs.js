@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain } from "../Styled"
 import {setModal} from "../helperFunctions"
@@ -6,13 +6,18 @@ import {setModal} from "../helperFunctions"
 const MyJobs = () => {
 
     const { jobs, dispatch, currentUser } = useContext(stateContext)
-    const myJobs = jobs.filter(job => job.job_data.user.user_data.user.id.toString() === currentUser().user_id.toString() && job.job_data.job.time_out === null)
+    const [myJobs, setMyJobs] = useState(null)
+    useEffect(() => {
+        if (jobs && jobs.length > 0){
+            setMyJobs(jobs.filter(job => job.job_data.user.user_data.user.id.toString() === currentUser().user_id.toString() && job.job_data.job.time_out === null))
+        }
+    }, [jobs])
 
     return (
         <div>
             <h1>My Jobs!</h1>
             <DashCardContain>
-                {jobs.length > 0 &&
+                {myJobs &&
                     myJobs.map(({job_data}) => (
                         <DashCard key={job_data.job.id}>
                             <h2>Client: </h2>
