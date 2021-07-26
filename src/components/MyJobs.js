@@ -11,7 +11,7 @@ const MyJobs = () => {
         if (jobs && jobs.length > 0){
             setMyJobs(jobs.filter(job => job.job_data.user.user_data.user.id.toString() === currentUser().user_id.toString() && job.job_data.job.time_out === null))
         }
-    }, [jobs])
+    }, [jobs, currentUser])
 
     return (
         <div>
