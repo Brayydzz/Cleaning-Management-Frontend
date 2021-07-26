@@ -36,7 +36,7 @@ const NewClient = ({ setRoute, setReloadClients }) => {
   return (
     <div>
       <h1>New Client!</h1>
-      <ContactForm {...{ handleChange, submit }} />
+      <ContactForm {...{ handleChange, submit }} employee={client} />
     </div>
   );
 };

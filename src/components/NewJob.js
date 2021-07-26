@@ -1,18 +1,23 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AuthFetchRequest, checkAvailable, setTimeAvailable } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
 import { Form } from "../Styled";
+import Select from 'react-select';
 
 const NewJob = ({setRoute}) => {
+  const today = new Date()
+
   const { services, clients, employees, token, dispatch } = useContext(stateContext);
   const [clientOption, setClientOption] = useState(null);
   const [employeeOption, setEmployeeOption] = useState(null);
   const [serviceOption, setServiceOption] = useState(null);
   const [recurring, setRecurring] = useState(false);
   const [recurringType, setRecurringType] = useState("0");
-  const [dateTime, setDateTime] = useState("");
+  const [dateTime, setDateTime] = useState(today.toISOString());
 
   const [availableEmployees, setAvailableEmployees] = useState([]);
+  const [clientOptionsRef, setClientOptionsRef] = useState([])
+  const [employeeOptionsRef, setEmployeeOptionsRef] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -39,12 +44,10 @@ const NewJob = ({setRoute}) => {
 
     if (currAvailable){
       availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), service.hours_needed)
-      console.log("UPDATING AVAILABLE")
-      AuthFetchRequest(`/availables/${currAvailable.id}`, token, "PATCH", availableData).then(data => console.log(data))
+      AuthFetchRequest(`/availables/${currAvailable.id}`, token, "PATCH", availableData).then(data => data)
     }else{
       availableData.freedom = setTimeAvailable("", new Date(dateTime), service.hours_needed)
-      console.log("CREATING NEW AVAILABLE")
-      AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => console.log(data))
+      AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => data)
     }
 
     const jobData = {
@@ -93,7 +96,6 @@ const NewJob = ({setRoute}) => {
         });
 
         if (canWork) {
-          console.log("I can work!", employee);
           tmpEmployees.push(employee);
         }
       });
@@ -102,27 +104,38 @@ const NewJob = ({setRoute}) => {
     setAvailableEmployees(tmpEmployees);
   }, [dateTime, employees, serviceOption, services]);
 
+  useEffect(() => {
+    setEmployeeOptionsRef(availableEmployees.map(emp => {
+      return {value: emp.user_data.user.id,
+     label: `${emp.user_data.contact_information.first_name} ${emp.user_data.contact_information.last_name}`}
+   }))
+  }, [availableEmployees])
+
+  useEffect(() => {
+    setClientOptionsRef(clients.map(cli => {
+       return {value: cli.client_data.client.id,
+      label: `${cli.client_data.contact_information.first_name} ${cli.client_data.contact_information.last_name}`}
+    }))
+    
+  }, [clients])
+
+  const dropDownStyle = {
+    container: base => ({
+      ...base,
+      width: "200px"
+    })
+  }
+
   return (
     <div>
       <h1>Create Job</h1>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="client">Client: </label>
-        <select
-          value={clientOption}
-          onChange={(e) => setClientOption(e.target.value)}
-          id="client"
-        >
-          {clients.map((client) => (
-            <option
-              key={client.client_data.client.id}
-              value={client.client_data.client.id}
-            >
-              {`${client.client_data.contact_information.first_name} ${client.client_data.contact_information.last_name}`}
-            </option>
-          ))}
-        </select>
+        <Select styles={dropDownStyle} value={clientOption} onChange={(e) => setClientOption(e)} options={clientOptionsRef}/>
 
-        <label></label>
+            {navigator.userAgent.includes("Firefox") ?
+        <label>Due Date (Please use chrome)</label> : <label>Due Date</label>
+            }
         <input
           onChange={(e) => setDateTime(e.target.value)}
           type="datetime-local"
@@ -132,21 +145,8 @@ const NewJob = ({setRoute}) => {
         />
 
         <label htmlFor="employee">Employee: </label>
-        <select
-          value={employeeOption}
-          onChange={(e) => setEmployeeOption(e.target.value)}
-          id="employee"
-        >
-          {availableEmployees.length > 0 &&
-            availableEmployees.map((employee) => (
-              <option
-                key={employee.user_data.user.id}
-                value={employee.user_data.user.id}
-              >
-                {`${employee.user_data.contact_information.first_name} ${employee.user_data.contact_information.last_name}`}
-              </option>
-            ))}
-        </select>
+        <Select styles={dropDownStyle} value={employeeOption} onChange={(e) => setEmployeeOption(e)} options={employeeOptionsRef} />
+
         <label htmlFor="services">Services: </label>
         <select
           value={serviceOption}
@@ -164,7 +164,6 @@ const NewJob = ({setRoute}) => {
         <input
           type="checkbox"
           onChange={(e) => {
-            console.log(e.target.checked);
             setRecurring(e.target.checked);
           }}
         />
