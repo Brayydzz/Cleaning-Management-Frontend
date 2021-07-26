@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
-const primaryColor = "red"
+const primaryLight = "#86BBD8"  
+const primaryColor = "#336699"
+const secondaryColor = "#DF5601"
 const primaryText = "black"
 const secondaryText = "white" 
 const cardColor = "grey"
@@ -68,9 +69,8 @@ export const DashContain = styled.div `
 export const DashCard = styled.div `
     text-align: center;
     margin: 10px;
-
     height: 300px;
-    width: 300px;
+    width: 250px;
     background-color: ${cardColor}; 
     border:solid black 2px;
 `
@@ -79,6 +79,12 @@ export const DashCardContain = styled.div `
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+`
+
+export const DashButton = styled.button `
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
 `
 
 export const Nav = styled.nav `
