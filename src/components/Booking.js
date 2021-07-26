@@ -69,7 +69,6 @@ const Booking = () => {
 
 
   const handleChange = (e) => {
-    // console.log([e.target.id])
     setBooking({ ...booking, [e.target.id]: e.target.value })
   }
 

@@ -44,12 +44,10 @@ const NewJob = ({setRoute}) => {
 
     if (currAvailable){
       availableData.freedom = setTimeAvailable(currAvailable.freedom, new Date(dateTime), service.hours_needed)
-      console.log("UPDATING AVAILABLE")
-      AuthFetchRequest(`/availables/${currAvailable.id}`, token, "PATCH", availableData).then(data => console.log(data))
+      AuthFetchRequest(`/availables/${currAvailable.id}`, token, "PATCH", availableData).then(data => data)
     }else{
       availableData.freedom = setTimeAvailable("", new Date(dateTime), service.hours_needed)
-      console.log("CREATING NEW AVAILABLE")
-      AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => console.log(data))
+      AuthFetchRequest(`/users/${employeeOption}/available`, token, "POST", availableData).then(data => data)
     }
 
     const jobData = {
@@ -166,7 +164,6 @@ const NewJob = ({setRoute}) => {
         <input
           type="checkbox"
           onChange={(e) => {
-            console.log(e.target.checked);
             setRecurring(e.target.checked);
           }}
         />
