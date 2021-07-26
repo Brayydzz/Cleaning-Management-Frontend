@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthFetchRequest } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
 import EditForm from "./EditForm";
+import {FormContainer} from "../Styled"
 
 const EditClient = ({ formData, setRoute, setFormData, contactInfo }) => {
   const { token } = useContext(stateContext);
@@ -18,10 +19,10 @@ const EditClient = ({ formData, setRoute, setFormData, contactInfo }) => {
   };
 
   return (
-    <div>
+    <FormContainer>
       <h1>Edit Client!</h1>
       <EditForm {...{ submit, formData, handleChange }} />
-    </div>
+    </FormContainer>
   );
 };
 

@@ -4,7 +4,7 @@ import Login from "./Login"
 import AllJobs from "./AllJobs"
 import IncomingBookings from "./IncomingBookings"
 import Employees from "./Employees"
-import { DashContain } from "../Styled"
+import { DashContain, Button, EmployeeTitle } from "../Styled"
 import MyJobs from "./MyJobs"
 import AccountDetails from "./AccountDetails"
 import AllClients from "./AllClients"
@@ -103,10 +103,12 @@ const Dashboard = () => {
     <>
       {token ? (
         <>
-          <h1>
-            Hello {currentUser().first_name + " " + currentUser().last_name}
-          </h1>
-          <button onClick={() => dispatch({ type: "logout" })}>Log Out</button>
+          <EmployeeTitle>
+            <h1>
+              Welcome {currentUser().first_name + " " + currentUser().last_name}
+            </h1>
+            <Button onClick={() => dispatch({ type: "logout" })}>Log Out</Button>
+          </EmployeeTitle>
           <DashContain>
             <DashNav handleClick={handleClick}/>
             {renderSwitch()}

@@ -2,12 +2,19 @@ import styled from "styled-components";
 import {FaTimes} from 'react-icons/fa'
 import { Link } from "react-router-dom";
 
+const primaryLight = "#86BBD8"  
+const primaryColor = "#336699"
+const secondaryColor = "#DF5601"
+const primaryText = "black"
+const secondaryText = "white" 
+
+
 export const SidebarContainer = styled.aside `
     position: fixed;
     z-index: 999;
     width: 100%;
     height: 100%;
-    background: #0d0d0d;
+    background: ${primaryLight};
     display: grid;
     align-items: center;
     top: 0;
@@ -59,7 +66,7 @@ export const SidebarLink = styled(Link) `
     cursor: pointer;
 
     &:hover {
-        color: red;
+        color: ${primaryColor};
         transition: 0.2s ease-in-out;
     }
 `
@@ -71,7 +78,7 @@ export const SideBtnWrap = styled.div `
 
 export const SidebarRoute = styled(Link)`
     border-radius: 50px;
-    background: red;
+    background: ${primaryColor};
     white-space: nowrap;
     padding: 16px 64px;
     color: #010606;
@@ -85,6 +92,6 @@ export const SidebarRoute = styled(Link)`
     &:hover {
         transition: all 0.2s ease-in-out;
         background: #fff;
-        color: #010606;
+        color: ${secondaryColor};
     }
 `
