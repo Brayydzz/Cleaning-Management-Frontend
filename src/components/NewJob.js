@@ -131,7 +131,7 @@ const NewJob = ({setRoute}) => {
       <h1>Create Job</h1>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="client">Client: </label>
-        <Select styles={dropDownStyle} value={clientOption} onChange={(e) => setClientOption(e)} options={clientOptionsRef}/>
+        <Select styles={dropDownStyle} value={clientOption} onChange={(e) => setClientOption(e.value)} options={clientOptionsRef}/>
 
             {navigator.userAgent.includes("Firefox") ?
         <label>Due Date (Please use chrome)</label> : <label>Due Date</label>
@@ -145,7 +145,7 @@ const NewJob = ({setRoute}) => {
         />
 
         <label htmlFor="employee">Employee: </label>
-        <Select styles={dropDownStyle} value={employeeOption} onChange={(e) => setEmployeeOption(e)} options={employeeOptionsRef} />
+        <Select styles={dropDownStyle} value={employeeOption} onChange={(e) => setEmployeeOption(e.value)} options={employeeOptionsRef} />
 
         <label htmlFor="services">Services: </label>
         <select
