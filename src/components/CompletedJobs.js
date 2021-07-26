@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { stateContext } from "../stateReducer"
-import { DashCard, DashCardContain } from "../Styled"
+import { DashCard, DashCardContain, Button } from "../Styled"
 import {setModal} from "../helperFunctions"
 
 const CompletedJobs = () => {
@@ -21,7 +21,7 @@ const CompletedJobs = () => {
                             <p>{job_data.address}</p>
                             <h2>Service Type:</h2>
                             <p>{job_data.service_type.name}</p>
-                            <button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</button>
+                            <Button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</Button>
                         </DashCard>
                     ))        
                 }

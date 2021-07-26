@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { stateContext } from "../stateReducer"
 import { AuthFetchRequest } from "../helperFunctions"
-import { DashCard, DashCardContain } from "../Styled"
+import { DashCard, DashCardContain, Button } from "../Styled"
 
 const IncomingBookings = () => {
   const { services, token } = useContext(stateContext)
@@ -54,8 +54,8 @@ const IncomingBookings = () => {
                   )[0].name
                 }
               </p>
-              <button onClick={() => deletePost(booking)}>Delete</button>
-              <button onClick={() => setModal(booking, "bookings", dispatch)}>View Booking</button>
+              <Button onClick={() => setModal(booking, "bookings", dispatch)}>View Booking</Button>
+              <Button onClick={() => deletePost(booking)}>Delete</Button>
             </DashCard>
           ))}
       </DashCardContain>

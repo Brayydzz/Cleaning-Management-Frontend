@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { stateContext } from "../stateReducer";
-import { DashCard, DashCardContain } from "../Styled";
+import { DashCard, DashCardContain, Button } from "../Styled";
 
 const Employees = ({ handleClick }) => {
 
@@ -11,9 +11,9 @@ const Employees = ({ handleClick }) => {
   return (
     <div>
       <h1>Employees</h1>
-      <button onClick={handleClick} id="newEmployee">
+      <Button onClick={handleClick} id="newEmployee">
         New Employee
-      </button>
+      </Button>
       <DashCardContain>
         {employees.length > 0 &&
           employees.map(({ user_data }) => (
