@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react"
 import { stateContext } from "../stateReducer"
 import { DashCard, DashCardContain, Button } from "../Styled"
 import {setModal} from "../helperFunctions"
+import Select from 'react-select';
+
 
 const AllJobs = ({handleClick}) => {
 
@@ -9,21 +11,36 @@ const AllJobs = ({handleClick}) => {
 
   const [showJobs, setShowJobs] = useState([])
   const [client, setClient] = useState("")
+  const [clientOptionsRef, setClientOptionsRef] = useState([])
+
+
 
   useEffect(() => {
     client === "" ? setShowJobs(jobs) : setShowJobs(jobs.filter(job => job.job_data.client.client_data.client.id.toString() === client))
   }, [client, jobs])
 
+  useEffect(() => {
+    const clientArr = clients.map(cli => {
+      return {value: cli.client_data.client.id,
+     label: `${cli.client_data.contact_information.first_name} ${cli.client_data.contact_information.last_name}`}
+   })
+   clientArr.unshift({value: "", label: "All Clients"})
+    setClientOptionsRef(clientArr)
+  }, [clients])
+
+  const dropDownStyle = {
+    container: base => ({
+      ...base,
+      width: "200px"
+    })
+  }
+
   return (
     <div>
       <h1>All Jobs</h1>
       <label>Filter by Client</label>
-      <select onChange={ e => {setClient(e.target.value)}} value={client}>
-        <option value="">All Clients</option>
-        {clients.map(cli => (
-          <option key={cli.client_data.client.id} value={cli.client_data.client.id}>{`${cli.client_data.contact_information.first_name} ${cli.client_data.contact_information.last_name}`}</option>
-        ))}
-      </select>
+      <Select styles={dropDownStyle} value={client} onChange={(e) => setClient(e.value.toString())} options={clientOptionsRef}/>
+
       <br/>
       <Button onClick={handleClick} id="newJob">Create Job</Button>
       <DashCardContain>
