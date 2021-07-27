@@ -80,9 +80,7 @@ const NewJob = ({setRoute}) => {
       return
     }
     let tmpEmployees = [];
-    console.log(serviceOption)
     const service = services.find(service => service.id.toString() === serviceOption.toString())
-    console.log(service)
 
     if (dateTime) {
       employees.forEach((employee) => {
