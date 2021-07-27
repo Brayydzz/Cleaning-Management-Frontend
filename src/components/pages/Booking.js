@@ -4,6 +4,9 @@ import { stateContext } from "../../stateReducer"
 import { FetchRequest } from "../../helperFunctions"
 import { useHistory } from "react-router"
 import validator from "validator"
+import { TextArea, BookingImg, BookingForm, InputText, Select } from "./pageStyling";
+import { Button } from "../../Styled";
+import Footer from "./Footer";
 
 const Booking = () => {
   const { services, dispatch } = useContext(stateContext)
@@ -74,65 +77,65 @@ const Booking = () => {
 
   return (
     <>
-      <h1>Booking Form</h1>
-
-      <Form id="bookingSubmit" onSubmit={submit}>
-        <label htmlFor="first_name">First Name: </label>
-        <input
-          id="first_name"
-          type="text"
-          onChange={handleChange}
-          value={booking.first_name}
-        ></input>
-
-        <label htmlFor="last_name">Last Name: </label>
-        <input
-          id="last_name"
-          type="text"
-          onChange={handleChange}
-          value={booking.last_name}
-        ></input>
-
-        <label htmlFor="email">Email: </label>
-        <input
-          id="email"
-          type="text"
-          onChange={handleChange}
-          value={booking.email}
-        ></input>
-
-        <label htmlFor="phone_number">Phone Number: </label>
-        <input
-          id="phone_number"
-          type="text"
-          onChange={handleChange}
-          value={booking.phone_number}
-        ></input>
-
-        <label htmlFor="body">Description: </label>
-        <textarea
-          id="body"
-          type="text"
-          onChange={handleChange}
-          value={booking.body}
-        ></textarea>
-
-        <label>Service Type: </label>
-        <select
-          id="service_select"
-          onChange={(e) =>
-            setBooking({ ...booking, service_type_id: e.target.value })
-          }
-          value={booking.service_type_id}
-        >
-          {services.map((service) => (
-            <option key={service.id} value={service.id}>
-              {service.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Submit</button>
-      </Form>
+      <BookingForm>
+      <BookingImg src={"images/booking.jpg"} alt="" />
+        <Form id="bookingSubmit" onSubmit={submit}>
+        <h1>Booking Form</h1>
+          <span>
+          <label htmlFor="first_name">First Name: </label>
+          <InputText
+            id="first_name"
+            type="text"
+            onChange={handleChange}
+            value={booking.first_name}
+          ></InputText>
+          <label htmlFor="last_name">Last Name: </label>
+          <InputText
+            id="last_name"
+            type="text"
+            onChange={handleChange}
+            value={booking.last_name}
+            ></InputText>
+          <label htmlFor="email">Email: </label>
+          </span>
+          <InputText
+            id="email"
+            type="text"
+            onChange={handleChange}
+            value={booking.email}
+          ></InputText>
+          <label htmlFor="phone_number">Phone Number: </label>
+          <InputText
+            id="phone_number"
+            type="text"
+            onChange={handleChange}
+            value={booking.phone_number}
+          ></InputText>
+          <label htmlFor="body">Description: </label>
+          <TextArea
+            id="body"
+            type="text"
+            onChange={handleChange}
+            value={booking.body}
+          ></TextArea>
+          <label>Service Type: </label>
+          <Select
+            id="service_select"
+            onChange={(e) =>
+              setBooking({ ...booking, service_type_id: e.target.value })
+            }
+            value={booking.service_type_id}
+          >
+            {services.map((service) => (
+              <option key={service.id} value={service.id}>
+                {service.name}
+              </option>
+            ))}
+          </Select>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </BookingForm>
+        <Footer />
     </>
   )
 }

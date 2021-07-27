@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 const primaryLight = "#86BBD8"  
 const primaryColor = "#336699"
 const secondaryColor = "#DC602E"
-const primaryText = "black"
-const secondaryText = "white" 
 const cardColor = "#EFF8FB"
 
 // Form component used on Booking.js,
@@ -245,3 +243,4 @@ export const PageButton = styled(Link) `
         color: ${secondaryColor};
     }
 `
+
