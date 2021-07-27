@@ -76,8 +76,10 @@ const NewJob = ({setRoute}) => {
   }, [services]);
 
   useEffect(() => {
+    if (!serviceOption){
+      return
+    }
     let tmpEmployees = [];
-
     const service = services.find(service => service.id.toString() === serviceOption.toString())
 
     if (dateTime) {
