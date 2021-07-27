@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthFetchRequest, checkAvailable, setTimeAvailable } from "../helperFunctions";
 import { stateContext } from "../stateReducer";
 import { Form } from "../Styled";

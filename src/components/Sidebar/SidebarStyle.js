@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 const primaryLight = "#86BBD8"  
 const primaryColor = "#336699"
 const secondaryColor = "#DF5601"
-const primaryText = "black"
-const secondaryText = "white" 
 
 
 export const SidebarContainer = styled.aside `

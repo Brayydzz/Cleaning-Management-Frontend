@@ -1,5 +1,7 @@
-import { AboutCardContain, HeroText, HomeArticle, PageP, ServiceCard, ServiceContainer, Footer, FooterLink, ServiceImg } from "./pageStyling";
+import { AboutCardContain, HeroText, HomeArticle, PageP, ServiceCard, ServiceContainer, ServiceImg } from "./pageStyling";
 import { PageButton, DashCard } from "../../Styled";
+import Footer from "./Footer";
+
 
 
 const Home = () => {
@@ -99,21 +101,7 @@ const Home = () => {
           </ServiceContainer>
         </HomeArticle>
       </div>
-      <Footer>
-        Sitemap
-        <ul style={{ listStyleType: "none" }}>
-          <FooterLink to="/about">
-            <li>About</li>
-          </FooterLink>
-          <FooterLink to="/services">
-            <li>Services</li>
-          </FooterLink>
-          <FooterLink to="/bookings">
-            <li>Contact Us</li>
-          </FooterLink>
-        </ul>
-        <p>{"\u00a9"}, Copyright The Clean Team 2021</p>
-      </Footer>
+      <Footer />
     </>
   );
 };
