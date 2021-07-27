@@ -8,9 +8,9 @@ const NewJob = ({setRoute}) => {
   const today = new Date()
 
   const { services, clients, employees, token, dispatch } = useContext(stateContext);
-  const [clientOption, setClientOption] = useState(null);
-  const [employeeOption, setEmployeeOption] = useState(null);
-  const [serviceOption, setServiceOption] = useState(null);
+  const [clientOption, setClientOption] = useState("");
+  const [employeeOption, setEmployeeOption] = useState("");
+  const [serviceOption, setServiceOption] = useState("");
   const [recurring, setRecurring] = useState(false);
   const [recurringType, setRecurringType] = useState("0");
   const [dateTime, setDateTime] = useState(today.toISOString());
@@ -68,7 +68,7 @@ const NewJob = ({setRoute}) => {
   }, [clients]);
 
   useEffect(() => {
-    availableEmployees.length > 0 ? setEmployeeOption(`${availableEmployees[0].user_data.user.id}`) : setEmployeeOption(null);
+    availableEmployees.length > 0 ? setEmployeeOption(`${availableEmployees[0].user_data.user.id}`) : setEmployeeOption("");
   }, [availableEmployees]);
 
   useEffect(() => {
