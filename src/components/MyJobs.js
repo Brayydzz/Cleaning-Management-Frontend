@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { stateContext } from "../stateReducer"
-import { DashCard, DashCardContain } from "../Styled"
+import { DashCard, DashCardContain, Button } from "../Styled"
 import {setModal} from "../helperFunctions"
 
 const MyJobs = () => {
@@ -29,7 +29,7 @@ const MyJobs = () => {
                             <h2>Time Due</h2>
                             <p>{new Date(parseFloat(job_data.job.due_data)).toString()}</p>
               
-                            <button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</button>
+                            <Button onClick={() => setModal(job_data, "jobs", dispatch)}>View Job</Button>
                         </DashCard>
                     ))        
                 }

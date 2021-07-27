@@ -147,7 +147,7 @@ export const InputText = styled.input `
     border-radius: 4px; 
     box-sizing: border-box; 
     margin-top: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     resize: vertical ;
 `
 
