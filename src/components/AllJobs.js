@@ -39,7 +39,7 @@ const AllJobs = ({handleClick}) => {
     <div>
       <h1>All Jobs</h1>
       <label>Filter by Client</label>
-      <Select styles={dropDownStyle} value={client} onChange={(e) => setClient(e.value.toString())} options={clientOptionsRef}/>
+      <Select styles={dropDownStyle} onChange={(e) => setClient(e.value.toString())} options={clientOptionsRef}/>
 
       <br/>
       <Button onClick={handleClick} id="newJob">Create Job</Button>
