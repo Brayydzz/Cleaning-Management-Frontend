@@ -2,7 +2,7 @@ import EditForm from "./EditForm";
 import { useContext } from "react";
 import { stateContext } from "../stateReducer";
 import { AuthFetchRequest } from "../helperFunctions";
-import { DashCardContain } from "../Styled";
+import { FormContainer } from "../Styled";
 
 const EditAccount = ({ formData, setRoute, setFormData, contactInfo }) => {
   const { token } = useContext(stateContext);
@@ -13,24 +13,20 @@ const EditAccount = ({ formData, setRoute, setFormData, contactInfo }) => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(contactInfo);
     AuthFetchRequest(
       `/users/${contactInfo.user.id}`,
       token,
       "PATCH",
       formData
     ).then((data) => {
-      console.log(data);
       setRoute("accountDetails");
     });
   };
   return (
-    <div>
+    <FormContainer>
       <h1>EDIT ACCOUNT</h1>
-      <DashCardContain>
         <EditForm {...{ submit, formData, handleChange }} />
-      </DashCardContain>
-    </div>
+    </FormContainer>
   );
 };
 

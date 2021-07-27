@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
-const primaryColor = "red"
-const primaryText = "black"
-const secondaryText = "white" 
-const cardColor = "grey"
+const primaryLight = "#86BBD8"  
+const primaryColor = "#336699"
+const secondaryColor = "#DC602E"
+const cardColor = "#EFF8FB"
 
 // Form component used on Booking.js,
 export const Form = styled.form `
@@ -35,27 +34,31 @@ export const NewNote = styled.div `
 export const NoteCard = styled.div `
     border: solid black 2px;
     height: 100%;
-    min-height: 100px;
+    min-height: 200px;
     width: 100%;
-    max-width: 300px;
-    min-width: 200px;
+    max-width: 500px;
+    min-width: 350px;
     margin-bottom: 10px;
     background-color: ${cardColor};
 `
 
 export const Button = styled.button `
+    border-radius: 50px;
     background: ${primaryColor};
-    color: ${primaryText};
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
+    white-space: nowrap;
+    padding: 10px 22px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2 ease-in-out;
+    text-decoration: none;
+    margin: 5px;
 
     &:hover {
         transition: all 0.2s ease-in-out;
-        background: ${secondaryText};
-        color: #010606;
+        background: ${primaryLight};
+        color: ${secondaryColor};
     }
 `
 
@@ -66,13 +69,37 @@ export const DashContain = styled.div `
 `
 
 export const DashCard = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     margin: 10px;
-
     height: 300px;
     width: 300px;
     background-color: ${cardColor}; 
-    border:solid black 2px;
+    border:solid black 1px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+`
+
+export const FormContainer = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+`
+
+export const EmployeeTitle = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 export const DashCardContain = styled.div `
@@ -81,8 +108,14 @@ export const DashCardContain = styled.div `
     width: 100%;
 `
 
+export const DashButton = styled.button `
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+`
+
 export const Nav = styled.nav `
-    background: #000;
+    background: ${primaryColor};
     height: 80px;
     display: flex;
     justify-content: center;
@@ -110,7 +143,7 @@ export const NavbarContainer = styled.div `
 export const MobileIcon = styled.div `
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         display: block;
         position: absolute;
         top: 0;
@@ -129,7 +162,7 @@ export const NavMenu = styled.ul `
     text-align: center;
     margin-right: -22px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         display: none;
     }
 `
@@ -139,7 +172,7 @@ export const NavItem = styled.li `
 `
 
 export const NavLinks = styled(Link)`
-    color: #fff;
+    color: ${primaryLight};
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -148,12 +181,12 @@ export const NavLinks = styled(Link)`
     cursor: pointer;
 
     &:hover {
-        border-bottom: 3px solid ${primaryColor};
+        border-bottom: 3px solid ${primaryLight};
     }
 `
 
 export const NavLogo = styled(Link)`
-    color: red;
+    color: ${primaryLight};
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -168,14 +201,14 @@ export const NavBtn = styled.nav `
     display: flex;
     align-items: center;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         display: none;
     }
 `
 
 export const NavBtnLink = styled(Link)`
     border-radius: 50px;
-    background: red;
+    background: ${primaryLight};
     white-space: nowrap;
     padding: 10px 22px;
     color: #010606;
@@ -188,23 +221,26 @@ export const NavBtnLink = styled(Link)`
     &:hover {
         transition: all 0.2s ease-in-out;
         background: #fff;
-        color: blue;
+        color: ${secondaryColor};
+    }
+`
+export const PageButton = styled(Link) `
+    border-radius: 50px;
+    background: ${primaryColor};
+    white-space: nowrap;
+    padding: 10px 22px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2 ease-in-out;
+    text-decoration: none;
+    margin: 5px;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: ${primaryLight};
+        color: ${secondaryColor};
     }
 `
 
-export const DashLi = styled.li `
-    cursor: pointer;
-    border: black solid 1px;
-`
-
-export const DashNavUl = styled.nav `
-    display: flex;
-    height: 300px;
-    width: 200px;
-    background-color: ${cardColor};
-    flex-direction: column;
-    justify-content: space-around;
-    list-style-type: none;
-    padding: 0;
-    margin: 10px;
-`

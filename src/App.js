@@ -3,16 +3,16 @@ import jwtDecode from "jwt-decode";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./components/Dashboard";
-import Booking from "./components/Booking";
-import Home from "./components/Home";
+import Booking from "./components/pages/Booking";
+import Home from "./components/pages/Home";
 import { useReducer, useEffect } from "react";
 import stateReducer, { stateContext } from "./stateReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FetchRequest, AuthFetchRequest } from "./helperFunctions";
 import FlashMessage from "./components/FlashMessage";
 import GlobalModal from "./components/Modals/GlobalModal";
-import About from "./components/About";
-import Services from "./components/Services";
+import About from "./components/pages/About";
+import Services from "./components/pages/Services";
 
 function App() {
   // GLOBAL STATE

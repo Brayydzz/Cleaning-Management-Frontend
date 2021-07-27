@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AuthFetchRequest } from "../helperFunctions"
 import { stateContext } from "../stateReducer"
-import { DashCard, DashCardContain } from "../Styled"
+import { DashCard, DashCardContain, Button } from "../Styled"
 
 const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
   const { token, clients, dispatch } = useContext(stateContext)
@@ -39,9 +39,9 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
   return (
     <div>
       <h1>All Clients</h1>
-      <button id="newClient" onClick={handleClick}>
+      <Button id="newClient" onClick={handleClick}>
         Add new Client
-      </button>
+      </Button>
       <DashCardContain>
         {clients.length > 0 &&
           clients.map(({ client_data }) => (
@@ -52,18 +52,18 @@ const AllClients = ({ handleClick, setRoute, setContactInfo }) => {
               <p>{client_data.contact_information.email}</p>
               <h2>Phone: </h2>
               <p>{client_data.contact_information.phone_number}</p>
-              <button onClick={() => deleteClient(client_data.client)}>
-                DELETE CLIENT
-              </button>
-              <button
+              <Button onClick={() => deleteClient(client_data.client)}>
+                Delete
+              </Button>
+              <Button
                 onClick={() => {
                   setContactInfo(client_data)
                   setRoute("editClient")
                 }}
               >
-                EDIT CLIENT
-              </button>
-              <button onClick={() => setModal(client_data, "clients", dispatch)}>View Client</button>
+                Edit
+              </Button>
+              <Button onClick={() => setModal(client_data, "clients", dispatch)}>View Client</Button>
             </DashCard>
           ))}
       </DashCardContain>

@@ -1,34 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AboutCardContain, AboutContent, AboutImg, AboutContain, HeroText, HomeArticle, PageP } from "./pageStyling";
+import { PageButton } from "../../Styled";
+import Footer from "./Footer";
+
 
 const About = () => {
   return (
     <>
-      <header>
-        <h1>About The Clean Team</h1>
-        <blockquote>Don't stress, let us handle the mess.</blockquote>
-        <Link to="/bookings">
-          <button>Get a Quote!</button>
-        </Link>
-      </header>
-      <div>
-        <div>
-          <h1>History Of The Clean Team</h1>
-          <p>
-            The Clean Team was founded in 1998 by John Smith, making it one of
-            the oldest and most experienced residential cleaning companies in
-            the Brisbane CBD. After many years of experience in property
-            management, John saw a need for a specialized quality local service
-            provider to cater for the specific needs of Brisbane’s booming
-            residential market.
-          </p>
-        </div>
-        <article>
-          <div>
-            <h2>Our Values</h2>
-            <span>
-              <img src="https://placeimg.com/200/200/people" alt="" />
-              <div>
+      <div className="hero-image">
+          <HeroText>
+            <h1>The Clean Team</h1>
+            <PageP>We'll sweet you off your feet!</PageP>
+            <PageButton to="/bookings">Get a Quote</PageButton >
+          </HeroText>
+      </div>
+      <HomeArticle>
+        <AboutCardContain class="homeSection" id="homeAbout">
+          <h1>About The Clean Team</h1>
+          <PageP>
+            We are a Brisbane based family owned business established in 1998.
+            With over a decade worth of experience in the cleaning industry,
+            our quality and standards leave our clients spotless.
+          </PageP>
+        </AboutCardContain>
+            <AboutContain>
+              <AboutImg src={"images/woman1.jpg"} alt="" />
+              <AboutContent>
+                <h2>Our Values</h2>
                 <ul style={{ listStyleType: "none" }}>
                   <li>
                     Respect: The Clean Team is an inclusive organization where
@@ -66,33 +65,31 @@ const About = () => {
                 electronic audit form which is automatically uploaded into our
                 online system which are then accessible by client appointed
                 representatives as required.
-              </div>
-            </span>
-            <br />
-            <span>
-              <img src="https://placeimg.com/200/200/people" alt="" />
-
-              <h3>The Team</h3>
-              <p>
-                The Clean Team prides itself on the calibre of our cleaners. Not
-                only do all of our cleaners undergo the standard criminal
-                history and background checks you would expect, but we are very
-                particular about only engaging individuals with strong cleaning
-                experience which is both independently verifiable via referees.
-                Even after applying our strict recruitment standards, we still
-                have all candidates undertake our own in-house training to
-                ensure they are employing best practices and conforming to The
-                Clean Team standards in all of the work they undertake. Unlike
-                many cleaning companies, we keep tabs on our top performing
-                cleaners so that we can reward them through our industry leading
-                cleaner incentive scheme which includes the reward of a $50
-                playstation plus voucher!
-              </p>
-            </span>
-          </div>
-        </article>
-      </div>
-      <footer>
+              </AboutContent>
+            </AboutContain>
+            <AboutContain>
+              <AboutContent>
+                <h3>The Team</h3>
+                <p>
+                  The Clean Team prides itself on the calibre of our cleaners. Not
+                  only do all of our cleaners undergo the standard criminal
+                  history and background checks you would expect, but we are very
+                  particular about only engaging individuals with strong cleaning
+                  experience which is both independently verifiable via referees.
+                  Even after applying our strict recruitment standards, we still
+                  have all candidates undertake our own in-house training to
+                  ensure they are employing best practices and conforming to The
+                  Clean Team standards in all of the work they undertake. Unlike
+                  many cleaning companies, we keep tabs on our top performing
+                  cleaners so that we can reward them through our industry leading
+                  cleaner incentive scheme which includes the reward of a $50
+                  playstation plus voucher!
+                </p>
+              </AboutContent>
+              <AboutImg src={"images/woman2.jpg"} alt="" />
+            </AboutContain>
+      </HomeArticle>
+      <Footer>
         Sitemap
         <ul style={{ listStyleType: "none" }}>
           <Link to="/about">
@@ -106,7 +103,7 @@ const About = () => {
           </Link>
         </ul>
         <p>{"\u00a9"}, Copyright The Clean Team 2021</p>
-      </footer>
+      </Footer>
     </>
   );
 };
