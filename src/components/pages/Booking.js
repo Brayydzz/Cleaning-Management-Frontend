@@ -1,7 +1,7 @@
-import { Form } from "../Styled"
+import { Form } from "../../Styled"
 import { useContext, useState, useEffect } from "react"
-import { stateContext } from "../stateReducer"
-import { FetchRequest } from "../helperFunctions"
+import { stateContext } from "../../stateReducer"
+import { FetchRequest } from "../../helperFunctions"
 import { useHistory } from "react-router"
 import validator from "validator"
 

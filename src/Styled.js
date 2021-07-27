@@ -36,10 +36,10 @@ export const NewNote = styled.div `
 export const NoteCard = styled.div `
     border: solid black 2px;
     height: 100%;
-    min-height: 100px;
+    min-height: 200px;
     width: 100%;
-    max-width: 300px;
-    min-width: 200px;
+    max-width: 500px;
+    min-width: 350px;
     margin-bottom: 10px;
     background-color: ${cardColor};
 `
@@ -223,6 +223,25 @@ export const NavBtnLink = styled(Link)`
     &:hover {
         transition: all 0.2s ease-in-out;
         background: #fff;
+        color: ${secondaryColor};
+    }
+`
+export const PageButton = styled(Link) `
+    border-radius: 50px;
+    background: ${primaryColor};
+    white-space: nowrap;
+    padding: 10px 22px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2 ease-in-out;
+    text-decoration: none;
+    margin: 5px;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: ${primaryLight};
         color: ${secondaryColor};
     }
 `
