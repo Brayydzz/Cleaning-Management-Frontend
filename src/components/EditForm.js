@@ -1,8 +1,8 @@
-import { Form } from "../Styled"
+import { Form, Button } from "../Styled"
 import validator from "validator"
 import { useContext } from "react"
 import { stateContext } from "../stateReducer"
-
+import { InputText } from "./pages/pageStyling"
 
 
 
@@ -101,36 +101,36 @@ const EditForm = ({submit, handleChange, formData}) => {
     return (
         <Form onSubmit={(e) => {if (validateInputs(e)) submit(e)}}>
         <label htmlFor="first_name">First Name:</label>
-        <input id="first_name" type="text" onChange={handleChange} value={formData.first_name}></input>
+        <InputText id="first_name" type="text" onChange={handleChange} value={formData.first_name}></InputText>
 
         <label htmlFor="last_name">Last Name:</label>
-        <input id="last_name" type="text" onChange={handleChange} value={formData.last_name}></input>
+        <InputText id="last_name" type="text" onChange={handleChange} value={formData.last_name}></InputText>
 
         <label htmlFor="email">Email Address:</label>
-        <input id="email" type="text" onChange={handleChange} value={formData.email}></input>
+        <InputText id="email" type="text" onChange={handleChange} value={formData.email}></InputText>
 
         <label htmlFor="phone_number">Phone Number:</label>
-        <input id="phone_number" type="text" onChange={handleChange} value={formData.phone_number}></input>
+        <InputText id="phone_number" type="text" onChange={handleChange} value={formData.phone_number}></InputText>
 
         <label htmlFor="street_number">Street Number:</label>
-        <input id="street_number" type="text" onChange={handleChange} value={formData.street_number}></input>
+        <InputText id="street_number" type="text" onChange={handleChange} value={formData.street_number}></InputText>
         
         <label htmlFor="unit_number">Unit Number:</label>
-        <input id="unit_number" type="text" onChange={handleChange} value={formData.unit_number}></input>
+        <InputText id="unit_number" type="text" onChange={handleChange} value={formData.unit_number}></InputText>
         
         <label htmlFor="street_address">Street Name:</label>
-        <input id="street_address" type="text" onChange={handleChange} value={formData.street_address}></input>
+        <InputText id="street_address" type="text" onChange={handleChange} value={formData.street_address}></InputText>
 
         <label htmlFor="suburb">Suburb: </label>
-        <input id="suburb" type="text" onChange={handleChange} value={formData.suburb}></input>
+        <InputText id="suburb" type="text" onChange={handleChange} value={formData.suburb}></InputText>
 
         <label htmlFor="postcode">Postcode:</label>
-        <input id="postcode" type="text" onChange={handleChange} value={formData.postcode}></input>
+        <InputText id="postcode" type="text" onChange={handleChange} value={formData.postcode}></InputText>
 
         <label htmlFor="state">State:</label>
-        <input id="state" type="text" onChange={handleChange} value={formData.state}></input>
+        <InputText id="state" type="text" onChange={handleChange} value={formData.state}></InputText>
 
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
   </Form>
     )
 }
